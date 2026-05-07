@@ -3,8 +3,10 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import { Database } from 'sqlite'
+import { requireAuth } from './auth/authMiddleware'
 import { initDb } from './db/client'
 import { makeDocumentsRouter } from './routes/documents'
+import authRouter from './routes/auth'
 
 dotenv.config()
 
@@ -23,7 +25,8 @@ async function main() {
     res.json({ status: 'ok' })
   })
 
-  app.use('/api/documents', makeDocumentsRouter(db))
+  app.use('/api/auth', authRouter)
+  app.use('/api/documents', requireAuth, makeDocumentsRouter(db))
 
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)
