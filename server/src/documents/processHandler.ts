@@ -30,6 +30,16 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
+    const claim = await db.run(
+      'UPDATE tax_documents SET status = ? WHERE id = ? AND status = ?',
+      ['processing', id, 'pending']
+    )
+
+    if (claim.changes !== 1) {
+      res.status(409).json({ error: 'Already processing or processed' })
+      return
+    }
+
     let fields: ExtractedFields
     let status: DocumentStatus = 'extracted'
 
