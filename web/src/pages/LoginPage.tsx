@@ -8,8 +8,9 @@ type Props = {
 }
 
 export default function LoginPage({ onSuccess }: Props) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const params = new URLSearchParams(window.location.search)
+  const [username, setUsername] = useState(params.get('username') ?? '')
+  const [password, setPassword] = useState(params.get('password') ?? '')
   const [state, setState] = useState<LoginState>('idle')
   const [message, setMessage] = useState<string | null>(null)
 
