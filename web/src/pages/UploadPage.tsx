@@ -1,13 +1,17 @@
 import { useState, useRef } from 'react'
 import { uploadDocument } from '../api/documents'
+import { isUnauthorizedError } from '../api/auth'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 type UploadState = 'idle' | 'uploading' | 'success' | 'error'
 
-type Props = { onReview: (documentId: number) => void }
+type Props = {
+  onReview: (documentId: number) => void
+  onUnauthorized: () => void
+}
 
-export default function UploadPage({ onReview }: Props) {
+export default function UploadPage({ onReview, onUnauthorized }: Props) {
   const [file, setFile] = useState<File | null>(null)
   const [idempotencyKey, setIdempotencyKey] = useState<string>(crypto.randomUUID())
   const [replace, setReplace] = useState(false)
@@ -45,6 +49,11 @@ export default function UploadPage({ onReview }: Props) {
       setState('success')
       setMessage(replaced ? 'File replaced successfully.' : null)
     } catch (err) {
+      if (isUnauthorizedError(err)) {
+        onUnauthorized()
+        return
+      }
+
       setState('error')
       setMessage(err instanceof Error ? err.message : 'Upload failed, please try again')
     }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { getDocument, processDocument, acceptDocument } from '../api/documents'
+import { isUnauthorizedError } from '../api/auth'
 import type { DocumentDetail, ExtractedFields } from '../../../shared/types'
 
 type ReviewState = 'loading' | 'review' | 'submitting' | 'accepted' | 'error'
@@ -31,9 +32,13 @@ const MONEY_FIELDS: (keyof ExtractedFields)[] = ['totalWages', 'totalTax', 'refu
 const MONEY_PATTERN = /^\$?\d{1,3}(,\d{3})*(\.\d{2})?$|^\$?\d+(\.\d{2})?$/
 const MAX_FIELD_LENGTH = 80
 
-type Props = { documentId: number; onBack: () => void }
+type Props = {
+  documentId: number
+  onBack: () => void
+  onUnauthorized: () => void
+}
 
-export default function ReviewPage({ documentId, onBack }: Props) {
+export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props) {
   const [state, setState] = useState<ReviewState>('loading')
   const [fields, setFields] = useState<FormFields>(EMPTY_FIELDS)
   const [loadError, setLoadError] = useState<string | null>(null)
@@ -107,6 +112,11 @@ export default function ReviewPage({ documentId, onBack }: Props) {
       })
       setState('review')
     } catch (err) {
+      if (isUnauthorizedError(err)) {
+        onUnauthorized()
+        return
+      }
+
       setLoadError(err instanceof Error ? err.message : 'Could not load document.')
       setState('error')
     }
@@ -127,6 +137,11 @@ export default function ReviewPage({ documentId, onBack }: Props) {
       setAcceptedAt(accepted_at)
       setState('accepted')
     } catch (err) {
+      if (isUnauthorizedError(err)) {
+        onUnauthorized()
+        return
+      }
+
       const msg = err instanceof Error ? err.message : 'Accept failed. Please try again.'
       setAcceptError(msg.includes('Already accepted') ? 'This document has already been accepted.' : msg)
       setState('review')
