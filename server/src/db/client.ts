@@ -1,15 +1,18 @@
-import Database from 'better-sqlite3'
+import { open, Database } from 'sqlite'
+import sqlite3 from 'sqlite3'
 import fs from 'fs'
 import path from 'path'
 
 const dbPath = process.env.DB_PATH ?? 'data/tax_ocr.db'
 
-fs.mkdirSync(path.dirname(path.resolve(dbPath)), { recursive: true })
+export async function initDb(): Promise<Database> {
+  fs.mkdirSync(path.dirname(path.resolve(dbPath)), { recursive: true })
 
-const db = new Database(dbPath)
-db.pragma('journal_mode = WAL')
+  const db = await open({ filename: dbPath, driver: sqlite3.Database })
+  db.configure('busyTimeout', 5000)
 
-const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf-8')
-db.exec(schema)
+  const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf-8')
+  await db.exec(schema)
 
-export default db
+  return db
+}
