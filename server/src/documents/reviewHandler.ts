@@ -18,6 +18,61 @@ const REQUIRED_FIELDS: (keyof ExtractedFields)[] = [
   'refundOrOwed',
 ]
 
+const FILING_STATUSES = new Set([
+  'Single',
+  'Married filing jointly',
+  'Married filing separately',
+  'Head of household',
+  'Qualifying surviving spouse',
+])
+
+const MONEY_FIELDS: (keyof ExtractedFields)[] = ['totalWages', 'totalTax', 'refundOrOwed']
+const MONEY_PATTERN = /^\$?\d{1,3}(,\d{3})*(\.\d{2})?$|^\$?\d+(\.\d{2})?$/
+const MAX_FIELD_LENGTH = 80
+
+type AcceptedFields = Record<keyof ExtractedFields, string>
+
+export function validateAcceptedFields(value: unknown): { fields: AcceptedFields } | { error: string } {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return { error: 'Fields must be an object' }
+  }
+
+  const input = value as Record<string, unknown>
+  const fields = {} as AcceptedFields
+
+  for (const key of REQUIRED_FIELDS) {
+    const rawValue = input[key]
+
+    if (typeof rawValue !== 'string') {
+      return { error: `${key} is required` }
+    }
+
+    const trimmed = rawValue.trim()
+    if (!trimmed) {
+      return { error: `${key} is required` }
+    }
+
+    if (trimmed.length > MAX_FIELD_LENGTH) {
+      return { error: `${key} is too long` }
+    }
+
+    fields[key] = trimmed
+  }
+
+  if (!FILING_STATUSES.has(fields.filingStatus)) {
+    return { error: 'Filing status is invalid' }
+  }
+
+  for (const key of MONEY_FIELDS) {
+    const value = fields[key]
+    if (!value || !MONEY_PATTERN.test(value)) {
+      return { error: `${key} must be a valid dollar amount` }
+    }
+  }
+
+  return { fields }
+}
+
 export function makeReviewHandlers(db: Database) {
   const getDocument = async (req: Request, res: Response): Promise<void> => {
     const id = parseInt(String(req.params.id), 10)
@@ -50,9 +105,9 @@ export function makeReviewHandlers(db: Database) {
       return
     }
 
-    const { fields } = req.body as { fields: ExtractedFields }
-    if (!fields || REQUIRED_FIELDS.some(k => !fields[k]?.trim())) {
-      res.status(400).json({ error: 'All five fields are required and must be non-empty' })
+    const validation = validateAcceptedFields((req.body as { fields?: unknown }).fields)
+    if ('error' in validation) {
+      res.status(400).json({ error: validation.error })
       return
     }
 
@@ -75,7 +130,7 @@ export function makeReviewHandlers(db: Database) {
       `UPDATE tax_documents
        SET extracted_fields = ?, status = 'accepted', accepted_at = datetime('now')
        WHERE id = ?`,
-      JSON.stringify(encryptFields(fields)),
+      JSON.stringify(encryptFields(validation.fields)),
       id
     )
 

@@ -20,6 +20,16 @@ const EMPTY_FIELDS: FormFields = {
 
 const PROCESS_POLL_INTERVAL_MS = 1000
 const PROCESS_TIMEOUT_MS = 30000
+const FILING_STATUSES = new Set([
+  'Single',
+  'Married filing jointly',
+  'Married filing separately',
+  'Head of household',
+  'Qualifying surviving spouse',
+])
+const MONEY_FIELDS: (keyof ExtractedFields)[] = ['totalWages', 'totalTax', 'refundOrOwed']
+const MONEY_PATTERN = /^\$?\d{1,3}(,\d{3})*(\.\d{2})?$|^\$?\d+(\.\d{2})?$/
+const MAX_FIELD_LENGTH = 80
 
 type Props = { documentId: number; onBack: () => void }
 
@@ -104,9 +114,9 @@ export default function ReviewPage({ documentId, onBack }: Props) {
 
   async function handleAccept(e: React.FormEvent) {
     e.preventDefault()
-    const empty = FIELD_LABELS.find(({ key }) => !fields[key].trim())
-    if (empty) {
-      setValidationError('All fields are required.')
+    const validationMessage = validateFields(fields)
+    if (validationMessage) {
+      setValidationError(validationMessage)
       return
     }
     setValidationError(null)
@@ -127,6 +137,25 @@ export default function ReviewPage({ documentId, onBack }: Props) {
     setFields(prev => ({ ...prev, [key]: value }))
     setValidationError(null)
     setAcceptError(null)
+  }
+
+  function validateFields(values: FormFields): string | null {
+    const empty = FIELD_LABELS.find(({ key }) => !values[key].trim())
+    if (empty) return `${empty.label} is required.`
+
+    const tooLong = FIELD_LABELS.find(({ key }) => values[key].trim().length > MAX_FIELD_LENGTH)
+    if (tooLong) return `${tooLong.label} is too long.`
+
+    if (!FILING_STATUSES.has(values.filingStatus.trim())) {
+      return 'Filing Status must match a valid 1040 filing status.'
+    }
+
+    const invalidMoney = FIELD_LABELS.find(({ key }) =>
+      MONEY_FIELDS.includes(key) && !MONEY_PATTERN.test(values[key].trim())
+    )
+    if (invalidMoney) return `${invalidMoney.label} must be a valid dollar amount.`
+
+    return null
   }
 
   if (state === 'loading') {
@@ -174,6 +203,7 @@ export default function ReviewPage({ documentId, onBack }: Props) {
             <input
               type="text"
               value={fields[key]}
+              placeholder="No value parsed"
               onChange={e => handleFieldChange(key, e.target.value)}
               disabled={isSubmitting}
               style={{ width: '100%', padding: '0.4rem', boxSizing: 'border-box' }}
