@@ -1,4 +1,11 @@
-import type { UploadResponse, ProcessResponse, DocumentDetail, AcceptResponse, ExtractedFields } from '../../../shared/types'
+import type {
+  UploadResponse,
+  ProcessResponse,
+  DocumentDetail,
+  AcceptResponse,
+  ExtractedFields,
+  AcceptedDocumentRecord,
+} from '../../../shared/types'
 import { getToken, UnauthorizedError } from './auth'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL ?? 'http://localhost:3001'
@@ -40,6 +47,12 @@ export async function processDocument(id: number): Promise<ProcessResponse> {
 
 export async function getDocument(id: number): Promise<DocumentDetail> {
   return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}`, {
+    headers: authHeaders(),
+  }))
+}
+
+export async function listAcceptedDocuments(): Promise<{ records: AcceptedDocumentRecord[] }> {
+  return handleResponse(await fetch(`${SERVER_URL}/api/documents/accepted`, {
     headers: authHeaders(),
   }))
 }

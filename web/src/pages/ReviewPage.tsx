@@ -101,6 +101,12 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
         totalTax:     doc.fields?.totalTax     ?? '',
         refundOrOwed: doc.fields?.refundOrOwed ?? '',
       })
+      setAcceptedAt(doc.accepted_at)
+      if (doc.status === 'accepted') {
+        setState('accepted')
+        return
+      }
+
       setState('review')
     } catch (err) {
       if (isUnauthorizedError(err)) {
@@ -133,8 +139,16 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
     setAcceptError(null)
     setState('submitting')
     try {
-      const { accepted_at } = await acceptDocument(documentId, fields as unknown as ExtractedFields)
-      setAcceptedAt(accepted_at)
+      await acceptDocument(documentId, fields as unknown as ExtractedFields)
+      const savedDocument = await getDocument(documentId)
+      setFields({
+        taxpayerName: savedDocument.fields?.taxpayerName ?? '',
+        filingStatus: savedDocument.fields?.filingStatus ?? '',
+        totalWages:   savedDocument.fields?.totalWages   ?? '',
+        totalTax:     savedDocument.fields?.totalTax     ?? '',
+        refundOrOwed: savedDocument.fields?.refundOrOwed ?? '',
+      })
+      setAcceptedAt(savedDocument.accepted_at)
       setState('accepted')
     } catch (err) {
       if (isUnauthorizedError(err)) {
@@ -197,16 +211,36 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
 
   if (state === 'accepted') {
     return (
-      <section className="panel state-panel">
-        <div className="status-icon">✓</div>
-        <h1>Document Accepted</h1>
-        <p className="muted">
-          Your tax data has been saved.
-          {acceptedAt && ` Accepted at: ${new Date(acceptedAt).toLocaleString()}`}
-        </p>
-        <button className="button button-primary" onClick={onBack}>Upload another document</button>
+      <section className="page-grid">
+        <div className="page-intro">
+          <div className="status-icon">✓</div>
+          <p className="eyebrow">Document #{documentId}</p>
+          <h1>Document Accepted</h1>
+          <p className="page-subtitle">
+            These are the values currently saved for the accepted document.
+            {acceptedAt &&
+              ` Accepted at: ${new Date(acceptedAt).toLocaleString()}.`}
+          </p>
+        </div>
+
+        <div className="panel saved-values-panel">
+          <dl className="saved-values-list">
+            {FIELD_LABELS.map(({ key, label }) => (
+              <div className="saved-value-row" key={key}>
+                <dt>{label}</dt>
+                <dd>{fields[key]}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="button-row">
+            <button className="button button-primary" onClick={onBack}>
+              Upload another document
+            </button>
+          </div>
+        </div>
       </section>
-    )
+    );
   }
 
   const isSubmitting = state === 'submitting'

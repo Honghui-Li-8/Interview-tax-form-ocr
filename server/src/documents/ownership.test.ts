@@ -87,6 +87,27 @@ describe('document ownership guards', () => {
     expect(calls[2].params).toEqual([9, 'alice'])
   })
 
+  test('accepted record list filters by authenticated owner', async () => {
+    const calls: DbCall[] = []
+    const db = {
+      all: async (sql: string, params: unknown[]) => {
+        calls.push({ sql, params })
+        return []
+      },
+    }
+
+    const { listAcceptedDocuments } = makeReviewHandlers(db as never)
+    const res = makeRes()
+
+    await listAcceptedDocuments(makeReq('1', 'carol') as never, res as never)
+
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toEqual({ records: [] })
+    expect(calls[0].sql).toContain('owner_username = ?')
+    expect(calls[0].sql).toContain("status = 'accepted'")
+    expect(calls[0].params).toEqual(['carol'])
+  })
+
   test('process lookup and claim filter by authenticated owner', async () => {
     const calls: DbCall[] = []
     const db = {

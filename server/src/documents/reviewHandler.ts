@@ -11,6 +11,13 @@ type TaxDocumentRow = {
   accepted_at: string | null
 }
 
+type AcceptedDocumentRow = {
+  id: number
+  filename: string
+  extracted_fields: string
+  accepted_at: string
+}
+
 const REQUIRED_FIELDS: (keyof ExtractedFields)[] = [
   'taxpayerName',
   'filingStatus',
@@ -75,6 +82,26 @@ export function validateAcceptedFields(value: unknown): { fields: AcceptedFields
 }
 
 export function makeReviewHandlers(db: Database) {
+  const listAcceptedDocuments = async (req: Request, res: Response): Promise<void> => {
+    const { username } = getAuthUser(req)
+    const rows = await db.all<AcceptedDocumentRow[]>(
+      `SELECT id, filename, extracted_fields, accepted_at
+       FROM tax_documents
+       WHERE owner_username = ? AND status = 'accepted'
+       ORDER BY accepted_at DESC, id DESC`,
+      [username]
+    )
+
+    res.json({
+      records: rows.map(row => ({
+        id: row.id,
+        filename: row.filename,
+        fields: decryptFields(JSON.parse(row.extracted_fields)),
+        accepted_at: row.accepted_at,
+      })),
+    })
+  }
+
   const getDocument = async (req: Request, res: Response): Promise<void> => {
     const { username } = getAuthUser(req)
     const id = parseInt(String(req.params.id), 10)
@@ -146,5 +173,5 @@ export function makeReviewHandlers(db: Database) {
     res.json({ accepted_at: updated!.accepted_at })
   }
 
-  return { getDocument, acceptDocument }
+  return { listAcceptedDocuments, getDocument, acceptDocument }
 }

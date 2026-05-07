@@ -26,6 +26,13 @@ export type DocumentDetail = {
   accepted_at: string | null
 }
 
+export type AcceptedDocumentRecord = {
+  id: number
+  filename: string
+  fields: ExtractedFields
+  accepted_at: string
+}
+
 export type AcceptResponse = {
   accepted_at: string
 }

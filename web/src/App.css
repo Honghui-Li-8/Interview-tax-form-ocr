@@ -191,6 +191,110 @@
   gap: 12px;
 }
 
+.saved-values-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.saved-values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.saved-value-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.45fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.saved-value-row:first-child {
+  padding-top: 0;
+}
+
+.saved-value-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.saved-value-row dt {
+  color: #526173;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.saved-value-row dd {
+  margin: 0;
+  color: #111827;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.records-page {
+  display: flex;
+  width: min(100%, 1120px);
+  min-height: 0;
+  margin: 0 auto;
+  flex: 1;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.records-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.records-toolbar h1 {
+  margin: 0;
+}
+
+.records-scroll {
+  display: flex;
+  max-height: calc(100vh - 230px);
+  min-height: 320px;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.record-card {
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.record-card-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.record-card-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.record-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #526173;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .upload-panel {
   display: flex;
   flex-direction: column;
@@ -411,6 +515,19 @@
     flex-direction: column;
   }
 
+  .records-toolbar,
+  .record-card-header,
+  .record-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .records-scroll {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+
   .page-grid {
     grid-template-columns: 1fr;
     gap: 22px;
@@ -418,6 +535,11 @@
 
   .page-intro {
     padding-top: 0;
+  }
+
+  .saved-value-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
 

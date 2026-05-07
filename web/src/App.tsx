@@ -3,9 +3,10 @@ import { clearToken, getStoredUser, getToken, type AuthUser } from './api/auth'
 import LoginPage from './pages/LoginPage'
 import UploadPage from './pages/UploadPage'
 import ReviewPage from './pages/ReviewPage'
+import SavedRecordsPage from './pages/SavedRecordsPage'
 import './App.css'
 
-type Page = 'upload' | 'review'
+type Page = 'upload' | 'review' | 'saved'
 
 export default function App() {
   const [authed, setAuthed] = useState(() => Boolean(getToken()))
@@ -21,6 +22,11 @@ export default function App() {
   function goToUpload() {
     setDocumentId(null)
     setPage('upload')
+  }
+
+  function goToSaved() {
+    setDocumentId(null)
+    setPage('saved')
   }
 
   function handleLogout() {
@@ -46,6 +52,7 @@ export default function App() {
       </div>
       <div className="user-actions">
         <span>Signed in as {user?.username ?? 'unknown user'}</span>
+        <button className="button button-secondary" onClick={goToSaved}>Saved records</button>
         <button className="button button-secondary" onClick={handleLogout}>Logout</button>
       </div>
     </header>
@@ -56,6 +63,15 @@ export default function App() {
       <main className="app-shell">
         {authHeader}
         <ReviewPage documentId={documentId} onBack={goToUpload} onUnauthorized={handleLogout} />
+      </main>
+    )
+  }
+
+  if (page === 'saved') {
+    return (
+      <main className="app-shell">
+        {authHeader}
+        <SavedRecordsPage onBack={goToUpload} onReview={goToReview} onUnauthorized={handleLogout} />
       </main>
     )
   }
