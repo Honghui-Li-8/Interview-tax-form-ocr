@@ -45,3 +45,11 @@ export const requireAuth: RequestHandler = (req, res, next) => {
     res.status(401).json({ error: 'Unauthorized' })
   }
 }
+
+export function getAuthUser(req: Express.Request): AuthUser {
+  const user = (req as AuthenticatedRequest).user
+  if (!user) {
+    throw new Error('Authenticated user missing from request')
+  }
+  return user
+}

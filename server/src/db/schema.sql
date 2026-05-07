@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS tax_documents (
   id               INTEGER  PRIMARY KEY AUTOINCREMENT,
-  idempotency_key  TEXT     UNIQUE,
+  idempotency_key  TEXT,
+  owner_username   TEXT     NOT NULL,
   filename         TEXT     NOT NULL,
   stored_path      TEXT     NOT NULL,
   mime_type        TEXT     NOT NULL,
@@ -8,5 +9,6 @@ CREATE TABLE IF NOT EXISTS tax_documents (
   created_at       TEXT     NOT NULL DEFAULT (datetime('now')),
   extracted_fields TEXT,
   processed_at     TEXT,
-  accepted_at      TEXT
+  accepted_at      TEXT,
+  UNIQUE(owner_username, idempotency_key)
 );

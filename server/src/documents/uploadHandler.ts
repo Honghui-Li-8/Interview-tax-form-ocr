@@ -3,6 +3,7 @@ import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 import { Database } from 'sqlite'
+import { getAuthUser } from '../auth/authMiddleware'
 import type { UploadResponse } from '../../../shared/types'
 
 const ALLOWED_MIME_TYPES = new Set(['application/pdf'])
@@ -29,6 +30,8 @@ type ExistingDocument = { id: number; stored_path: string }
 
 export function makeUploadHandler(db: Database) {
   return async function handleUpload(req: Request, res: Response): Promise<void> {
+    const { username } = getAuthUser(req)
+
     if (!req.file) {
       res.status(400).json({ error: 'No file provided' })
       return
@@ -42,8 +45,8 @@ export function makeUploadHandler(db: Database) {
 
     if (idempotencyKey) {
       const existing = await db.get<ExistingDocument>(
-        'SELECT id, stored_path FROM tax_documents WHERE idempotency_key = ?',
-        idempotencyKey
+        'SELECT id, stored_path FROM tax_documents WHERE idempotency_key = ? AND owner_username = ?',
+        [idempotencyKey, username]
       )
 
       if (existing) {
@@ -56,8 +59,11 @@ export function makeUploadHandler(db: Database) {
 
         fs.rmSync(existing.stored_path, { force: true })
         await db.run(
-          'UPDATE tax_documents SET filename = ?, stored_path = ?, mime_type = ?, status = ?, created_at = datetime(\'now\') WHERE id = ?',
-          [originalname, storedPath, mimetype, 'pending', existing.id]
+          `UPDATE tax_documents
+           SET filename = ?, stored_path = ?, mime_type = ?, status = ?, extracted_fields = NULL,
+               processed_at = NULL, accepted_at = NULL, created_at = datetime('now')
+           WHERE id = ? AND owner_username = ?`,
+          [originalname, storedPath, mimetype, 'pending', existing.id, username]
         )
         const body: UploadResponse = { documentId: existing.id, replaced: true }
         res.status(200).json(body)
@@ -66,8 +72,8 @@ export function makeUploadHandler(db: Database) {
     }
 
     const result = await db.run(
-      'INSERT INTO tax_documents (idempotency_key, filename, stored_path, mime_type) VALUES (?, ?, ?, ?)',
-      [idempotencyKey, originalname, storedPath, mimetype]
+      'INSERT INTO tax_documents (idempotency_key, owner_username, filename, stored_path, mime_type) VALUES (?, ?, ?, ?, ?)',
+      [idempotencyKey, username, originalname, storedPath, mimetype]
     )
 
     const body: UploadResponse = { documentId: result.lastID!, replaced: false }

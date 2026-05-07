@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { Database } from 'sqlite'
+import { getAuthUser } from '../auth/authMiddleware'
 import { decryptFields, encryptFields } from './encryptionService'
 import type { ExtractedFields } from '../../../shared/types'
 
@@ -75,6 +76,7 @@ export function validateAcceptedFields(value: unknown): { fields: AcceptedFields
 
 export function makeReviewHandlers(db: Database) {
   const getDocument = async (req: Request, res: Response): Promise<void> => {
+    const { username } = getAuthUser(req)
     const id = parseInt(String(req.params.id), 10)
     if (isNaN(id)) {
       res.status(400).json({ error: 'Invalid document ID' })
@@ -82,8 +84,8 @@ export function makeReviewHandlers(db: Database) {
     }
 
     const row = await db.get<TaxDocumentRow>(
-      'SELECT id, status, extracted_fields, accepted_at FROM tax_documents WHERE id = ?',
-      id
+      'SELECT id, status, extracted_fields, accepted_at FROM tax_documents WHERE id = ? AND owner_username = ?',
+      [id, username]
     )
 
     if (!row) {
@@ -99,6 +101,7 @@ export function makeReviewHandlers(db: Database) {
   }
 
   const acceptDocument = async (req: Request, res: Response): Promise<void> => {
+    const { username } = getAuthUser(req)
     const id = parseInt(String(req.params.id), 10)
     if (isNaN(id)) {
       res.status(400).json({ error: 'Invalid document ID' })
@@ -112,8 +115,8 @@ export function makeReviewHandlers(db: Database) {
     }
 
     const row = await db.get<{ status: string }>(
-      'SELECT status FROM tax_documents WHERE id = ?',
-      id
+      'SELECT status FROM tax_documents WHERE id = ? AND owner_username = ?',
+      [id, username]
     )
 
     if (!row) {
@@ -129,14 +132,15 @@ export function makeReviewHandlers(db: Database) {
     await db.run(
       `UPDATE tax_documents
        SET extracted_fields = ?, status = 'accepted', accepted_at = datetime('now')
-       WHERE id = ?`,
+       WHERE id = ? AND owner_username = ?`,
       JSON.stringify(encryptFields(validation.fields)),
-      id
+      id,
+      username
     )
 
     const updated = await db.get<{ accepted_at: string }>(
-      'SELECT accepted_at FROM tax_documents WHERE id = ?',
-      id
+      'SELECT accepted_at FROM tax_documents WHERE id = ? AND owner_username = ?',
+      [id, username]
     )
 
     res.json({ accepted_at: updated!.accepted_at })
