@@ -5,5 +5,7 @@ CREATE TABLE IF NOT EXISTS tax_documents (
   stored_path      TEXT     NOT NULL,
   mime_type        TEXT     NOT NULL,
   status           TEXT     NOT NULL DEFAULT 'pending',
-  created_at       TEXT     NOT NULL DEFAULT (datetime('now'))
+  created_at       TEXT     NOT NULL DEFAULT (datetime('now')),
+  extracted_fields TEXT,
+  processed_at     TEXT
 );

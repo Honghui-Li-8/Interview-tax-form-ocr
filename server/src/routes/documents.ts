@@ -1,10 +1,12 @@
 import { Router } from 'express'
 import { Database } from 'sqlite'
 import { upload, makeUploadHandler } from '../documents/uploadHandler'
+import { makeProcessHandler } from '../documents/processHandler'
 
 export function makeDocumentsRouter(db: Database): Router {
   const router = Router()
   const handleUpload = makeUploadHandler(db)
+  const handleProcess = makeProcessHandler(db)
 
   router.post('/upload', (req, res, next) => {
     upload.single('file')(req, res, (err) => {
@@ -15,6 +17,8 @@ export function makeDocumentsRouter(db: Database): Router {
       next()
     })
   }, handleUpload)
+
+  router.post('/:id/process', handleProcess)
 
   return router
 }
