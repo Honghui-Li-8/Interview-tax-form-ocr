@@ -57,6 +57,15 @@ export async function listAcceptedDocuments(): Promise<{ records: AcceptedDocume
   }))
 }
 
+export async function getDocumentFile(id: number): Promise<string> {
+  const res = await fetch(`${SERVER_URL}/api/documents/${id}/file`, {
+    headers: authHeaders(),
+  })
+  if (res.status === 401) throw new UnauthorizedError()
+  if (!res.ok) throw new Error(await res.text())
+  return URL.createObjectURL(await res.blob())
+}
+
 export async function acceptDocument(id: number, fields: ExtractedFields): Promise<AcceptResponse> {
   return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}/accept`, {
     method: 'PATCH',

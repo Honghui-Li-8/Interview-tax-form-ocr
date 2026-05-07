@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { getDocument, processDocument, acceptDocument } from '../api/documents'
+import { getDocument, processDocument, acceptDocument, getDocumentFile } from '../api/documents'
 import { isUnauthorizedError } from '../api/auth'
 import type { DocumentDetail, ExtractedFields } from '../../../shared/types'
+import PdfViewer from '../components/PdfViewer'
 
 type ReviewState = 'loading' | 'review' | 'submitting' | 'accepted' | 'error'
 
@@ -45,6 +46,7 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
   const [acceptError, setAcceptError] = useState<string | null>(null)
   const [validationError, setValidationError] = useState<string | null>(null)
   const [acceptedAt, setAcceptedAt] = useState<string | null>(null)
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const processStartedFor = useRef<number | null>(null)
 
   const waitForProcessing = useCallback(async (getCancelled: () => boolean): Promise<DocumentDetail> => {
@@ -128,6 +130,17 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
       cancelled = true
     }
   }, [load])
+
+  useEffect(() => {
+    let url: string | null = null
+    getDocumentFile(documentId)
+      .then(objectUrl => { url = objectUrl; setPdfUrl(objectUrl) })
+      .catch(() => {})
+    return () => {
+      if (url) URL.revokeObjectURL(url)
+      setPdfUrl(null)
+    }
+  }, [documentId])
 
   async function handleAccept(e: React.FormEvent) {
     e.preventDefault()
@@ -222,6 +235,9 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
             {acceptedAt &&
               ` Accepted at: ${new Date(acceptedAt).toLocaleString()}.`}
           </p>
+          {pdfUrl && (
+            <PdfViewer url={pdfUrl} onOpenInTab={() => { const tab = window.open('', '_blank'); tab?.location.replace(pdfUrl) }} />
+          )}
         </div>
 
         <div className="panel saved-values-panel">
@@ -252,6 +268,9 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
         <p className="eyebrow">Document #{documentId}</p>
         <h1>Review extracted data</h1>
         <p className="page-subtitle">Confirm each field before accepting the OCR result.</p>
+        {pdfUrl && (
+          <PdfViewer url={pdfUrl} onOpenInTab={() => { const tab = window.open('', '_blank'); tab?.location.replace(pdfUrl) }} />
+        )}
       </div>
 
       <form className="panel form-stack" onSubmit={handleAccept}>

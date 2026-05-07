@@ -34,9 +34,10 @@ export default function LoginPage({ onSuccess }: Props) {
   return (
     <main className="auth-page">
       <section className="auth-panel">
-        <div className="brand-mark">1040</div>
-        <p className="eyebrow">Secure review</p>
-        <h1>Tax Form OCR</h1>
+        <div className="login-brand">
+          <div className="brand-mark">1040</div>
+          <h1>Tax Form OCR</h1>
+        </div>
         <p className="page-subtitle">Sign in to upload a 1040 PDF and review the extracted tax fields.</p>
 
         <form className="form-stack" onSubmit={handleSubmit}>

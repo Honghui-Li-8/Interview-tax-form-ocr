@@ -8,7 +8,7 @@ export function makeDocumentsRouter(db: Database): Router {
   const router = Router()
   const handleUpload = makeUploadHandler(db)
   const handleProcess = makeProcessHandler(db)
-  const { listAcceptedDocuments, getDocument, acceptDocument } = makeReviewHandlers(db)
+  const { listAcceptedDocuments, getDocument, acceptDocument, getDocumentFile } = makeReviewHandlers(db)
 
   router.post('/upload', (req, res, next) => {
     upload.single('file')(req, res, (err) => {
@@ -22,6 +22,7 @@ export function makeDocumentsRouter(db: Database): Router {
 
   router.post('/:id/process', handleProcess)
   router.get('/accepted', listAcceptedDocuments)
+  router.get('/:id/file', getDocumentFile)
   router.get('/:id', getDocument)
   router.patch('/:id/accept', acceptDocument)
 

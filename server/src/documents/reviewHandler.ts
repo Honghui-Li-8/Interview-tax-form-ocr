@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { Request, Response } from 'express'
 import { Database } from 'sqlite'
 import { getAuthUser } from '../auth/authMiddleware'
@@ -173,5 +174,33 @@ export function makeReviewHandlers(db: Database) {
     res.json({ accepted_at: updated!.accepted_at })
   }
 
-  return { listAcceptedDocuments, getDocument, acceptDocument }
+  const getDocumentFile = async (req: Request, res: Response): Promise<void> => {
+    const { username } = getAuthUser(req)
+    const id = parseInt(String(req.params.id), 10)
+    if (isNaN(id)) {
+      res.status(400).json({ error: 'Invalid document ID' })
+      return
+    }
+
+    const row = await db.get<{ stored_path: string; mime_type: string }>(
+      'SELECT stored_path, mime_type FROM tax_documents WHERE id = ? AND owner_username = ?',
+      [id, username]
+    )
+
+    if (!row) {
+      res.status(404).json({ error: 'Not found' })
+      return
+    }
+
+    if (!fs.existsSync(row.stored_path)) {
+      res.status(404).json({ error: 'File not found' })
+      return
+    }
+
+    res.setHeader('Content-Type', row.mime_type)
+    res.setHeader('Content-Disposition', 'inline')
+    fs.createReadStream(row.stored_path).pipe(res)
+  }
+
+  return { listAcceptedDocuments, getDocument, acceptDocument, getDocumentFile }
 }

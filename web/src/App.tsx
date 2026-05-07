@@ -51,7 +51,7 @@ export default function App() {
         <strong>Document review workspace</strong>
       </div>
       <div className="user-actions">
-        <span>Signed in as {user?.username ?? 'unknown user'}</span>
+        <span>Signed in as: <span className="username-badge">{user?.username ?? 'unknown user'}</span></span>
         <button className="button button-secondary" onClick={goToSaved}>Saved records</button>
         <button className="button button-secondary" onClick={handleLogout}>Logout</button>
       </div>
