@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS tax_documents (
   status           TEXT     NOT NULL DEFAULT 'pending',
   created_at       TEXT     NOT NULL DEFAULT (datetime('now')),
   extracted_fields TEXT,
-  processed_at     TEXT
+  processed_at     TEXT,
+  accepted_at      TEXT
 );

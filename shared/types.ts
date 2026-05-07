@@ -18,3 +18,14 @@ export type ProcessResponse = {
   status: DocumentStatus
   fields: ExtractedFields
 }
+
+export type DocumentDetail = {
+  id: number
+  status: DocumentStatus
+  fields: ExtractedFields | null
+  accepted_at: string | null
+}
+
+export type AcceptResponse = {
+  accepted_at: string
+}
