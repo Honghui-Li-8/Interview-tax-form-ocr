@@ -109,6 +109,7 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
 
       setState('review')
     } catch (err) {
+      if (getCancelled()) return
       if (isUnauthorizedError(err)) {
         onUnauthorized()
         return

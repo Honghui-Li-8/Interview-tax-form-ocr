@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { clearToken, getStoredUser, getToken, type AuthUser } from './api/auth'
 import LoginPage from './pages/LoginPage'
 import UploadPage from './pages/UploadPage'
@@ -19,23 +19,23 @@ export default function App() {
     setPage('review')
   }
 
-  function goToUpload() {
+  const goToUpload = useCallback(() => {
     setDocumentId(null)
     setPage('upload')
-  }
+  }, [])
 
-  function goToSaved() {
+  const goToSaved = useCallback(() => {
     setDocumentId(null)
     setPage('saved')
-  }
+  }, [])
 
-  function handleLogout() {
+  const handleLogout = useCallback(() => {
     clearToken()
     setAuthed(false)
     setUser(null)
     setDocumentId(null)
     setPage('upload')
-  }
+  }, [])
 
   if (!authed) {
     return <LoginPage onSuccess={(nextUser) => {
