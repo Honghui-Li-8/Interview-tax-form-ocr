@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getDocument, processDocument, acceptDocument } from '../api/documents'
-import type { ExtractedFields } from '../../../shared/types'
+import type { DocumentDetail, ExtractedFields } from '../../../shared/types'
 
 type ReviewState = 'loading' | 'review' | 'submitting' | 'accepted' | 'error'
 
@@ -18,6 +18,9 @@ const EMPTY_FIELDS: FormFields = {
   taxpayerName: '', filingStatus: '', totalWages: '', totalTax: '', refundOrOwed: '',
 }
 
+const PROCESS_POLL_INTERVAL_MS = 1000
+const PROCESS_TIMEOUT_MS = 30000
+
 type Props = { documentId: number; onBack: () => void }
 
 export default function ReviewPage({ documentId, onBack }: Props) {
@@ -27,19 +30,64 @@ export default function ReviewPage({ documentId, onBack }: Props) {
   const [acceptError, setAcceptError] = useState<string | null>(null)
   const [validationError, setValidationError] = useState<string | null>(null)
   const [acceptedAt, setAcceptedAt] = useState<string | null>(null)
+  const processStartedFor = useRef<number | null>(null)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { load() }, [documentId])
+  useEffect(() => {
+    let cancelled = false
+    load(() => cancelled)
 
-  async function load() {
+    return () => {
+      cancelled = true
+    }
+  }, [documentId])
+
+  async function waitForProcessing(getCancelled: () => boolean): Promise<DocumentDetail> {
+    const startedAt = Date.now()
+
+    while (!getCancelled()) {
+      const doc = await getDocument(documentId)
+
+      if (doc.status !== 'pending' && doc.status !== 'processing') {
+        return doc
+      }
+
+      if (Date.now() - startedAt > PROCESS_TIMEOUT_MS) {
+        throw new Error('Document processing is taking longer than expected. Please try again.')
+      }
+
+      await new Promise(resolve => setTimeout(resolve, PROCESS_POLL_INTERVAL_MS))
+    }
+
+    throw new Error('Document processing was cancelled.')
+  }
+
+  async function load(getCancelled: () => boolean = () => false) {
     setState('loading')
     setLoadError(null)
     try {
       let doc = await getDocument(documentId)
-      if (doc.status === 'pending') {
-        await processDocument(documentId)
+
+      if (doc.status === 'pending' && processStartedFor.current !== documentId) {
+        processStartedFor.current = documentId
+        try {
+          await processDocument(documentId)
+        } catch (err) {
+          const message = err instanceof Error ? err.message : ''
+          if (!message.includes('Already processing') && !message.includes('Already processed')) {
+            throw err
+          }
+        }
         doc = await getDocument(documentId)
       }
+
+      if (doc.status === 'pending' || doc.status === 'processing') {
+        doc = await waitForProcessing(getCancelled)
+      }
+
+      if (getCancelled()) {
+        return
+      }
+
       setFields({
         taxpayerName: doc.fields?.taxpayerName ?? '',
         filingStatus: doc.fields?.filingStatus ?? '',
@@ -93,7 +141,7 @@ export default function ReviewPage({ documentId, onBack }: Props) {
     return (
       <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
         <p style={{ color: 'red' }}>{loadError}</p>
-        <button onClick={load}>Try again</button>
+        <button onClick={() => load()}>Try again</button>
         <button onClick={onBack} style={{ marginLeft: '1rem' }}>Back to upload</button>
       </div>
     )
