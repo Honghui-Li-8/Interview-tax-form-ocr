@@ -18,7 +18,7 @@ What's included and what was skipped. Happy to discuss any of this.
 - [x] Encryption — AES-256-GCM field-level, 2-layer key (server master + username)
 - [x] Installation instructions — setup and run steps documented in README
 - [x] Source control and commit messages — conventional commits throughout
-- [ ] Deployment — not attempted; a broken live URL is worse than none
+- [x] Deployment — live on EC2 via Nginx + pm2; `setup-deploy.sh` handles full server setup
 
 ## Added (not required — some purely for demo UX quality and convenience)
 
@@ -29,3 +29,4 @@ What's included and what was skipped. Happy to discuss any of this.
 - [x] UI polish — refined upload, review, and records pages for demo clarity
 - [x] `setup-dev.sh` — installs deps and scaffolds `.env` files for local dev
 - [x] `run-dev.sh` — starts frontend and backend in parallel with one command
+- [x] `setup-deploy.sh` — builds and deploys to a Linux server via Nginx + pm2, optional HTTPS via SSL cert
