@@ -57,13 +57,13 @@ export function makeProcessHandler(db: Database) {
       }
     }
 
-    const encrypted = encryptFields(fields)
+    const encrypted = encryptFields(fields, username)
 
     await db.run(
       'UPDATE tax_documents SET extracted_fields = ?, status = ?, processed_at = ? WHERE id = ? AND owner_username = ?',
       [JSON.stringify(encrypted), status, new Date().toISOString(), id, username]
     )
 
-    res.json({ documentId: id, status, fields: decryptFields(encrypted) })
+    res.json({ documentId: id, status, fields: decryptFields(encrypted, username) })
   }
 }

@@ -97,7 +97,7 @@ export function makeReviewHandlers(db: Database) {
       records: rows.map(row => ({
         id: row.id,
         filename: row.filename,
-        fields: decryptFields(JSON.parse(row.extracted_fields)),
+        fields: decryptFields(JSON.parse(row.extracted_fields), username),
         accepted_at: row.accepted_at,
       })),
     })
@@ -122,7 +122,7 @@ export function makeReviewHandlers(db: Database) {
     }
 
     const fields: ExtractedFields | null = row.extracted_fields
-      ? decryptFields(JSON.parse(row.extracted_fields))
+      ? decryptFields(JSON.parse(row.extracted_fields), username)
       : null
 
     res.json({ id: row.id, status: row.status, fields, accepted_at: row.accepted_at })
@@ -161,7 +161,7 @@ export function makeReviewHandlers(db: Database) {
       `UPDATE tax_documents
        SET extracted_fields = ?, status = 'accepted', accepted_at = datetime('now')
        WHERE id = ? AND owner_username = ?`,
-      JSON.stringify(encryptFields(validation.fields)),
+      JSON.stringify(encryptFields(validation.fields, username)),
       id,
       username
     )
