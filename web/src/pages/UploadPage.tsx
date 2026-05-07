@@ -5,7 +5,9 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 type UploadState = 'idle' | 'uploading' | 'success' | 'error'
 
-export default function UploadPage() {
+type Props = { onReview: (documentId: number) => void }
+
+export default function UploadPage({ onReview }: Props) {
   const [file, setFile] = useState<File | null>(null)
   const [idempotencyKey, setIdempotencyKey] = useState<string>(crypto.randomUUID())
   const [replace, setReplace] = useState(false)
@@ -69,7 +71,8 @@ export default function UploadPage() {
             Upload successful — Document ID: {documentId}
             {message && ` (${message})`}
           </p>
-          <button onClick={handleReset}>Upload another</button>
+          <button onClick={() => onReview(documentId!)}>Review Document</button>
+          <button onClick={handleReset} style={{ marginLeft: '1rem' }}>Upload another</button>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>

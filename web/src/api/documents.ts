@@ -1,6 +1,11 @@
-import type { UploadResponse } from '../../../shared/types'
+import type { UploadResponse, ProcessResponse, DocumentDetail, AcceptResponse, ExtractedFields } from '../../../shared/types'
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL ?? 'http://localhost:3001'
+
+async function handleResponse<T>(res: Response): Promise<T> {
+  if (!res.ok) throw new Error(await res.text())
+  return res.json()
+}
 
 export async function uploadDocument(
   file: File,
@@ -12,15 +17,26 @@ export async function uploadDocument(
   form.append('idempotencyKey', idempotencyKey)
   form.append('replace', String(replace))
 
-  const res = await fetch(`${SERVER_URL}/api/documents/upload`, {
+  return handleResponse(await fetch(`${SERVER_URL}/api/documents/upload`, {
     method: 'POST',
     body: form,
-  })
+  }))
+}
 
-  if (!res.ok) {
-    const text = await res.text()
-    throw new Error(text)
-  }
+export async function processDocument(id: number): Promise<ProcessResponse> {
+  return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}/process`, {
+    method: 'POST',
+  }))
+}
 
-  return res.json()
+export async function getDocument(id: number): Promise<DocumentDetail> {
+  return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}`))
+}
+
+export async function acceptDocument(id: number, fields: ExtractedFields): Promise<AcceptResponse> {
+  return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}/accept`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields }),
+  }))
 }
