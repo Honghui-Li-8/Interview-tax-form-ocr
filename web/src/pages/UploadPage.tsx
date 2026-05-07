@@ -7,6 +7,8 @@ type UploadState = 'idle' | 'uploading' | 'success' | 'error'
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null)
+  const [idempotencyKey, setIdempotencyKey] = useState<string>(crypto.randomUUID())
+  const [replace, setReplace] = useState(false)
   const [state, setState] = useState<UploadState>('idle')
   const [message, setMessage] = useState<string | null>(null)
   const [documentId, setDocumentId] = useState<number | null>(null)
@@ -23,6 +25,7 @@ export default function UploadPage() {
     }
 
     setFile(selected)
+    setIdempotencyKey(crypto.randomUUID())
     setState('idle')
     setMessage(null)
   }
@@ -35,9 +38,10 @@ export default function UploadPage() {
     setMessage(null)
 
     try {
-      const { documentId: id } = await uploadDocument(file)
+      const { documentId: id, replaced } = await uploadDocument(file, idempotencyKey, replace)
       setDocumentId(id)
       setState('success')
+      setMessage(replaced ? 'File replaced successfully.' : null)
     } catch (err) {
       setState('error')
       setMessage(err instanceof Error ? err.message : 'Upload failed, please try again')
@@ -46,6 +50,8 @@ export default function UploadPage() {
 
   function handleReset() {
     setFile(null)
+    setIdempotencyKey(crypto.randomUUID())
+    setReplace(false)
     setState('idle')
     setMessage(null)
     setDocumentId(null)
@@ -59,7 +65,10 @@ export default function UploadPage() {
 
       {state === 'success' ? (
         <div>
-          <p style={{ color: 'green' }}>Upload successful — Document ID: {documentId}</p>
+          <p style={{ color: 'green' }}>
+            Upload successful — Document ID: {documentId}
+            {message && ` (${message})`}
+          </p>
           <button onClick={handleReset}>Upload another</button>
         </div>
       ) : (
@@ -72,6 +81,18 @@ export default function UploadPage() {
               onChange={handleFileChange}
               disabled={state === 'uploading'}
             />
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <label>
+              <input
+                type="checkbox"
+                checked={replace}
+                onChange={(e) => setReplace(e.target.checked)}
+                disabled={state === 'uploading'}
+              />
+              {' '}Replace existing upload with this key
+            </label>
           </div>
 
           {message && (
