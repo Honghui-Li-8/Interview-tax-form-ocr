@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { getDocument, processDocument, acceptDocument } from '../api/documents'
 import { isUnauthorizedError } from '../api/auth'
 import type { DocumentDetail, ExtractedFields } from '../../../shared/types'
@@ -47,16 +47,7 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
   const [acceptedAt, setAcceptedAt] = useState<string | null>(null)
   const processStartedFor = useRef<number | null>(null)
 
-  useEffect(() => {
-    let cancelled = false
-    load(() => cancelled)
-
-    return () => {
-      cancelled = true
-    }
-  }, [documentId])
-
-  async function waitForProcessing(getCancelled: () => boolean): Promise<DocumentDetail> {
+  const waitForProcessing = useCallback(async (getCancelled: () => boolean): Promise<DocumentDetail> => {
     const startedAt = Date.now()
 
     while (!getCancelled()) {
@@ -74,9 +65,9 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
     }
 
     throw new Error('Document processing was cancelled.')
-  }
+  }, [documentId])
 
-  async function load(getCancelled: () => boolean = () => false) {
+  const load = useCallback(async (getCancelled: () => boolean = () => false) => {
     setState('loading')
     setLoadError(null)
     try {
@@ -120,7 +111,16 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
       setLoadError(err instanceof Error ? err.message : 'Could not load document.')
       setState('error')
     }
-  }
+  }, [documentId, onUnauthorized, waitForProcessing])
+
+  useEffect(() => {
+    let cancelled = false
+    load(() => cancelled)
+
+    return () => {
+      cancelled = true
+    }
+  }, [load])
 
   async function handleAccept(e: React.FormEvent) {
     e.preventDefault()
@@ -175,71 +175,81 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
 
   if (state === 'loading') {
     return (
-      <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
-        <p>Processing document…</p>
-      </div>
+      <section className="panel state-panel">
+        <div className="spinner" />
+        <h1>Processing document</h1>
+        <p className="muted">Extracting fields from document #{documentId}.</p>
+      </section>
     )
   }
 
   if (state === 'error') {
     return (
-      <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
-        <p style={{ color: 'red' }}>{loadError}</p>
-        <button onClick={() => load()}>Try again</button>
-        <button onClick={onBack} style={{ marginLeft: '1rem' }}>Back to upload</button>
-      </div>
+      <section className="panel state-panel">
+        <p className="alert alert-error">{loadError}</p>
+        <div className="button-row">
+          <button className="button button-primary" onClick={() => load()}>Try again</button>
+          <button className="button button-secondary" onClick={onBack}>Back to upload</button>
+        </div>
+      </section>
     )
   }
 
   if (state === 'accepted') {
     return (
-      <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
+      <section className="panel state-panel">
+        <div className="status-icon">✓</div>
         <h1>Document Accepted</h1>
-        <p style={{ color: 'green' }}>
+        <p className="muted">
           Your tax data has been saved.
           {acceptedAt && ` Accepted at: ${new Date(acceptedAt).toLocaleString()}`}
         </p>
-        <button onClick={onBack}>Upload another document</button>
-      </div>
+        <button className="button button-primary" onClick={onBack}>Upload another document</button>
+      </section>
     )
   }
 
   const isSubmitting = state === 'submitting'
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
-      <h1>Review Extracted Data</h1>
-      <p>Correct any fields if needed, then click Accept.</p>
+    <section className="page-grid">
+      <div className="page-intro">
+        <p className="eyebrow">Document #{documentId}</p>
+        <h1>Review extracted data</h1>
+        <p className="page-subtitle">Confirm each field before accepting the OCR result.</p>
+      </div>
 
-      <form onSubmit={handleAccept}>
+      <form className="panel form-stack" onSubmit={handleAccept}>
         {FIELD_LABELS.map(({ key, label }) => (
-          <div key={key} style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.25rem' }}>{label}</label>
+          <div className="field" key={key}>
+            <label htmlFor={key}>{label}</label>
             <input
+              id={key}
               type="text"
               value={fields[key]}
               placeholder="No value parsed"
               onChange={e => handleFieldChange(key, e.target.value)}
               disabled={isSubmitting}
-              style={{ width: '100%', padding: '0.4rem', boxSizing: 'border-box' }}
             />
           </div>
         ))}
 
         {validationError && (
-          <p style={{ color: 'red', marginBottom: '1rem' }}>{validationError}</p>
+          <p className="alert alert-error">{validationError}</p>
         )}
         {acceptError && (
-          <p style={{ color: 'red', marginBottom: '1rem' }}>{acceptError}</p>
+          <p className="alert alert-error">{acceptError}</p>
         )}
 
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Accepting…' : 'Accept'}
-        </button>
-        <button type="button" onClick={onBack} disabled={isSubmitting} style={{ marginLeft: '1rem' }}>
-          Back
-        </button>
+        <div className="button-row">
+          <button className="button button-primary" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Accepting...' : 'Accept'}
+          </button>
+          <button className="button button-secondary" type="button" onClick={onBack} disabled={isSubmitting}>
+            Back
+          </button>
+        </div>
       </form>
-    </div>
+    </section>
   )
 }

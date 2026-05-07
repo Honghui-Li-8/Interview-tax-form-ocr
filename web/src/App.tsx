@@ -3,6 +3,7 @@ import { clearToken, getStoredUser, getToken, type AuthUser } from './api/auth'
 import LoginPage from './pages/LoginPage'
 import UploadPage from './pages/UploadPage'
 import ReviewPage from './pages/ReviewPage'
+import './App.css'
 
 type Page = 'upload' | 'review'
 
@@ -38,25 +39,31 @@ export default function App() {
   }
 
   const authHeader = (
-    <div style={{ margin: '1rem 0 0 2rem', fontFamily: 'sans-serif' }}>
-      <span style={{ marginRight: '1rem' }}>Signed in as {user?.username ?? 'unknown user'}</span>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <header className="app-header">
+      <div>
+        <p className="eyebrow">Tax Form OCR</p>
+        <strong>Document review workspace</strong>
+      </div>
+      <div className="user-actions">
+        <span>Signed in as {user?.username ?? 'unknown user'}</span>
+        <button className="button button-secondary" onClick={handleLogout}>Logout</button>
+      </div>
+    </header>
   )
 
   if (page === 'review' && documentId !== null) {
     return (
-      <div>
+      <main className="app-shell">
         {authHeader}
         <ReviewPage documentId={documentId} onBack={goToUpload} onUnauthorized={handleLogout} />
-      </div>
+      </main>
     )
   }
 
   return (
-    <div>
+    <main className="app-shell">
       {authHeader}
       <UploadPage onReview={goToReview} onUnauthorized={handleLogout} />
-    </div>
+    </main>
   )
 }

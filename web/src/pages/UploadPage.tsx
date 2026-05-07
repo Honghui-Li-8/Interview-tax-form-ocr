@@ -14,7 +14,6 @@ type Props = {
 export default function UploadPage({ onReview, onUnauthorized }: Props) {
   const [file, setFile] = useState<File | null>(null)
   const [idempotencyKey, setIdempotencyKey] = useState<string>(crypto.randomUUID())
-  const [replace, setReplace] = useState(false)
   const [state, setState] = useState<UploadState>('idle')
   const [message, setMessage] = useState<string | null>(null)
   const [documentId, setDocumentId] = useState<number | null>(null)
@@ -44,7 +43,7 @@ export default function UploadPage({ onReview, onUnauthorized }: Props) {
     setMessage(null)
 
     try {
-      const { documentId: id, replaced } = await uploadDocument(file, idempotencyKey, replace)
+      const { documentId: id, replaced } = await uploadDocument(file, idempotencyKey, false)
       setDocumentId(id)
       setState('success')
       setMessage(replaced ? 'File replaced successfully.' : null)
@@ -62,7 +61,6 @@ export default function UploadPage({ onReview, onUnauthorized }: Props) {
   function handleReset() {
     setFile(null)
     setIdempotencyKey(crypto.randomUUID())
-    setReplace(false)
     setState('idle')
     setMessage(null)
     setDocumentId(null)
@@ -70,52 +68,79 @@ export default function UploadPage({ onReview, onUnauthorized }: Props) {
   }
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '480px' }}>
-      <h1>Tax Form OCR</h1>
-      <p>Upload your 1040 PDF to extract and review your tax data.</p>
+    <section className="page-grid">
+      <div className="page-intro">
+        <p className="eyebrow">Upload</p>
+        <h1>Start a tax form review</h1>
+        <p className="page-subtitle">
+          Upload a 1040 PDF to extract key tax fields and confirm them before
+          saving.
+        </p>
+      </div>
 
-      {state === 'success' ? (
-        <div>
-          <p style={{ color: 'green' }}>
-            Upload successful — Document ID: {documentId}
+      {state === "success" ? (
+        <div className="panel success-panel">
+          <div className="status-icon">✓</div>
+          <h2>Upload successful</h2>
+          <p className="muted">
+            Document ID: {documentId}
             {message && ` (${message})`}
           </p>
-          <button onClick={() => onReview(documentId!)}>Review Document</button>
-          <button onClick={handleReset} style={{ marginLeft: '1rem' }}>Upload another</button>
+          <div className="button-row">
+            <button
+              className="button button-primary"
+              onClick={() => onReview(documentId!)}
+            >
+              Review Document
+            </button>
+            <button className="button button-secondary" onClick={handleReset}>
+              Upload another
+            </button>
+          </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1rem' }}>
+        <form className="panel upload-panel" onSubmit={handleSubmit}>
+          <label className={`file-drop ${file ? "has-file" : ""}`}>
+            <span className="file-icon">PDF</span>
+            <span className="file-title">
+              {file ? file.name : "Choose a 1040 PDF"}
+            </span>
+            <span className="file-meta">
+              {file
+                ? `${(file.size / 1024 / 1024).toFixed(2)} MB`
+                : "PDF only, up to 10 MB"}
+            </span>
             <input
               ref={inputRef}
               type="file"
               accept=".pdf"
               onChange={handleFileChange}
-              disabled={state === 'uploading'}
+              disabled={state === "uploading"}
             />
-          </div>
+          </label>
 
-          <div style={{ marginBottom: '1rem' }}>
-            <label>
-              <input
-                type="checkbox"
-                checked={replace}
-                onChange={(e) => setReplace(e.target.checked)}
-                disabled={state === 'uploading'}
-              />
-              {' '}Replace existing upload with this key
-            </label>
-          </div>
+          <details className="upload-details">
+            <summary>
+              <span>Upload session</span>
+              <strong>{idempotencyKey.slice(0, 8)}</strong>
+            </summary>
+            <p>
+              Idempotency key: prevents duplicate records when an upload is retried.
+            </p>
+            <code>{idempotencyKey}</code>
+          </details>
 
-          {message && (
-            <p style={{ color: 'red', marginBottom: '1rem' }}>{message}</p>
-          )}
+          {message && <p className="alert alert-error">{message}</p>}
 
-          <button type="submit" disabled={!file || state === 'uploading'}>
-            {state === 'uploading' ? 'Uploading...' : 'Upload'}
+          <button
+            className="button button-primary button-wide"
+            type="submit"
+            disabled={!file || state === "uploading"}
+          >
+            {state === "uploading" ? "Uploading..." : "Upload"}
           </button>
         </form>
       )}
-    </div>
-  )
+    </section>
+  );
 }

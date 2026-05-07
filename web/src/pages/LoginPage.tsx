@@ -32,42 +32,47 @@ export default function LoginPage({ onSuccess }: Props) {
   const isSubmitting = state === 'submitting'
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '360px' }}>
-      <h1>Tax Form OCR</h1>
+    <main className="auth-page">
+      <section className="auth-panel">
+        <div className="brand-mark">1040</div>
+        <p className="eyebrow">Secure review</p>
+        <h1>Tax Form OCR</h1>
+        <p className="page-subtitle">Sign in to upload a 1040 PDF and review the extracted tax fields.</p>
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ display: 'block', marginBottom: '0.25rem' }}>Username</label>
-          <input
-            type="text"
-            placeholder="user"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            disabled={isSubmitting}
-            style={{ width: '100%', padding: '0.4rem', boxSizing: 'border-box' }}
-          />
-        </div>
+        <form className="form-stack" onSubmit={handleSubmit}>
+          <div className="field">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              placeholder="user"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled={isSubmitting}
+            />
+          </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ display: 'block', marginBottom: '0.25rem' }}>Password</label>
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isSubmitting}
-            style={{ width: '100%', padding: '0.4rem', boxSizing: 'border-box' }}
-          />
-        </div>
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isSubmitting}
+            />
+          </div>
 
-        {message && (
-          <p style={{ color: 'red', marginBottom: '1rem' }}>{message}</p>
-        )}
+          {message && (
+            <p className="alert alert-error">{message}</p>
+          )}
 
-        <button type="submit" disabled={isSubmitting || !username.trim() || !password}>
-          {isSubmitting ? 'Signing in...' : 'Sign in'}
-        </button>
-      </form>
-    </div>
+          <button className="button button-primary button-wide" type="submit" disabled={isSubmitting || !username.trim() || !password}>
+            {isSubmitting ? 'Signing in...' : 'Sign in'}
+          </button>
+        </form>
+      </section>
+    </main>
   )
 }
