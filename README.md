@@ -36,15 +36,19 @@ pdftoppm -h
 
 ## Setup
 
-Install backend dependencies:
+Use the script:
+
+```bash
+./setup-dev.sh
+```
+
+Or manually:
 
 ```bash
 cd server
 npm install
 cp .env.example .env
 ```
-
-Install frontend dependencies:
 
 ```bash
 cd ../web
@@ -53,6 +57,14 @@ cp .env.example .env
 ```
 
 ## Run Locally
+
+Use the script (starts both servers in parallel, Ctrl+C stops both):
+
+```bash
+./run-dev.sh
+```
+
+Or manually in separate terminals:
 
 Start the backend:
 
@@ -67,7 +79,7 @@ The backend runs on:
 http://localhost:3001
 ```
 
-Start the frontend in another terminal:
+Start the frontend:
 
 ```bash
 cd web

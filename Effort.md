@@ -27,3 +27,5 @@ What's included and what was skipped. Happy to discuss any of this.
 - [x] Idempotent upload — re-uploading the same file replaces rather than duplicates
 - [x] Field validation on accept — server-side format and presence checks before persisting
 - [x] UI polish — refined upload, review, and records pages for demo clarity
+- [x] `setup-dev.sh` — installs deps and scaffolds `.env` files for local dev
+- [x] `run-dev.sh` — starts frontend and backend in parallel with one command
