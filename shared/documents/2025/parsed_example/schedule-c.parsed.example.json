@@ -1,0 +1,599 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule C",
+  "present": true,
+  "sourcePages": [
+    10,
+    11
+  ],
+  "fields": {
+    "proprietorName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "Name of proprietor EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "Social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineA": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "A Principal business or profession EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineB": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "B Business code EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineC": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "C Business name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineD": {
+      "value": "12-3456789",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "D Employer ID number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineE": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "E Business address EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineFAccountingMethod": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "F Accounting method EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineGMaterialParticipation": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "G Materially participated EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineHStartedOrAcquired": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "H Started or acquired business during 2025 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineIRequired1099": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "I Made payments requiring Form 1099 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineJFiled1099": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "J Filed or will file required Forms 1099 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "1 Gross receipts or sales EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1StatutoryEmployeeW2": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "1 Income reported on statutory employee W-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "2 Returns and allowances EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "3 Subtract line 2 from line 1 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "4 Cost of goods sold EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "5 Gross profit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "6 Other income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "7 Gross income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "8 Advertising EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "9 Car and truck expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "10 Commissions and fees EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "11 Contract labor EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "12 Depletion EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "13 Depreciation and section 179 expense deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "14 Employee benefit programs EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "15 Insurance other than health EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "16a Mortgage interest paid to banks, etc. EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "16b Other interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "17 Legal and professional services EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "18 Office expense EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "19 Pension and profit-sharing plans EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "20a Rent or lease vehicles, machinery, and equipment EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "20b Rent or lease other business property EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "21 Repairs and maintenance EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line22": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "22 Supplies EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "23 Taxes and licenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "24a Travel EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "24b Deductible meals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "25 Utilities EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line26": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "26 Wages EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "27a Energy efficient commercial buildings deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "27b Other expenses from line 48 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line28": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "28 Total expenses before business use of home EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line29": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "29 Tentative profit or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line30": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "30 Business use of home expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line30HomeSquareFootage": {
+      "value": "123",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "30 Home square footage for simplified method EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line30BusinessSquareFootage": {
+      "value": "123",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "30 Business-use square footage for simplified method EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line31": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "31 Net profit or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line32a": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "32a All investment is at risk EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line32b": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "32b Some investment is not at risk EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line33InventoryMethod": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "33 Inventory valuation method EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line34InventoryChange": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "34 Change in inventory quantity/cost/valuation method EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line35": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "35 Inventory at beginning of year EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line36": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "36 Purchases less cost of items withdrawn for personal use EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line37": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "37 Cost of labor EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line38": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "38 Materials and supplies EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line39": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "39 Other costs EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line40": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "40 Add lines 35 through 39 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line41": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "41 Inventory at end of year EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line42": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "42 Cost of goods sold EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line43": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "43 Vehicle placed in service date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line44a": {
+      "value": "123",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "44a Business miles EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line44b": {
+      "value": "123",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "44b Commuting miles EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line44c": {
+      "value": "123",
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "44c Other miles EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line45": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "45 Vehicle available for personal use during off-duty hours EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line46": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "46 Another vehicle available for personal use EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line47a": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "47a Evidence to support deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line47b": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "47b Evidence is written EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line48": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 10,
+      "rawText": "48 Total other expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line48Items": {
+      "value": [
+        {
+          "description": "EXAMPLE_description",
+          "amount": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 11,
+      "rawText": "48 Other expense item rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

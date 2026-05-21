@@ -1,0 +1,45 @@
+{
+  "purpose": "Index of example parsed form payloads for Phase 5 Claude tax packet extraction.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+  "note": "These examples document the expected parsed JSON shape. They may be used as prompt examples if helpful, but the field inventory remains the canonical schema source.",
+  "files": [
+    {
+      "formType": "1040",
+      "file": "form-1040.parsed.example.json"
+    },
+    {
+      "formType": "Schedule 1",
+      "file": "schedule-1.parsed.example.json"
+    },
+    {
+      "formType": "Schedule 2",
+      "file": "schedule-2.parsed.example.json"
+    },
+    {
+      "formType": "Schedule 3",
+      "file": "schedule-3.parsed.example.json"
+    },
+    {
+      "formType": "Schedule A",
+      "file": "schedule-a.parsed.example.json"
+    },
+    {
+      "formType": "Schedule B",
+      "file": "schedule-b.parsed.example.json"
+    },
+    {
+      "formType": "Schedule C",
+      "file": "schedule-c.parsed.example.json"
+    },
+    {
+      "formType": "Schedule D",
+      "file": "schedule-d.parsed.example.json"
+    },
+    {
+      "formType": "Schedule E",
+      "file": "schedule-e.parsed.example.json"
+    }
+  ]
+}

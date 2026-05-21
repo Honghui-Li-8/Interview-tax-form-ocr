@@ -1,0 +1,281 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule A",
+  "present": true,
+  "sourcePages": [
+    8
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "Name(s) shown on Form 1040 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "1 Medical and dental expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "2 Amount from Form 1040 line 11b EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "3 Multiply line 2 by 7.5% EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "4 Medical/dental expense deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5a State and local income taxes or general sales taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5aGeneralSalesTaxElection": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5a General sales taxes election checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5b State and local real estate taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5c State and local personal property taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5d Add lines 5a through 5c EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "5e SALT deduction after limitation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "6 Other taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6Type": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "6 Other taxes type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "7 Total taxes paid EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8MortgageNotAllUsedForHome": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8 Mortgage not all used to buy/build/improve home checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8a Home mortgage interest and points reported on Form 1098 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8b Home mortgage interest not reported on Form 1098 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8bPayeeInfo": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8b Line 8b payee name, identifying number, and address EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8c Points not reported on Form 1098 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8d Reserved for future use EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "8e Add lines 8a through 8c EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "9 Investment interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "10 Total interest paid EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "11 Gifts by cash or check EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "12 Gifts other than by cash or check EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "13 Carryover from prior year EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "14 Total gifts to charity EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "15 Casualty and theft losses from federally declared disaster EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "16 Other itemized deductions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16Type": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "16 Other itemized deductions type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "17 Total itemized deductions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18ItemizeEvenIfLess": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 8,
+      "rawText": "18 Elect to itemize deductions even though less than standard deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

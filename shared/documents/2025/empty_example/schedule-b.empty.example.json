@@ -1,0 +1,112 @@
+{
+  "purpose": "Empty parsed form payload for initialization, failed extraction placeholders, and UI shape reference. Values are intentionally blank.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formKey": "scheduleB",
+  "formType": "Schedule B",
+  "present": false,
+  "sourcePages": [],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1InterestPayers": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line5DividendPayers": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7aForeignAccount": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7aFbarRequired": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7bForeignCountries": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8ForeignTrust": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "purpose": "Empty parsed form payload for initialization, failed extraction placeholders, and UI shape reference. Values are intentionally blank.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formKey": "scheduleD",
+  "formType": "Schedule D",
+  "present": false,
+  "sourcePages": [],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "qualifiedOpportunityFundDisposed": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1a": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1b": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8a": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8b": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": {
+        "proceeds": null,
+        "costOrBasis": null,
+        "adjustments": null,
+        "gainOrLoss": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17BothLines15And16Gains": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line20UseQualifiedDividendsWorksheet": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line22QualifiedDividends": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

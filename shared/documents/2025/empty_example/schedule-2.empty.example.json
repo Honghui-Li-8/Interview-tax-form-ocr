@@ -1,0 +1,456 @@
+{
+  "purpose": "Empty parsed form payload for initialization, failed extraction placeholders, and UI shape reference. Values are intentionally blank.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formKey": "schedule2",
+  "formType": "Schedule 2",
+  "present": false,
+  "sourcePages": [],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1a": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1b": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1c": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1d": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1e": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1eSourceCheckboxes": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1f": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1fSourceCheckboxes": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1y": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1yType": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1z": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Exemption4361": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Exemption4029": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8Form5329NotRequired": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17a": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17aType": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17b": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17c": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17d": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17e": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17f": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17g": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17h": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17i": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17j": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17k": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17l": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17m": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17n": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17o": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17p": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17q": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17z": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17zType": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

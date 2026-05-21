@@ -1,0 +1,458 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule 2",
+  "present": true,
+  "sourcePages": [
+    5,
+    6
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "Name(s) shown on Form 1040 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1a Excess advance premium tax credit repayment EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "1b Repayment of new clean vehicle credits transferred to dealer EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1c Repayment of previously owned clean vehicle credits transferred to dealer EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "1d Recapture of net EPE from Form 4255 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1e Excessive payments on gross EPE EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1eSourceCheckboxes": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "1e Line 1e source checkboxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1f": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1f 20% EP from Form 4255 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1fSourceCheckboxes": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "1f Line 1f source checkboxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1y": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1y Other additions to tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1yType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "1y Other additions to tax type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1z": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "1z Add lines 1a through 1y EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "2 Alternative minimum tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "3 Add lines 1z and 2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "4 Self-employment tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Exemption4361": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "4 Self-employment tax exemption Form 4361 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Exemption4029": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "4 Self-employment tax exemption Form 4029 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "5 Social security and Medicare tax on unreported tip income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "6 Uncollected social security and Medicare tax on wages EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "7 Total additional social security and Medicare tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "8 Additional tax on IRAs or other tax-favored accounts EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8Form5329NotRequired": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "8 Form 5329 not required checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "9 Household employment taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "10 Reserved for future use EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "11 Additional Medicare Tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "12 Net investment income tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "13 Uncollected social security and Medicare or RRTA tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "14 Interest on tax due on installment income from sale of certain residential lots and timeshares EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "15 Interest on deferred tax on gain from certain installment sales EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "16 Recapture of low-income housing credit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17a Recapture of other credits EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17aType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17a Recapture of other credits type/form EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17b Recapture of federal mortgage subsidy EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17c Additional tax on HSA distributions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17d Additional HSA tax for not remaining eligible EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17e Additional tax on Archer MSA distributions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17f": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17f Additional tax on Medicare Advantage MSA distributions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17g": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17g Recapture of charitable contribution deduction for fractional interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17h": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17h Section 409A nonqualified deferred compensation tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17i": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17i Section 457A nonqualified deferred compensation tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17j": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17j Section 72(m)(5) excess benefits tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17k": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17k Golden parachute payments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17l": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17l Tax on accumulation distribution of trusts EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17m": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17m Excise tax on insider stock compensation from expatriated corporation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17n": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17n Look-back interest under section 167(g) or 460(b) EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17o": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17o Tax on non-effectively connected income from Form 1040-NR EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17p": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17p Form 8621 line 16f interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17q": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17q Form 8621 line 24 interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17z": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "17z Any other taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17zType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "17z Any other taxes type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "18 Total additional taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "19 Recapture of net EPE from Form 4255 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 6,
+      "rawText": "20 Section 965 net tax liability installment EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 5,
+      "rawText": "21 Total other taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

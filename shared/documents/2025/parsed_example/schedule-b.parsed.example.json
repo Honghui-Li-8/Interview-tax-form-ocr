@@ -1,0 +1,125 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule B",
+  "present": true,
+  "sourcePages": [
+    9
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "Name(s) shown on return EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1InterestPayers": {
+      "value": [
+        {
+          "payerName": "EXAMPLE_payerName",
+          "amount": "1,234",
+          "sellerFinancedMortgageBuyerSsn": "123-45-6789",
+          "sellerFinancedMortgageBuyerAddress": "EXAMPLE_sellerFinancedMortgageBuyerAddress"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "1 Interest payer rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "2 Total interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "3 Excludable interest on series EE and I U.S. savings bonds EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "4 Taxable interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5DividendPayers": {
+      "value": [
+        {
+          "payerName": "EXAMPLE_payerName",
+          "amount": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "5 Ordinary dividend payer rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "6 Total ordinary dividends EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7aForeignAccount": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "7a Had foreign financial account EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7aFbarRequired": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "7a Required to file FinCEN Form 114 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7bForeignCountries": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "7b Foreign country names for financial accounts EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8ForeignTrust": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 9,
+      "rawText": "8 Received distribution from, grantor of, or transferor to foreign trust EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

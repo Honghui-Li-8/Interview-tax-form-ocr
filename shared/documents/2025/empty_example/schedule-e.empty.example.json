@@ -1,0 +1,548 @@
+{
+  "purpose": "Empty parsed form payload for initialization, failed extraction placeholders, and UI shape reference. Values are intentionally blank.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formKey": "scheduleE",
+  "formType": "Schedule E",
+  "present": false,
+  "sourcePages": [],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "lineARequired1099": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "lineBFiled1099": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1aProperties": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line1bTypeOtherDescription": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line19Type": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line22": {
+      "value": {
+        "propertyA": null,
+        "propertyB": null,
+        "propertyC": null,
+        "total": null
+      },
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line23a": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line23b": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line23c": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line23d": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line23e": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line24": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line25": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line26": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line27PriorYearLossQuestion": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line28Entities": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line29aTotals": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line29bTotals": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line30": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line31": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line32": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line33Entities": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line34aTotals": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line34bTotals": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line35": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line36": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line37": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line38RemicRows": {
+      "value": [],
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line39": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line40": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line41": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line42": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    },
+    "line43": {
+      "value": null,
+      "confidence": "unknown",
+      "sourcePage": null,
+      "rawText": null,
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

@@ -1,0 +1,590 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule E",
+  "present": true,
+  "sourcePages": [
+    14,
+    15
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "Name(s) shown on return EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineARequired1099": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "A Made payments requiring Form 1099 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "lineBFiled1099": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "B Filed or will file required Forms 1099 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1aProperties": {
+      "value": [
+        {
+          "propertyLabel": "EXAMPLE_propertyLabel",
+          "physicalAddress": "EXAMPLE_physicalAddress",
+          "typeOfProperty": "EXAMPLE_typeOfProperty",
+          "fairRentalDays": "EXAMPLE_fairRentalDays",
+          "personalUseDays": "EXAMPLE_personalUseDays",
+          "qjv": true
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "1a Property rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1bTypeOtherDescription": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "1b Other property type description EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "3 Rents received EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "4 Royalties received EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "5 Advertising EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "6 Auto and travel EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "7 Cleaning and maintenance EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "8 Commissions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "9 Insurance EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "10 Legal and other professional fees EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "11 Management fees EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "12 Mortgage interest paid to banks, etc. EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "13 Other interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "14 Repairs EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "15 Supplies EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "16 Taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "17 Utilities EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "18 Depreciation expense or depletion EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "19 Other rental expense EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19Type": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "19 Other rental expense type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "20 Total rental expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "21 Rental or royalty income/loss before limitations EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line22": {
+      "value": {
+        "propertyA": "1,234",
+        "propertyB": "1,234",
+        "propertyC": "1,234",
+        "total": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "22 Deductible rental real estate loss after limitation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "23a Total rents received EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "23b Total royalties received EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "23c Total mortgage interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "23d Total depreciation/depletion EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "23e Total expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "24 Rental/royalty income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "25 Rental/royalty losses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line26": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "26 Total rental real estate and royalty income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27PriorYearLossQuestion": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "27 Reporting prior year disallowed loss, passive loss, or unreimbursed partnership expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line28Entities": {
+      "value": [
+        {
+          "name": "EXAMPLE_name",
+          "entityType": "EXAMPLE_entityType",
+          "foreignPartnership": true,
+          "ein": "12-3456789",
+          "basisComputationRequired": "1,234",
+          "anyAmountNotAtRisk": "1,234",
+          "passiveLossAllowed": "1,234",
+          "passiveIncome": "1,234",
+          "nonpassiveLossAllowed": "1,234",
+          "section179Deduction": "1,234",
+          "nonpassiveIncome": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "28 Partnership/S corporation entity rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line29aTotals": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "29a Line 29a totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line29bTotals": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "29b Line 29b totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line30": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "30 Partnership/S corporation income total EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line31": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "31 Partnership/S corporation loss total EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line32": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "32 Total partnership and S corporation income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line33Entities": {
+      "value": [
+        {
+          "name": "EXAMPLE_name",
+          "ein": "12-3456789",
+          "passiveDeductionOrLossAllowed": "1,234",
+          "passiveIncome": "1,234",
+          "deductionOrLoss": "1,234",
+          "otherIncome": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "33 Estate/trust entity rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line34aTotals": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "34a Line 34a totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line34bTotals": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "34b Line 34b totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line35": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "35 Estate/trust income total EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line36": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "36 Estate/trust loss total EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line37": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "37 Total estate and trust income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line38RemicRows": {
+      "value": [
+        {
+          "name": "EXAMPLE_name",
+          "ein": "12-3456789",
+          "excessInclusion": "EXAMPLE_excessInclusion",
+          "taxableIncomeOrNetLoss": "1,234",
+          "incomeFromSchedulesQ": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "38 REMIC residual holder rows EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line39": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "39 REMIC income/loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line40": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "40 Net farm rental income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line41": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "41 Total income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line42": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 14,
+      "rawText": "42 Gross farming and fishing income reconciliation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line43": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 15,
+      "rawText": "43 Real estate professional net income or loss reconciliation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

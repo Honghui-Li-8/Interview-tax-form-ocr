@@ -1,0 +1,61 @@
+{
+  "purpose": "Official blank 2025 IRS form PDFs referenced by Phase 5 tax packet extraction planning.",
+  "taxYear": "2025",
+  "note": "These files are reference artifacts for schema review, visual comparison, and prompt/testing work. Use current IRS sources when updating to a new tax year.",
+  "forms": [
+    {
+      "formType": "1040",
+      "title": "Form 1040, U.S. Individual Income Tax Return",
+      "file": "f1040.pdf",
+      "source": "docs/f1040.pdf"
+    },
+    {
+      "formType": "Schedule 1",
+      "title": "Additional Income and Adjustments to Income",
+      "file": "f1040s1.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040s1.pdf"
+    },
+    {
+      "formType": "Schedule 2",
+      "title": "Additional Taxes",
+      "file": "f1040s2.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040s2.pdf"
+    },
+    {
+      "formType": "Schedule 3",
+      "title": "Additional Credits and Payments",
+      "file": "f1040s3.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040s3.pdf"
+    },
+    {
+      "formType": "Schedule A",
+      "title": "Itemized Deductions",
+      "file": "f1040sa.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040sa.pdf"
+    },
+    {
+      "formType": "Schedule B",
+      "title": "Interest and Ordinary Dividends",
+      "file": "f1040sb.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040sb.pdf"
+    },
+    {
+      "formType": "Schedule C",
+      "title": "Profit or Loss From Business",
+      "file": "f1040sc.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040sc.pdf"
+    },
+    {
+      "formType": "Schedule D",
+      "title": "Capital Gains and Losses",
+      "file": "f1040sd.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040sd.pdf"
+    },
+    {
+      "formType": "Schedule E",
+      "title": "Supplemental Income and Loss",
+      "file": "f1040se.pdf",
+      "source": "https://www.irs.gov/pub/irs-pdf/f1040se.pdf"
+    }
+  ]
+}

@@ -1,0 +1,594 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule 1",
+  "present": true,
+  "sourcePages": [
+    3,
+    4
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "Name(s) shown on Form 1040 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1099KIncludedInErrorOrPersonalItemsLoss": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "2025 1099-K included in error or personal items sold at a loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "1 Taxable refunds, credits, or offsets of state and local income taxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "2a Alimony received EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2b": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "2b Date of original divorce or separation agreement EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "3 Business income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "4 Other gains or losses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Form4797": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "4 Line 4 from Form 4797 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Form4684": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "4 Line 4 from Form 4684 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "5 Rental real estate, royalties, partnerships, S corporations, trusts, etc. EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "6 Farm income or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "7 Unemployment compensation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7OverpaymentRepaid": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "7 Unemployment overpayment repaid amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8a Net operating loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8b Gambling EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8c Cancellation of debt EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8d Foreign earned income exclusion from Form 2555 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8e Income from Form 8853 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8f": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8f Income from Form 8889 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8g": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8g Alaska Permanent Fund dividends EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8h": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8h Jury duty pay EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8i": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8i Prizes and awards EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8j": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8j Activity not engaged in for profit income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8k": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8k Stock options EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8l": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8l Income from rental of personal property engaged in for profit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8m": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8m Olympic and Paralympic medals and USOC prize money EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8n": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8n Section 951(a) inclusion EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8o": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8o Section 951A(a) inclusion EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8p": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8p Section 461(l) excess business loss adjustment EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8q": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8q Taxable distributions from an ABLE account EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8r": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8r Scholarship and fellowship grants not reported on Form W-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8s": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8s Nontaxable Medicaid waiver payments included on Form 1040 line 1a or 1d EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8t": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8t Nonqualified deferred compensation or nongovernmental section 457 pension/annuity EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8u": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8u Wages earned while incarcerated EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8v": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8v Digital assets ordinary income not reported elsewhere EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8z": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "8z Other income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8zType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "8z Other income type and amount text EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "9 Total other income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "10 Additional income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "11 Educator expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "12 Certain business expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "13 Health savings account deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "14 Moving expenses for members of the Armed Forces EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14StorageFeesOnly": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "14 Moving expenses storage fees only checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "15 Deductible part of self-employment tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "16 Self-employed SEP, SIMPLE, and qualified plans EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "17 Self-employed health insurance deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "18 Penalty on early withdrawal of savings EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "19a Alimony paid EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19b": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "19b Recipient SSN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19c": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "19c Date of original divorce or separation agreement EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "20 IRA deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20MfsLivedApartEntireYear": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "20 IRA deduction MFS lived apart entire year checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "21 Student loan interest deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line22": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "22 Reserved for future use EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "23 Archer MSA deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24a Jury duty pay adjustment EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24b Rental personal property deductible expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24c Nontaxable Olympic/Paralympic medal and USOC prize value EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24d Reforestation amortization and expenses EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24e Repayment of supplemental unemployment benefits EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24f": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24f Contributions to section 501(c)(18)(D) pension plans EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24g": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24g Contributions by certain chaplains to section 403(b) plans EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24h": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24h Attorney fees and court costs for unlawful discrimination claims EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24i": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24i Attorney fees and court costs for IRS whistleblower award EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24j": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24j Housing deduction from Form 2555 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24k": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24k Excess deductions of section 67(e) expenses from Schedule K-1 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24z": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "24z Other adjustments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24zType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "24z Other adjustments type and amount text EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 3,
+      "rawText": "25 Total other adjustments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line26": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 4,
+      "rawText": "26 Adjustments to income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

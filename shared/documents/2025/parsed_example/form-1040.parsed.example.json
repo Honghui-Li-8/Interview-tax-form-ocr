@@ -1,0 +1,1175 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "1040",
+  "present": true,
+  "sourcePages": [
+    1,
+    2
+  ],
+  "fields": {
+    "taxPeriodStart": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Tax year beginning date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxPeriodEnd": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Tax year ending date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filedPursuantToSection30191002": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Filed pursuant to section 301.9100-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "combatZone": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Combat zone EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerDeceasedDate": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Taxpayer deceased date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseDeceasedDate": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Spouse deceased date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerFirstNameMiddleInitial": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Your first name and middle initial EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerLastName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Your last name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerSsn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseFirstNameMiddleInitial": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Spouse first name and middle initial EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseLastName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Spouse last name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseSsn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Spouse social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "homeAddress": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Home address EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "apartmentNumber": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Apartment number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "cityTownPostOffice": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "City, town, or post office EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "state": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "State EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "zipCode": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "ZIP code EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "foreignCountryName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Foreign country name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "foreignProvinceStateCounty": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Foreign province/state/county EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "foreignPostalCode": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Foreign postal code EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filingStatusSingle": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Single EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filingStatusMarriedFilingJointly": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Married filing jointly EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filingStatusMarriedFilingSeparately": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Married filing separately EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filingStatusHeadOfHousehold": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Head of household EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "filingStatusQualifyingSurvivingSpouse": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Qualifying surviving spouse EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "mfsSpouseName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "MFS spouse full name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "hohOrQssQualifyingChildName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "HOH/QSS qualifying child name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "mainHomeInUsMoreThanHalfYear": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Main home in U.S. for more than half of 2025 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "treatNonresidentSpouseAsResident": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Treat nonresident or dual-status alien spouse as U.S. resident EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "nonresidentSpouseName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Nonresident or dual-status alien spouse name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "digitalAssetsYes": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Digital asset question yes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "digitalAssetsNo": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Digital asset question no EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "presidentialElectionCampaignYou": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Presidential election campaign fund: you EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "presidentialElectionCampaignSpouse": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Presidential election campaign fund: spouse EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "dependents": {
+      "value": [
+        {
+          "firstName": "EXAMPLE_firstName",
+          "lastName": "EXAMPLE_lastName",
+          "ssn": "123-45-6789",
+          "relationship": "EXAMPLE_relationship",
+          "livedWithYouMoreThanHalfYear": true,
+          "livedInUsMoreThanHalfYear": true,
+          "fullTimeStudent": true,
+          "permanentlyTotallyDisabled": "1,234",
+          "childTaxCredit": "1,234",
+          "creditForOtherDependents": "1,234"
+        }
+      ],
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Dependents table EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "moreThanFourDependents": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "More than four dependents EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "mfsOrHohLivedApartLastSixMonths": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "MFS/HOH lived apart from spouse last 6 months EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1a Total amount from Form(s) W-2, box 1 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "1b Household employee wages not reported on Form(s) W-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1c Tip income not reported on line 1a EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "1d Medicaid waiver payments not reported on Form(s) W-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1e Taxable dependent care benefits from Form 2441, line 26 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1f": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "1f Employer-provided adoption benefits from Form 8839, line 31 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1g": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1g Wages from Form 8919, line 6 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1h": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "1h Other earned income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1hType": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1h Other earned income type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1i": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "1i Nontaxable combat pay election EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1z": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "1z Add lines 1a through 1h EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "2a Tax-exempt interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "2b Taxable interest EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "3a Qualified dividends EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "3b Ordinary dividends EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "childDividendsIncludedInLine3": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "3 Child's dividends included checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "4a IRA distributions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "4b IRA taxable amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Rollover": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "4 IRA rollover checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4Qcd": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "4 IRA QCD checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "5a Pensions and annuities EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "5b Pensions and annuities taxable amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5Rollover": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "5 Pensions/annuities rollover checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5Pso": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "5 Pensions/annuities PSO checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "6a Social security benefits EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "6b Social security taxable amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6LumpSumElection": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "6c Lump-sum election method checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6MfsLivedApartEntireYear": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "6d MFS lived apart from spouse entire year checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "7a Capital gain or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "scheduleDNotRequired": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "7b Schedule D not required checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "includesChildCapitalGainOrLoss": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "7b Includes child's capital gain or loss checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "8 Additional income from Schedule 1, line 10 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "9 Total income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "10 Adjustments to income from Schedule 1, line 26 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "11a Adjusted gross income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "11b Amount from line 11a EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12aDependentYou": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "12a Someone can claim you as a dependent EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12bDependentSpouse": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "12b Someone can claim your spouse as a dependent EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12cSpouseItemizes": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "12c Spouse itemizes on a separate return or dual-status alien EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12dAgeBlindBoxes": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "12d Born before Jan 2, 1961 / blind checkboxes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12e": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "12e Standard deduction or itemized deductions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "13a Qualified business income deduction EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "13b Additional deductions from Schedule 1-A, line 38 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "14 Add lines 12e, 13a, and 13b EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "15 Taxable income EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "16 Tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16TaxFromForm8814": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "16 Tax from Form 8814 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16TaxFromForm4972": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "16 Tax from Form 4972 checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "17 Amount from Schedule 2, line 3 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "18 Add lines 16 and 17 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "19 Child tax credit or credit for other dependents EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "20 Amount from Schedule 3, line 8 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "21 Add lines 19 and 20 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line22": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "22 Subtract line 21 from line 18 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line23": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "23 Other taxes from Schedule 2, line 21 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line24": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "24 Total tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "25a Federal income tax withheld from Form(s) W-2 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25b": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "25b Federal income tax withheld from Form(s) 1099 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25c": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "25c Federal income tax withheld from other forms EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line25d": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "25d Add lines 25a through 25c EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line26": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "26 2025 estimated tax payments and amount applied from 2024 return EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "estimatedPaymentsFormerSpouseSsn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "26 Former spouse SSN for estimated payments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "27a Earned income credit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27bNoEic": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "27b Do not want to claim EIC checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line27cClergyScheduleSe": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "27c Clergy filing Schedule SE checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line28": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "28 Additional child tax credit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line28NoActc": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "28 Do not want to claim ACTC checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line29": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "29 American opportunity credit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line30": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "30 Refundable adoption credit EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line31": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "31 Amount from Schedule 3, line 15 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line32": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "32 Total other payments and refundable credits EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line33": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "33 Total payments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line34": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "34 Amount overpaid EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line35a": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "35a Amount of line 34 to refund EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "form8888Attached": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "35a Form 8888 attached checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "routingNumber": {
+      "value": "021000021",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "35b Routing number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "accountTypeChecking": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "35c Checking account type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "accountTypeSavings": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "35c Savings account type EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "accountNumber": {
+      "value": "1234567890",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "35d Account number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line36": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "36 Amount applied to 2026 estimated tax EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line37": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "37 Amount owed EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line38": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "38 Estimated tax penalty EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "thirdPartyDesigneeYes": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Third party designee yes EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "thirdPartyDesigneeNo": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Third party designee no EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "thirdPartyDesigneeName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Third party designee name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "thirdPartyDesigneePhone": {
+      "value": "555-0100",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Third party designee phone number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "thirdPartyDesigneePin": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Third party designee PIN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerSignature": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Your signature EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerSignatureDate": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Your signature date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerOccupation": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Your occupation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerIdentityProtectionPin": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Taxpayer identity protection PIN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseSignature": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Spouse signature EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseSignatureDate": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Spouse signature date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseOccupation": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Spouse occupation EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "spouseIdentityProtectionPin": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Spouse identity protection PIN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerPhone": {
+      "value": "555-0100",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Taxpayer phone number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "taxpayerEmail": {
+      "value": "taxpayer@example.com",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Taxpayer email address EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "preparerName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Preparer name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "preparerSignature": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Preparer signature EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "preparerDate": {
+      "value": "2025-04-15",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Preparer date EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "preparerPtin": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Preparer PTIN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "preparerSelfEmployed": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Preparer self-employed checkbox EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "firmName": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Firm name EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "firmPhone": {
+      "value": "555-0100",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Firm phone number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "firmAddress": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 2,
+      "rawText": "Firm address EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "firmEin": {
+      "value": "12-3456789",
+      "confidence": "high",
+      "sourcePage": 1,
+      "rawText": "Firm EIN EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}

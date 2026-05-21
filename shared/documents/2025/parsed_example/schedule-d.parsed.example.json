@@ -1,0 +1,274 @@
+{
+  "purpose": "Example parsed form payload for documentation and prompt-shape reference. Values are synthetic placeholders, not real tax data.",
+  "schemaVersion": 1,
+  "taxYear": "2025",
+  "sourceInventory": {
+    "path": "docs/tickets/phase-5-tax-form-field-inventory-2025.json",
+    "taxYear": "2025",
+    "schemaVersion": 1
+  },
+  "formType": "Schedule D",
+  "present": true,
+  "sourcePages": [
+    12,
+    13
+  ],
+  "fields": {
+    "nameShownOnReturn": {
+      "value": "EXAMPLE_TEXT",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "Name(s) shown on return EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "ssn": {
+      "value": "123-45-6789",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "Your social security number EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "qualifiedOpportunityFundDisposed": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "Disposed of qualified opportunity fund investments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1a": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "1a Short-term 1099-B/1099-DA totals with basis reported and no adjustments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line1b": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "1b Short-term Form 8949 Box A or G totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line2": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "2 Short-term Form 8949 Box B or H totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line3": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "3 Short-term Form 8949 Box C or I totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line4": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "4 Short-term gain from Forms 6252, 4684, 6781, and 8824 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line5": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "5 Net short-term gain or loss from Schedule(s) K-1 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line6": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "6 Short-term capital loss carryover EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line7": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "7 Net short-term capital gain or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8a": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "8a Long-term 1099-B/1099-DA totals with basis reported and no adjustments EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line8b": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "8b Long-term Form 8949 Box D or J totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line9": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "9 Long-term Form 8949 Box E or K totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line10": {
+      "value": {
+        "proceeds": "1,234",
+        "costOrBasis": "1,234",
+        "adjustments": "1,234",
+        "gainOrLoss": "1,234"
+      },
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "10 Long-term Form 8949 Box F or L totals EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line11": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "11 Long-term gain from Forms 4797, 2439, 6252, 4684, 6781, and 8824 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line12": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "12 Net long-term gain or loss from Schedule(s) K-1 EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line13": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "13 Capital gain distributions EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line14": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "14 Long-term capital loss carryover EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line15": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "15 Net long-term capital gain or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line16": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "16 Combined capital gain or loss EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line17BothLines15And16Gains": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "17 Lines 15 and 16 both gains EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line18": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "18 28% rate gain worksheet amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line19": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "19 Unrecaptured section 1250 gain worksheet amount EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line20UseQualifiedDividendsWorksheet": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "20 Use Qualified Dividends and Capital Gain Tax Worksheet EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line21": {
+      "value": "1,234",
+      "confidence": "high",
+      "sourcePage": 13,
+      "rawText": "21 Allowable capital loss on Form 1040 line 7a EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    },
+    "line22QualifiedDividends": {
+      "value": true,
+      "confidence": "high",
+      "sourcePage": 12,
+      "rawText": "22 Qualified dividends on Form 1040 line 3a EXAMPLE_VALUE",
+      "reviewed": false,
+      "edited": false
+    }
+  }
+}
