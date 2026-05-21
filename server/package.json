@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.98.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -20,7 +21,8 @@
     "multer": "^2.1.1",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
-    "tesseract.js": "^4.1.4"
+    "tesseract.js": "^4.1.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
