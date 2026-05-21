@@ -5,6 +5,7 @@ import { getAuthUser } from '../auth/authMiddleware'
 import {
   decryptFields,
   decryptJsonPayload,
+  encryptJsonPayload,
   encryptFields,
   isEncryptedJsonPayload,
 } from './encryptionService'
@@ -45,6 +46,15 @@ const MONEY_PATTERN = /^\$?\d{1,3}(,\d{3})*(\.\d{2})?$|^\$?\d+(\.\d{2})?$/
 const MAX_FIELD_LENGTH = 80
 
 type AcceptedFields = Record<keyof ExtractedFields, string>
+
+function isTaxReturnExtraction(value: unknown): value is TaxReturnExtraction {
+  return Boolean(value)
+    && typeof value === 'object'
+    && !Array.isArray(value)
+    && (value as { schemaVersion?: unknown }).schemaVersion === 1
+    && typeof (value as { forms?: unknown }).forms === 'object'
+    && typeof (value as { summary?: unknown }).summary === 'object'
+}
 
 function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedFields {
   return {
@@ -173,8 +183,10 @@ export function makeReviewHandlers(db: Database) {
       return
     }
 
-    const validation = validateAcceptedFields((req.body as { fields?: unknown }).fields)
-    if ('error' in validation) {
+    const body = req.body as { fields?: unknown; extraction?: unknown }
+    const extraction = isTaxReturnExtraction(body.extraction) ? body.extraction : null
+    const validation = extraction ? null : validateAcceptedFields(body.fields)
+    if (validation && 'error' in validation) {
       res.status(400).json({ error: validation.error })
       return
     }
@@ -198,7 +210,10 @@ export function makeReviewHandlers(db: Database) {
       `UPDATE tax_documents
        SET extracted_fields = ?, status = 'accepted', accepted_at = datetime('now')
        WHERE id = ? AND owner_username = ?`,
-      JSON.stringify(encryptFields(validation.fields, username)),
+      JSON.stringify(extraction
+        ? encryptJsonPayload(extraction, username)
+        : encryptFields(validation!.fields, username)
+      ),
       id,
       username
     )

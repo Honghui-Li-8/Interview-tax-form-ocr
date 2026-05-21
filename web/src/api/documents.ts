@@ -5,6 +5,7 @@ import type {
   AcceptResponse,
   ExtractedFields,
   AcceptedDocumentRecord,
+  TaxReturnExtraction,
 } from '../../../shared/types'
 import { getToken, UnauthorizedError } from './auth'
 
@@ -66,10 +67,17 @@ export async function getDocumentFile(id: number): Promise<string> {
   return URL.createObjectURL(await res.blob())
 }
 
-export async function acceptDocument(id: number, fields: ExtractedFields): Promise<AcceptResponse> {
+export async function acceptDocument(
+  id: number,
+  payload: ExtractedFields | TaxReturnExtraction
+): Promise<AcceptResponse> {
+  const body = 'schemaVersion' in payload
+    ? { extraction: payload }
+    : { fields: payload }
+
   return handleResponse(await fetch(`${SERVER_URL}/api/documents/${id}/accept`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
-    body: JSON.stringify({ fields }),
+    body: JSON.stringify(body),
   }))
 }
