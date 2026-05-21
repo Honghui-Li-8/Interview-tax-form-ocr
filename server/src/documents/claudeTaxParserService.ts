@@ -11,6 +11,7 @@ import { withRenderedPdfPages, type RenderedPage } from './pageRenderService'
 import { normalizeParsedForm } from './extractionNormalizationService'
 import { validatePageClassifications, validateParsedForm } from './extractionValidationService'
 import { groupPagesByForm, mergeParsedForms } from './taxPacketMergeService'
+import { reconcileTaxReturnExtraction } from './reconciliationService'
 import {
   getClaudeFieldSchema,
   getDefaultSchema,
@@ -195,6 +196,6 @@ export async function parseTaxReturnPacket(
       parsedForms[formType] = await parseFormGroup(formType, formPages, getDefaultSchema(formType), options)
     }
 
-    return mergeParsedForms(classifications, parsedForms)
+    return reconcileTaxReturnExtraction(mergeParsedForms(classifications, parsedForms))
   })
 }
