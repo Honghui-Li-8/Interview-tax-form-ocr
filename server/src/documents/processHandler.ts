@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import { Database } from 'sqlite'
 import { getAuthUser } from '../auth/authMiddleware'
-import { getDemoFields } from './extractionService'
 import { decryptJsonPayload, encryptJsonPayload } from './encryptionService'
 import { parseTaxReturnPacket } from './claudeTaxParserService'
 import { mergeParsedForms } from './taxPacketMergeService'
@@ -20,7 +19,13 @@ function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedF
 }
 
 function demoExtraction(): TaxReturnExtraction {
-  const fields = getDemoFields()
+  const fields: ExtractedFields = {
+    taxpayerName: 'Billie J. Does',
+    filingStatus: 'Single',
+    totalWages: '39,027',
+    totalTax: '2,978',
+    refundOrOwed: '147',
+  }
   return {
     ...mergeParsedForms([], {}),
     summary: {

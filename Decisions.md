@@ -12,21 +12,21 @@ Kept minimal: two preset env users, JWT, every document query filtered by owner.
 
 ---
 
-## OCR Pipeline
+## Document Parsing Pipeline
 
-**PDF → image → OCR** — pages are rendered to PNG first, then Tesseract runs on the image. This handles scanned PDFs that have no embedded text layer.
+**PDF → image → Claude classification/extraction** — pages are rendered to PNG first, then Claude vision classifies pages and extracts supported forms against the 2025 schema inventory. `pdftoppm` remains a deterministic renderer only; Tesseract is no longer used.
 
-**Duplicate job guard** — if OCR is already running for a document, a second request returns the current status instead of starting a new job.
+**Duplicate job guard** — if parsing is already running for a document, a second request returns the current status instead of starting a new job.
 
-**Missing fields** — if a field can't be extracted, it's stored as `null` and shown as a blank editable input. The flow doesn't break.
+**Missing fields** — if a field can't be extracted, it's stored as `null` and shown as a blank editable input. Unknown pages and reconciliation mismatches become review warnings instead of blocking acceptance.
 
 ---
 
 ## Extracted Fields
 
-Five fields: taxpayer name, filing status, total wages, total tax, refund or amount owed.
+Phase 5 extracts a packet-shaped payload for 2025 Form 1040 plus Schedules 1, 2, 3, A, B, C, D, and E.
 
-A full 1040 has 80+ lines. Five clean fields is enough to show the pipeline works — more would just add brittle regex.
+The schema inventory defines the field keys, labels, line numbers, value types, and repeatable table metadata. Claude output is treated as candidate data until runtime validation and deterministic normalization succeed.
 
 ---
 
@@ -40,9 +40,9 @@ Schema is applied on server startup (`CREATE TABLE IF NOT EXISTS`) so a reviewer
 
 ## Encryption
 
-**Scope:** extracted field values only (`ExtractedFields`). The uploaded PDF is not encrypted — out of scope for this exercise.
+**Scope:** extracted packet JSON only (`TaxReturnExtraction`). The uploaded PDF is not encrypted — out of scope for this exercise.
 
-**Algorithm:** AES-256-GCM, field-level. Each non-null field is encrypted individually at write and decrypted at read.
+**Algorithm:** AES-256-GCM. New packet payloads are encrypted as a single JSON blob at write and decrypted at read. Legacy five-field payloads are still readable during local migration.
 
 **Key design (2-layer):**
 - Layer 1 — server master secret (`MASTER_ENCRYPTION_KEY` env var)
@@ -51,16 +51,16 @@ Schema is applied on server startup (`CREATE TABLE IF NOT EXISTS`) so a reviewer
 - Neither layer alone can decrypt the data
 
 **Data lifecycle:**
-- Plaintext only ever exists in memory during OCR extraction and encrypt/decrypt calls
-- Every DB write goes through `encryptFields` — no plaintext path to storage
-- Decrypted fields are sent to the client over the API (intentional — user must review them)
+- Plaintext only ever exists in memory during parsing and encrypt/decrypt calls
+- Every extraction DB write goes through the encryption service — no plaintext extraction path to storage
+- Decrypted packet data is sent to the client over the API (intentional — user must review it)
 - Auth is untouched — key derivation is contained entirely within the encryption service
 
 ---
 
 ## PDF Preview
 
-Not a stated requirement. Added for demo convenience — having the source document alongside the review form makes it easier to verify the upload and OCR result without switching tabs.
+Not a stated requirement. Added for demo convenience — having the source document alongside the review form makes it easier to verify the upload and parsed result without switching tabs.
 
 ---
 

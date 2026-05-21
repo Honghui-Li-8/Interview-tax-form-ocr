@@ -1,8 +1,8 @@
-# Tax Form OCR
+# Tax Form Parser
 
-A small full-stack app for uploading a 1040 PDF, running OCR on the server, extracting key tax fields, and letting the user review/edit/accept the final data.
+A small full-stack app for uploading a federal tax return PDF packet, parsing supported forms with Claude vision, and letting the user review/edit/accept the final structured data.
 
-The app is scoped for an interview exercise: it prioritizes a complete upload -> OCR -> review -> accept flow over production infrastructure.
+The app is scoped for an interview exercise: it prioritizes a complete upload -> parse -> review -> accept flow over production infrastructure.
 
 > Design rationale and tradeoffs: [Decisions.md](Decisions.md)
 > Timeline and scope justification: [Effort.md](Effort.md)
@@ -14,13 +14,14 @@ The app is scoped for an interview exercise: it prioritizes a complete upload ->
 - SQLite local database
 - Local filesystem uploads
 - Poppler `pdftoppm` for PDF page rendering
-- `tesseract.js` for OCR
+- Claude vision/document parsing for tax packet extraction
 
 ## Prerequisites
 
 - Node.js 20+
 - npm
 - Poppler command line tools
+- Anthropic API key for real document parsing
 
 On Ubuntu/Debian:
 
@@ -97,8 +98,8 @@ http://localhost:5173
 1. Sign in with one of the preset exercise users.
 2. Upload a 1040 PDF.
 3. Click Review Document.
-4. Wait while the server renders the PDF pages and runs OCR.
-5. Review the extracted fields.
+4. Wait while the server renders the PDF pages and asks Claude to classify/extract supported forms.
+5. Review the extracted packet fields and warnings.
 6. Edit any missing or incorrect values.
 7. Click Accept to persist the reviewed data.
 
@@ -114,6 +115,11 @@ DB_PATH=data/tax_ocr.db
 DEBUG=false
 AUTH_USERS=user:password,user2:password
 JWT_SECRET=replace-with-a-long-random-string
+MASTER_ENCRYPTION_KEY=replace-with-32-byte-hex-secret
+ANTHROPIC_API_KEY=...
+CLAUDE_MODEL=claude-sonnet-4-5
+DOCUMENT_PARSER=claude
+CLAUDE_MAX_FORM_PAGES_PER_CALL=4
 ```
 
 Frontend `web/.env`:
@@ -122,7 +128,7 @@ Frontend `web/.env`:
 VITE_SERVER_URL=http://localhost:3001
 ```
 
-Set `DEBUG=true` on the backend to print OCR timing logs while not in production.
+Set `DEBUG=true` on the backend to print safe timing/count logs while not in production. Logs must not include rendered images, prompt bodies, SSNs, banking fields, or raw extracted values.
 
 The sample `AUTH_USERS` values are demo credentials only. Do not store real passwords this way in production.
 
@@ -166,11 +172,12 @@ npm run build
 ## Known Limitations
 
 - PDF only; image uploads are intentionally out of scope.
-- OCR extraction targets five fields, not the full 1040.
+- Supported tax packet scope is 2025 Form 1040 plus Schedules 1, 2, 3, A, B, C, D, and E.
+- W-2, 1099, K-1, state forms, multi-PDF returns, and async background queues are out of scope.
 - Local filesystem storage for server; production would use object storage such as S3.
 - SQLite local database; production would use a managed database.
 - Auth uses preset env users and JWTs for exercise/demo protection only.
 - Passwords in `AUTH_USERS` are plaintext demo credentials, not production auth.
 - JWT is stored in localStorage for simplicity.
-- No real field encryption; encryption hooks are placeholder no-ops.
-- Processing is synchronous per request, with a guard to prevent duplicate OCR jobs.
+- Uploaded PDFs are not encrypted at rest in this exercise; extracted packet JSON is encrypted before database storage.
+- Processing is synchronous per request, with a guard to prevent duplicate parser jobs.
