@@ -77,3 +77,26 @@ export function decryptFields(fields: ExtractedFields, username: string): Extrac
   logEncryption(`decrypted ${fieldNames.length} fields: ${fieldNames.join(', ')}`)
   return result
 }
+
+export type EncryptedJsonPayload = {
+  __encryptedJson: string
+}
+
+export function encryptJsonPayload<T>(payload: T, username: string): EncryptedJsonPayload {
+  const key = deriveFieldKey(username)
+  logEncryption('encrypted JSON payload')
+  return { __encryptedJson: encryptValue(JSON.stringify(payload), key) }
+}
+
+export function decryptJsonPayload<T>(payload: EncryptedJsonPayload, username: string): T {
+  const key = deriveFieldKey(username)
+  logEncryption('decrypted JSON payload')
+  return JSON.parse(decryptValue(payload.__encryptedJson, key)) as T
+}
+
+export function isEncryptedJsonPayload(value: unknown): value is EncryptedJsonPayload {
+  return Boolean(value)
+    && typeof value === 'object'
+    && !Array.isArray(value)
+    && typeof (value as Record<string, unknown>).__encryptedJson === 'string'
+}

@@ -2,8 +2,13 @@ import fs from 'fs'
 import { Request, Response } from 'express'
 import { Database } from 'sqlite'
 import { getAuthUser } from '../auth/authMiddleware'
-import { decryptFields, encryptFields } from './encryptionService'
-import type { ExtractedFields } from '../../../shared/types'
+import {
+  decryptFields,
+  decryptJsonPayload,
+  encryptFields,
+  isEncryptedJsonPayload,
+} from './encryptionService'
+import type { ExtractedFields, TaxReturnExtraction } from '../../../shared/types'
 
 type TaxDocumentRow = {
   id: number
@@ -40,6 +45,32 @@ const MONEY_PATTERN = /^\$?\d{1,3}(,\d{3})*(\.\d{2})?$|^\$?\d+(\.\d{2})?$/
 const MAX_FIELD_LENGTH = 80
 
 type AcceptedFields = Record<keyof ExtractedFields, string>
+
+function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedFields {
+  return {
+    taxpayerName: extraction.summary.taxpayerName,
+    filingStatus: extraction.summary.filingStatus,
+    totalWages: extraction.summary.totalIncome,
+    totalTax: extraction.summary.totalTax,
+    refundOrOwed: extraction.summary.refundOrOwed,
+  }
+}
+
+function decryptStoredExtraction(
+  storedValue: string,
+  username: string
+): { fields: ExtractedFields; extraction: TaxReturnExtraction | null } {
+  const parsed = JSON.parse(storedValue) as unknown
+  if (isEncryptedJsonPayload(parsed)) {
+    const extraction = decryptJsonPayload<TaxReturnExtraction>(parsed, username)
+    return { fields: legacyFieldsFromExtraction(extraction), extraction }
+  }
+
+  return {
+    fields: decryptFields(parsed as ExtractedFields, username),
+    extraction: null,
+  }
+}
 
 export function validateAcceptedFields(value: unknown): { fields: AcceptedFields } | { error: string } {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
@@ -97,7 +128,7 @@ export function makeReviewHandlers(db: Database) {
       records: rows.map(row => ({
         id: row.id,
         filename: row.filename,
-        fields: decryptFields(JSON.parse(row.extracted_fields), username),
+        ...decryptStoredExtraction(row.extracted_fields, username),
         accepted_at: row.accepted_at,
       })),
     })
@@ -121,11 +152,17 @@ export function makeReviewHandlers(db: Database) {
       return
     }
 
-    const fields: ExtractedFields | null = row.extracted_fields
-      ? decryptFields(JSON.parse(row.extracted_fields), username)
-      : null
+    const decrypted = row.extracted_fields
+      ? decryptStoredExtraction(row.extracted_fields, username)
+      : { fields: null, extraction: null }
 
-    res.json({ id: row.id, status: row.status, fields, accepted_at: row.accepted_at })
+    res.json({
+      id: row.id,
+      status: row.status,
+      fields: decrypted.fields,
+      extraction: decrypted.extraction,
+      accepted_at: row.accepted_at,
+    })
   }
 
   const acceptDocument = async (req: Request, res: Response): Promise<void> => {

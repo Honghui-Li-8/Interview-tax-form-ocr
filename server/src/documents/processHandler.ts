@@ -1,12 +1,54 @@
 import { Request, Response } from 'express'
 import { Database } from 'sqlite'
 import { getAuthUser } from '../auth/authMiddleware'
-import { runOcr } from './ocrService'
-import { extractFields, getDemoFields } from './extractionService'
-import { encryptFields, decryptFields } from './encryptionService'
-import type { ExtractedFields, DocumentStatus } from '../../../shared/types'
+import { getDemoFields } from './extractionService'
+import { decryptJsonPayload, encryptJsonPayload } from './encryptionService'
+import { parseTaxReturnPacket } from './claudeTaxParserService'
+import { mergeParsedForms } from './taxPacketMergeService'
+import type { ExtractedFields, DocumentStatus, TaxReturnExtraction } from '../../../shared/types'
 
 type TaxDocument = { id: number; stored_path: string; status: string }
+
+function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedFields {
+  return {
+    taxpayerName: extraction.summary.taxpayerName,
+    filingStatus: extraction.summary.filingStatus,
+    totalWages: extraction.summary.totalIncome,
+    totalTax: extraction.summary.totalTax,
+    refundOrOwed: extraction.summary.refundOrOwed,
+  }
+}
+
+function demoExtraction(): TaxReturnExtraction {
+  const fields = getDemoFields()
+  return {
+    ...mergeParsedForms([], {}),
+    summary: {
+      taxpayerName: fields.taxpayerName,
+      filingStatus: fields.filingStatus,
+      totalIncome: fields.totalWages,
+      totalTax: fields.totalTax,
+      refundOrOwed: fields.refundOrOwed,
+    },
+  }
+}
+
+function failedExtraction(message: string): TaxReturnExtraction {
+  const extraction = mergeParsedForms([], {})
+  return {
+    ...extraction,
+    warnings: [
+      ...extraction.warnings,
+      {
+        severity: 'error',
+        code: 'PARSER_FAILED',
+        message,
+        fields: [],
+        pages: [],
+      },
+    ],
+  }
+}
 
 export function makeProcessHandler(db: Database) {
   return async function handleProcess(req: Request, res: Response): Promise<void> {
@@ -42,28 +84,33 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
-    let fields: ExtractedFields
+    let extraction: TaxReturnExtraction
     let status: DocumentStatus = 'extracted'
 
     if (process.env.DEMO_MODE === 'true') {
-      fields = getDemoFields()
+      extraction = demoExtraction()
     } else {
       try {
-        const text = await runOcr(doc.stored_path)
-        fields = extractFields(text)
+        extraction = await parseTaxReturnPacket(doc.stored_path)
       } catch {
-        fields = { taxpayerName: null, filingStatus: null, totalWages: null, totalTax: null, refundOrOwed: null }
+        extraction = failedExtraction('Document parsing failed. Review the uploaded PDF and parser configuration.')
         status = 'failed'
       }
     }
 
-    const encrypted = encryptFields(fields, username)
+    const encrypted = encryptJsonPayload(extraction, username)
 
     await db.run(
       'UPDATE tax_documents SET extracted_fields = ?, status = ?, processed_at = ? WHERE id = ? AND owner_username = ?',
       [JSON.stringify(encrypted), status, new Date().toISOString(), id, username]
     )
 
-    res.json({ documentId: id, status, fields: decryptFields(encrypted, username) })
+    const decryptedExtraction = decryptJsonPayload<TaxReturnExtraction>(encrypted, username)
+    res.json({
+      documentId: id,
+      status,
+      extraction: decryptedExtraction,
+      fields: legacyFieldsFromExtraction(decryptedExtraction),
+    })
   }
 }
