@@ -8,6 +8,11 @@ import type { ExtractedFields, DocumentStatus, TaxReturnExtraction } from '../..
 import { emitProcessingProgress } from './processingProgressService'
 
 type TaxDocument = { id: number; stored_path: string; status: string }
+type ProcessJobResult = {
+  status: DocumentStatus
+  extraction: TaxReturnExtraction
+  fields: ExtractedFields
+}
 
 function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedFields {
   return {
@@ -56,6 +61,66 @@ function failedExtraction(message: string): TaxReturnExtraction {
   }
 }
 
+async function runDocumentProcessingJob(
+  db: Database,
+  id: number,
+  username: string,
+  storedPath: string
+): Promise<ProcessJobResult> {
+  let extraction: TaxReturnExtraction
+  let status: DocumentStatus = 'extracted'
+
+  if (process.env.DEMO_MODE === 'true') {
+    extraction = demoExtraction()
+  } else {
+    try {
+      extraction = await parseTaxReturnPacket(storedPath, {
+        onProgress: event => emitProcessingProgress(id, event),
+      })
+    } catch {
+      extraction = failedExtraction('Document parsing failed. Review the uploaded PDF and parser configuration.')
+      status = 'failed'
+    }
+  }
+
+  emitProcessingProgress(id, {
+    phase: 'encrypting_and_persisting',
+    message: 'Saving extraction',
+    percent: status === 'extracted' ? 95 : null,
+    warningCodes: extraction.warnings.map(warning => warning.code),
+  })
+
+  const encrypted = encryptJsonPayload(extraction, username)
+
+  await db.run(
+    'UPDATE tax_documents SET extracted_fields = ?, status = ?, processed_at = ? WHERE id = ? AND owner_username = ?',
+    [JSON.stringify(encrypted), status, new Date().toISOString(), id, username]
+  )
+
+  if (status === 'extracted') {
+    emitProcessingProgress(id, {
+      phase: 'completed',
+      message: 'Document processing completed',
+      percent: 100,
+      warningCodes: extraction.warnings.map(warning => warning.code),
+    })
+  } else {
+    emitProcessingProgress(id, {
+      phase: 'failed',
+      message: 'Document parsing failed',
+      percent: null,
+      warningCodes: extraction.warnings.map(warning => warning.code),
+    })
+  }
+
+  const decryptedExtraction = decryptJsonPayload<TaxReturnExtraction>(encrypted, username)
+  return {
+    status,
+    extraction: decryptedExtraction,
+    fields: legacyFieldsFromExtraction(decryptedExtraction),
+  }
+}
+
 export function makeProcessHandler(db: Database) {
   return async function handleProcess(req: Request, res: Response): Promise<void> {
     const { username } = getAuthUser(req)
@@ -96,58 +161,12 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
-    let extraction: TaxReturnExtraction
-    let status: DocumentStatus = 'extracted'
-
-    if (process.env.DEMO_MODE === 'true') {
-      extraction = demoExtraction()
-    } else {
-      try {
-        extraction = await parseTaxReturnPacket(doc.stored_path, {
-          onProgress: event => emitProcessingProgress(id, event),
-        })
-      } catch {
-        extraction = failedExtraction('Document parsing failed. Review the uploaded PDF and parser configuration.')
-        status = 'failed'
-      }
-    }
-
-    emitProcessingProgress(id, {
-      phase: 'encrypting_and_persisting',
-      message: 'Saving extraction',
-      percent: status === 'extracted' ? 95 : null,
-      warningCodes: extraction.warnings.map(warning => warning.code),
-    })
-
-    const encrypted = encryptJsonPayload(extraction, username)
-
-    await db.run(
-      'UPDATE tax_documents SET extracted_fields = ?, status = ?, processed_at = ? WHERE id = ? AND owner_username = ?',
-      [JSON.stringify(encrypted), status, new Date().toISOString(), id, username]
-    )
-
-    if (status === 'extracted') {
-      emitProcessingProgress(id, {
-        phase: 'completed',
-        message: 'Document processing completed',
-        percent: 100,
-        warningCodes: extraction.warnings.map(warning => warning.code),
-      })
-    } else {
-      emitProcessingProgress(id, {
-        phase: 'failed',
-        message: 'Document parsing failed',
-        percent: null,
-        warningCodes: extraction.warnings.map(warning => warning.code),
-      })
-    }
-
-    const decryptedExtraction = decryptJsonPayload<TaxReturnExtraction>(encrypted, username)
+    const result = await runDocumentProcessingJob(db, id, username, doc.stored_path)
     res.json({
       documentId: id,
-      status,
-      extraction: decryptedExtraction,
-      fields: legacyFieldsFromExtraction(decryptedExtraction),
+      status: result.status,
+      extraction: result.extraction,
+      fields: result.fields,
     })
   }
 }
