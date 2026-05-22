@@ -55,13 +55,13 @@ export async function withRenderedPdfPages<T>(
   }
 
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tax-render-'))
-  logRender(`created temp render directory ${tmpDir}`)
+  logRender('created temp render directory')
 
   try {
     const outputPrefix = path.join(tmpDir, 'page')
     const renderStartedAt = Date.now()
 
-    logRender(`rendering PDF ${filePath} at ${RENDER_DPI} DPI`)
+    logRender(`rendering PDF at ${RENDER_DPI} DPI`)
     execFileSync('pdftoppm', ['-r', RENDER_DPI, '-png', filePath, outputPrefix], { stdio: 'pipe' })
     logRender(`rendered PDF in ${Date.now() - renderStartedAt}ms`)
 
@@ -75,6 +75,6 @@ export async function withRenderedPdfPages<T>(
     return await callback(pages)
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true })
-    logRender(`removed temp render directory ${tmpDir}`)
+    logRender('removed temp render directory')
   }
 }

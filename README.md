@@ -98,7 +98,7 @@ http://localhost:5173
 1. Sign in with one of the preset exercise users.
 2. Upload a 1040 PDF.
 3. Click Review Document.
-4. Wait while the server renders the PDF pages and asks Claude to classify/extract supported forms.
+4. Watch the processing status while the server renders pages and asks Claude to classify/extract supported forms.
 5. Review the extracted packet fields and warnings.
 6. Edit any missing or incorrect values.
 7. Click Accept to persist the reviewed data.
@@ -128,7 +128,19 @@ Frontend `web/.env`:
 VITE_SERVER_URL=http://localhost:3001
 ```
 
-Set `DEBUG=true` on the backend to print safe timing/count logs while not in production. Logs must not include rendered images, prompt bodies, SSNs, banking fields, or raw extracted values.
+Set `DEBUG=true` on the backend to print safe timing/count logs while not in production. Logs must not include rendered images, prompt bodies, SSNs, banking fields, names, addresses, local file paths, raw Claude output, `rawText`, or raw extracted values.
+
+## Processing Progress
+
+The review page opens an authenticated progress stream while a pending document is processing:
+
+```text
+GET /api/documents/:id/process/progress
+```
+
+The stream uses newline-delimited JSON over `fetch()` so the browser can send the same Bearer token as the rest of the API. If the stream is unavailable or disconnects, the frontend falls back to the existing polling flow and still refetches the document when processing finishes.
+
+Progress events contain safe stage metadata only: phase, message, timestamp, percent, page counts, page numbers, supported form name, form index/count, and warning codes. They must not contain prompt text, image payloads, extracted values, `rawText`, SSNs, EINs, banking fields, names, addresses, or local file paths.
 
 The sample `AUTH_USERS` values are demo credentials only. Do not store real passwords this way in production.
 
