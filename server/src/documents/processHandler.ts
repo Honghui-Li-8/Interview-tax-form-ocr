@@ -6,6 +6,7 @@ import { parseTaxReturnPacket } from './claudeTaxParserService'
 import { mergeParsedForms } from './taxPacketMergeService'
 import type { ExtractedFields, DocumentStatus, TaxReturnExtraction } from '../../../shared/types'
 import { emitProcessingProgress } from './processingProgressService'
+import { enqueueProcessingJob } from './processingJobQueue'
 
 type TaxDocument = { id: number; stored_path: string; status: DocumentStatus }
 type ProcessJobResult = {
@@ -194,14 +195,14 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
-    void runDocumentProcessingJob(db, id, username, doc.stored_path).catch(() => {
+    enqueueProcessingJob(() => runDocumentProcessingJob(db, id, username, doc.stored_path).catch(() => {
       emitProcessingProgress(id, {
         phase: 'failed',
         message: 'Document processing failed',
         percent: null,
         warningCodes: ['PARSER_FAILED'],
       })
-    })
+    }))
     res.status(202).json({ documentId: id, status: 'processing' })
   }
 }
