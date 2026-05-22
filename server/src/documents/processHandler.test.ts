@@ -206,7 +206,7 @@ describe('makeProcessHandler packet parser wiring', () => {
     expect(secondRes.statusCode).toBe(429)
     expect(firstRes.body).toEqual({ documentId: 1, status: 'processing' })
     expect(secondRes.body).toEqual({
-      error: 'Another document is already processing. Try again after it finishes.',
+      error: 'Another document is already processing. This exercise build limits extraction to one document at a time because PDF parsing and Claude extraction are resource-intensive on modest hosting. Try again after it finishes.',
     })
     expect(docs.get(2)?.status).toBe('pending')
     expect(calls.filter(call => call.params[0] === 'processing')).toHaveLength(1)

@@ -96,7 +96,7 @@ The slot guard exists but does not protect PDF parsing or Claude calls unless th
 3. If no slot is available, return:
    ```ts
    res.status(429).json({
-     error: 'Another document is already processing. Try again after it finishes.',
+     error: 'Another document is already processing. This exercise build limits extraction to one document at a time because PDF parsing and Claude extraction are resource-intensive on modest hosting. Try again after it finishes.',
    })
    ```
 4. If a slot is reserved, keep the atomic database claim unchanged:

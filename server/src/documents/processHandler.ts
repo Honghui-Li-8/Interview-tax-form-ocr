@@ -177,7 +177,7 @@ export function makeProcessHandler(db: Database) {
     const releaseProcessingSlot = tryReserveProcessingSlot()
     if (!releaseProcessingSlot) {
       res.status(429).json({
-        error: 'Another document is already processing. Try again after it finishes.',
+        error: 'Another document is already processing. This exercise build limits extraction to one document at a time because PDF parsing and Claude extraction are resource-intensive on modest hosting. Try again after it finishes.',
       })
       return
     }
