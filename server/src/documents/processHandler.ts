@@ -195,14 +195,18 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
-    enqueueProcessingJob(() => runDocumentProcessingJob(db, id, username, doc.stored_path).catch(() => {
-      emitProcessingProgress(id, {
-        phase: 'failed',
-        message: 'Document processing failed',
-        percent: null,
-        warningCodes: ['PARSER_FAILED'],
-      })
-    }))
+    enqueueProcessingJob(async () => {
+      try {
+        await runDocumentProcessingJob(db, id, username, doc.stored_path)
+      } catch {
+        emitProcessingProgress(id, {
+          phase: 'failed',
+          message: 'Document processing failed',
+          percent: null,
+          warningCodes: ['PARSER_FAILED'],
+        })
+      }
+    })
     res.status(202).json({ documentId: id, status: 'processing' })
   }
 }
