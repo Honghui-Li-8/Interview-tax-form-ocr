@@ -1,0 +1,101 @@
+{
+  "description": "AcroForm cleanup for the 2025 Schedule C base PDF. Splits the top SSN widget into 3 segments, plus the business code and EIN comb fields into one field per printed digit box.",
+  "splitTextFields": [
+    {
+      "fullName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "schedule_c_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "schedule_c_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "schedule_c_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].BComb[0].f1_4[0]",
+      "gap": 0,
+      "justify": 1,
+      "comb": false,
+      "parts": [
+        {
+          "partialName": "business_code_1[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "business_code_2[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "business_code_3[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "business_code_4[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "business_code_5[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "business_code_6[0]",
+          "maxLength": 1
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].DComb[0].f1_6[0]",
+      "gap": 0,
+      "justify": 1,
+      "comb": false,
+      "parts": [
+        {
+          "partialName": "ein_1[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_2[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_3[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_4[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_5[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_6[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_7[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_8[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "ein_9[0]",
+          "maxLength": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "description": "AcroForm cleanup for the 2025 Schedule B base PDF. Splits the top SSN widget into 3 segments so generated values align with the printed divider layout.",
+  "splitTextFields": [
+    {
+      "fullName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "schedule_b_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "schedule_b_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "schedule_b_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    }
+  ]
+}

@@ -169,6 +169,20 @@ cd web
 npm run build
 ```
 
+## AcroForm Utilities
+
+The 2025 IRS `shared/documents/2025/official_doc/f1040.pdf` already contains AcroForm widgets. The repo includes a small helper for exporting the field inventory, stripping the XFA packet, and filling the form from JSON:
+
+```bash
+python3 -m pip install -r scripts/pdf_forms/requirements.txt
+python3 scripts/pdf_forms/acroform_tools.py normalize --input shared/documents/2025/official_doc/f1040.pdf --transform-spec shared/documents/2025/acroform/f1040.transforms.json --output shared/documents/2025/acroform/f1040.acroform.pdf
+python3 scripts/pdf_forms/acroform_tools.py inventory --input shared/documents/2025/acroform/f1040.acroform.pdf --output shared/documents/2025/acroform/f1040.fields.json
+python3 scripts/pdf_forms/acroform_tools.py template --input shared/documents/2025/acroform/f1040.acroform.pdf --output shared/documents/2025/acroform/f1040.values.template.json
+python3 scripts/pdf_forms/acroform_tools.py fill --input shared/documents/2025/acroform/f1040.acroform.pdf --values path/to/values.json --output path/to/filled.pdf
+```
+
+The checked-in 2025 `f1040.acroform.pdf` also splits the primary taxpayer and spouse SSN widgets into three fields each, and the page 2 direct-deposit routing/account widgets into one field per printed digit box.
+
 ## Known Limitations
 
 - PDF only; image uploads are intentionally out of scope.
