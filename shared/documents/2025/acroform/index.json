@@ -1,0 +1,15 @@
+{
+  "purpose": "Generated AcroForm support artifacts derived from the official 2025 IRS PDFs.",
+  "taxYear": "2025",
+  "note": "These files are repo-generated helpers for scripted filling and example generation. The source-of-truth blank IRS forms remain under `shared/documents/2025/official_doc/`.",
+  "artifacts": [
+    {
+      "formType": "1040",
+      "source": "../official_doc/f1040.pdf",
+      "transformSpec": "f1040.transforms.json",
+      "normalizedPdf": "f1040.acroform.pdf",
+      "fieldInventory": "f1040.fields.json",
+      "valueTemplate": "f1040.values.template.json"
+    }
+  ]
+}

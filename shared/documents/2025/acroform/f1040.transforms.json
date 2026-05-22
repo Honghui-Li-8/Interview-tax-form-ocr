@@ -1,0 +1,265 @@
+{
+  "description": "AcroForm cleanup for the 2025 Form 1040 base PDF. Splits the two primary SSN widgets into 3 segments each so generated values align with the printed divider layout.",
+  "splitTextFields": [
+    {
+      "fullName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "taxpayer_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "taxpayer_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "taxpayer_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "spouse_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "spouse_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "spouse_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page2[0].RoutingNo[0].f2_32[0]",
+      "gap": 0,
+      "justify": 1,
+      "comb": false,
+      "parts": [
+        {
+          "partialName": "routing_number_1[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_2[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_3[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_4[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_5[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_6[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_7[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_8[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "routing_number_9[0]",
+          "maxLength": 1
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page2[0].AccountNo[0].f2_33[0]",
+      "gap": 0,
+      "justify": 1,
+      "comb": false,
+      "parts": [
+        {
+          "partialName": "account_number_1[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_2[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_3[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_4[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_5[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_6[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_7[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_8[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_9[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_10[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_11[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_12[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_13[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_14[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_15[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_16[0]",
+          "maxLength": 1
+        },
+        {
+          "partialName": "account_number_17[0]",
+          "maxLength": 1
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].Table_Dependents[0].Row3[0].f1_39[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "dependent_1_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "dependent_1_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "dependent_1_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].Table_Dependents[0].Row3[0].f1_40[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "dependent_2_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "dependent_2_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "dependent_2_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].Table_Dependents[0].Row3[0].f1_41[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "dependent_3_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "dependent_3_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "dependent_3_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page1[0].Table_Dependents[0].Row3[0].f1_42[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "dependent_4_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "dependent_4_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "dependent_4_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    },
+    {
+      "fullName": "topmostSubform[0].Page2[0].SSN_ReadOrder[0].f2_22[0]",
+      "gap": 6,
+      "justify": 1,
+      "comb": true,
+      "parts": [
+        {
+          "partialName": "former_spouse_ssn_1[0]",
+          "maxLength": 3
+        },
+        {
+          "partialName": "former_spouse_ssn_2[0]",
+          "maxLength": 2
+        },
+        {
+          "partialName": "former_spouse_ssn_3[0]",
+          "maxLength": 4
+        }
+      ]
+    }
+  ]
+}
