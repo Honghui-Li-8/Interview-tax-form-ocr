@@ -47,6 +47,21 @@ const MAX_FIELD_LENGTH = 80
 
 type AcceptedFields = Record<keyof ExtractedFields, string>
 
+type StoredExtraction = {
+  fields: ExtractedFields
+  extraction: TaxReturnExtraction | null
+}
+
+type StoredExtractionDecryptFailure = {
+  id: number
+  filename?: string
+  code: 'DECRYPTION_FAILED'
+  message: string
+}
+
+const DECRYPTION_FAILED_MESSAGE =
+  'Saved extraction cannot be decrypted with the current encryption key.'
+
 function isTaxReturnExtraction(value: unknown): value is TaxReturnExtraction {
   return Boolean(value)
     && typeof value === 'object'
@@ -69,7 +84,7 @@ function legacyFieldsFromExtraction(extraction: TaxReturnExtraction): ExtractedF
 function decryptStoredExtraction(
   storedValue: string,
   username: string
-): { fields: ExtractedFields; extraction: TaxReturnExtraction | null } {
+): StoredExtraction {
   const parsed = JSON.parse(storedValue) as unknown
   if (isEncryptedJsonPayload(parsed)) {
     const extraction = decryptJsonPayload<TaxReturnExtraction>(parsed, username)
@@ -79,6 +94,17 @@ function decryptStoredExtraction(
   return {
     fields: decryptFields(parsed as ExtractedFields, username),
     extraction: null,
+  }
+}
+
+function tryDecryptStoredExtraction(
+  storedValue: string,
+  username: string
+): { ok: true; value: StoredExtraction } | { ok: false } {
+  try {
+    return { ok: true, value: decryptStoredExtraction(storedValue, username) }
+  } catch {
+    return { ok: false }
   }
 }
 
@@ -134,14 +160,36 @@ export function makeReviewHandlers(db: Database) {
       [username]
     )
 
-    res.json({
-      records: rows.map(row => ({
+    const records: Array<{
+      id: number
+      filename: string
+      fields: ExtractedFields
+      extraction: TaxReturnExtraction | null
+      accepted_at: string
+    }> = []
+    const warnings: StoredExtractionDecryptFailure[] = []
+
+    for (const row of rows) {
+      const decrypted = tryDecryptStoredExtraction(row.extracted_fields, username)
+      if (!decrypted.ok) {
+        warnings.push({
+          id: row.id,
+          filename: row.filename,
+          code: 'DECRYPTION_FAILED',
+          message: DECRYPTION_FAILED_MESSAGE,
+        })
+        continue
+      }
+
+      records.push({
         id: row.id,
         filename: row.filename,
-        ...decryptStoredExtraction(row.extracted_fields, username),
+        ...decrypted.value,
         accepted_at: row.accepted_at,
-      })),
-    })
+      })
+    }
+
+    res.json({ records, warnings })
   }
 
   const getDocument = async (req: Request, res: Response): Promise<void> => {
@@ -163,14 +211,22 @@ export function makeReviewHandlers(db: Database) {
     }
 
     const decrypted = row.extracted_fields
-      ? decryptStoredExtraction(row.extracted_fields, username)
-      : { fields: null, extraction: null }
+      ? tryDecryptStoredExtraction(row.extracted_fields, username)
+      : { ok: true as const, value: { fields: null, extraction: null } }
+
+    if (!decrypted.ok) {
+      res.status(409).json({
+        error: DECRYPTION_FAILED_MESSAGE,
+        code: 'DECRYPTION_FAILED',
+      })
+      return
+    }
 
     res.json({
       id: row.id,
       status: row.status,
-      fields: decrypted.fields,
-      extraction: decrypted.extraction,
+      fields: decrypted.value.fields,
+      extraction: decrypted.value.extraction,
       accepted_at: row.accepted_at,
     })
   }

@@ -23,14 +23,19 @@ export default function SavedRecordsPage({ onBack, onReview, onUnauthorized }: P
   const [state, setState] = useState<SavedRecordsState>('loading')
   const [records, setRecords] = useState<AcceptedDocumentRecord[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [warning, setWarning] = useState<string | null>(null)
 
   const load = useCallback(async () => {
     setState('loading')
     setError(null)
+    setWarning(null)
 
     try {
-      const { records } = await listAcceptedDocuments()
+      const { records, warnings } = await listAcceptedDocuments()
       setRecords(records)
+      if (warnings?.length) {
+        setWarning(`${warnings.length} saved record${warnings.length === 1 ? '' : 's'} could not be decrypted with the current encryption key.`)
+      }
       setState('ready')
     } catch (err) {
       if (isUnauthorizedError(err)) {
@@ -81,6 +86,8 @@ export default function SavedRecordsPage({ onBack, onReview, onUnauthorized }: P
           </div>
         </div>
       )}
+
+      {state === 'ready' && warning && <p className="alert alert-warning">{warning}</p>}
 
       {state === 'ready' && records.length === 0 && (
         <div className="panel state-panel">

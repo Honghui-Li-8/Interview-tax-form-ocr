@@ -160,6 +160,18 @@ export type AcceptedDocumentRecord = {
   accepted_at: string
 }
 
+export type AcceptedDocumentWarning = {
+  id: number
+  filename?: string
+  code: 'DECRYPTION_FAILED'
+  message: string
+}
+
+export type AcceptedDocumentsResponse = {
+  records: AcceptedDocumentRecord[]
+  warnings?: AcceptedDocumentWarning[]
+}
+
 export type AcceptResponse = {
   accepted_at: string
 }

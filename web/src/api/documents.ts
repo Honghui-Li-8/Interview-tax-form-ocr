@@ -4,7 +4,7 @@ import type {
   DocumentDetail,
   AcceptResponse,
   ExtractedFields,
-  AcceptedDocumentRecord,
+  AcceptedDocumentsResponse,
   TaxReturnExtraction,
   ProcessingProgressEvent,
 } from '../../../shared/types'
@@ -19,7 +19,17 @@ function authHeaders(): Record<string, string> {
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (res.status === 401) throw new UnauthorizedError()
-  if (!res.ok) throw new Error(await res.text())
+  if (!res.ok) {
+    const text = await res.text()
+    let message = text
+    try {
+      const parsed = JSON.parse(text) as { error?: unknown }
+      if (typeof parsed.error === 'string') message = parsed.error
+    } catch {
+      // Keep the raw response text for non-JSON errors.
+    }
+    throw new Error(message)
+  }
   return res.json()
 }
 
@@ -53,7 +63,7 @@ export async function getDocument(id: number): Promise<DocumentDetail> {
   }))
 }
 
-export async function listAcceptedDocuments(): Promise<{ records: AcceptedDocumentRecord[] }> {
+export async function listAcceptedDocuments(): Promise<AcceptedDocumentsResponse> {
   return handleResponse(await fetch(`${SERVER_URL}/api/documents/accepted`, {
     headers: authHeaders(),
   }))
