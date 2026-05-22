@@ -207,8 +207,8 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
 
       try {
         if (doc.status === 'pending' && processStartedFor.current !== documentId) {
-          processStartedFor.current = documentId
           await processDocument(documentId)
+          processStartedFor.current = documentId
           doc = await getDocument(documentId)
         }
 
