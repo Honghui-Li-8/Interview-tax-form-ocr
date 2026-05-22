@@ -2,8 +2,8 @@
   "description": "AcroForm cleanup for the 2025 Form 1040 base PDF. Splits the two primary SSN widgets into 3 segments each so generated values align with the printed divider layout.",
   "splitTextFields": [
     {
-      "fullName": "topmostSubform[0].Page1[0].f1_13[0]",
-      "gap": 6,
+      "fullName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "gap": 0,
       "justify": 1,
       "comb": true,
       "parts": [
@@ -22,8 +22,8 @@
       ]
     },
     {
-      "fullName": "topmostSubform[0].Page1[0].f1_16[0]",
-      "gap": 6,
+      "fullName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "gap": 0,
       "justify": 1,
       "comb": true,
       "parts": [
