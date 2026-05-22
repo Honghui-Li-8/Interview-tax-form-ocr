@@ -3,11 +3,13 @@ import { Database } from 'sqlite'
 import { upload, makeUploadHandler } from '../documents/uploadHandler'
 import { makeProcessHandler } from '../documents/processHandler'
 import { makeReviewHandlers } from '../documents/reviewHandler'
+import { makeProcessingProgressHandler } from '../documents/processingProgressHandler'
 
 export function makeDocumentsRouter(db: Database): Router {
   const router = Router()
   const handleUpload = makeUploadHandler(db)
   const handleProcess = makeProcessHandler(db)
+  const handleProcessingProgress = makeProcessingProgressHandler(db)
   const { listAcceptedDocuments, getDocument, acceptDocument, getDocumentFile } = makeReviewHandlers(db)
 
   router.post('/upload', (req, res, next) => {
@@ -21,6 +23,7 @@ export function makeDocumentsRouter(db: Database): Router {
   }, handleUpload)
 
   router.post('/:id/process', handleProcess)
+  router.get('/:id/process/progress', handleProcessingProgress)
   router.get('/accepted', listAcceptedDocuments)
   router.get('/:id/file', getDocumentFile)
   router.get('/:id', getDocument)
