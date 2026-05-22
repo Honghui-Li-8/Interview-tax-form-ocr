@@ -17,18 +17,35 @@ function authHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
+function fallbackErrorMessage(res: Response): string {
+  if (res.status === 504) {
+    return 'Processing took longer than the server allowed. Refresh the status or try again.'
+  }
+  return `Request failed with status ${res.status}.`
+}
+
+async function responseErrorMessage(res: Response): Promise<string> {
+  const text = await res.text()
+  if (!text.trim()) return fallbackErrorMessage(res)
+
+  try {
+    const parsed = JSON.parse(text) as { error?: unknown }
+    if (typeof parsed.error === 'string') return parsed.error
+  } catch {
+    // Non-JSON errors can be proxy HTML pages; keep those out of the UI.
+  }
+
+  if (/<\/?[a-z][\s\S]*>/i.test(text)) {
+    return fallbackErrorMessage(res)
+  }
+
+  return text
+}
+
 async function handleResponse<T>(res: Response): Promise<T> {
   if (res.status === 401) throw new UnauthorizedError()
   if (!res.ok) {
-    const text = await res.text()
-    let message = text
-    try {
-      const parsed = JSON.parse(text) as { error?: unknown }
-      if (typeof parsed.error === 'string') message = parsed.error
-    } catch {
-      // Keep the raw response text for non-JSON errors.
-    }
-    throw new Error(message)
+    throw new Error(await responseErrorMessage(res))
   }
   return res.json()
 }
@@ -74,7 +91,7 @@ export async function getDocumentFile(id: number): Promise<string> {
     headers: authHeaders(),
   })
   if (res.status === 401) throw new UnauthorizedError()
-  if (!res.ok) throw new Error(await res.text())
+  if (!res.ok) throw new Error(await responseErrorMessage(res))
   return URL.createObjectURL(await res.blob())
 }
 
