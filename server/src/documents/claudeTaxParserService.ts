@@ -96,15 +96,18 @@ function classificationPrompt(): string {
   ].join('\n')
 }
 
-function extractionPrompt(formType: SupportedTaxFormType, schema: TaxFormSchema): string {
+function extractionPrompt(formType: SupportedTaxFormType, schema: TaxFormSchema, pageNumbers: number[]): string {
+  const pageList = pageNumbers.join(', ')
   return [
     `Extract ${formType} from the provided page image(s).`,
     'Return JSON only, no Markdown.',
+    `The images correspond to PDF page numbers: ${pageList}.`,
+    `Response shape: {"formType":"${formType}","present":true,"taxYear":"${schema.taxYear}","sourcePages":[${pageList}],"fields":{<key>:{"value":<value>,"confidence":"high"|"medium"|"low"|"unknown","sourcePage":<one of: ${pageList}>,"rawText":<string>},...}}`,
     'Use schema keys exactly. Do not use labels as output keys.',
     'Every schema key must appear exactly once under fields.',
     'Prefer null for blank, unreadable, or not-present values.',
+    'All field values must be strings, null, or booleans — never numbers.',
     'Do not infer values from tax formulas when the printed field is blank.',
-    'Include confidence, sourcePage, and rawText for every field.',
     `Field schema: ${JSON.stringify(getClaudeFieldSchema(formType, schema.taxYear))}`,
   ].join('\n')
 }
@@ -169,7 +172,7 @@ export async function parseFormGroup(
   const parsedChunks: ParsedTaxForm[] = []
   for (const chunk of chunks) {
     const json = await createClaudeJson(client, config, [
-      textContent(extractionPrompt(formType, schema)),
+      textContent(extractionPrompt(formType, schema, chunk.map(page => page.pageNumber))),
       ...chunk.map(imageContent),
     ])
     const validated = validateParsedForm(formType, json, schema, chunk.map(page => page.pageNumber))
