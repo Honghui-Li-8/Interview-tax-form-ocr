@@ -135,6 +135,7 @@ step_nginx() {
   sudo tee "$conf" > /dev/null <<NGINX
 server {
     listen 443 ssl;
+    listen 80;
     server_name ${DOMAIN:-_};
 
     ssl_certificate     /etc/ssl/certs/tax-ocr.crt;
@@ -158,10 +159,6 @@ server {
         proxy_set_header   X-Forwarded-For   \$proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto \$scheme;
     }
-}
-server {
-    listen 80;
-    return 301 https://\$host\$request_uri;
 }
 NGINX
 
