@@ -40,7 +40,7 @@ const EMPTY_FIELDS: FormFields = {
 }
 
 const PROCESS_POLL_INTERVAL_MS = 1000
-const PROCESS_TIMEOUT_MS = 30000
+const PROCESS_TIMEOUT_MS = 15 * 60 * 1000
 const FILING_STATUSES = new Set([
   'Single',
   'Married filing jointly',
@@ -112,7 +112,12 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
       }
 
       if (Date.now() - startedAt > PROCESS_TIMEOUT_MS) {
-        throw new Error('Document processing is taking longer than expected. Please try again.')
+        const latestDoc = await getDocument(documentId)
+        if (latestDoc.status !== 'pending' && latestDoc.status !== 'processing') {
+          return latestDoc
+        }
+
+        throw new Error('Document processing is taking longer than expected. Please refresh and check the document status.')
       }
 
       await new Promise(resolve => setTimeout(resolve, PROCESS_POLL_INTERVAL_MS))
@@ -322,7 +327,7 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
       <section className="panel state-panel">
         <div className="spinner" />
         <h1>Processing document</h1>
-        <p className="muted">Extracting fields from document #{documentId}.</p>
+        <p className="muted">Classifying pages and extracting supported tax forms from document #{documentId}.</p>
       </section>
     )
   }

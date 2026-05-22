@@ -69,8 +69,16 @@ function parseClaudeJson(response: unknown): unknown {
   const withoutFence = text
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```$/i, '')
+    .replace(/^json\s+/i, '')
     .trim()
-  return JSON.parse(withoutFence)
+
+  try {
+    return JSON.parse(withoutFence)
+  } catch {
+    const jsonStart = withoutFence.search(/[\[{]/)
+    if (jsonStart < 0) throw new Error('Claude response did not contain JSON')
+    return JSON.parse(withoutFence.slice(jsonStart))
+  }
 }
 
 async function createClaudeJson(
