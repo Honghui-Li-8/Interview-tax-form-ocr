@@ -93,6 +93,37 @@ export type TaxReturnExtraction = {
   }
 }
 
+export type ProcessingProgressPhase =
+  | 'idle'
+  | 'claiming'
+  | 'rendering_pages'
+  | 'rendered_pages'
+  | 'classifying_pages'
+  | 'classified_pages'
+  | 'extracting_form_group'
+  | 'validating_form_group'
+  | 'normalizing_form_group'
+  | 'reconciling'
+  | 'encrypting_and_persisting'
+  | 'completed'
+  | 'failed'
+
+export type ProcessingProgressEvent = {
+  documentId: number
+  phase: ProcessingProgressPhase
+  message: string
+  timestamp: string
+  sequence: number
+  percent: number | null
+  pageCount?: number
+  currentPage?: number
+  pageNumbers?: number[]
+  formType?: SupportedTaxFormType
+  formIndex?: number
+  formCount?: number
+  warningCodes?: string[]
+}
+
 export type UploadResponse = {
   documentId: number
   replaced: boolean
