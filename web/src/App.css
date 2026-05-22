@@ -261,6 +261,11 @@
   color: #111827;
 }
 
+.packet-field-row--uncertain {
+  border-left: 3px solid #f59e0b;
+  padding-left: 10px;
+}
+
 .field-evidence {
   grid-column: 2;
   margin: -4px 0 0;

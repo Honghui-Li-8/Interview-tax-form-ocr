@@ -359,7 +359,15 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
     return (
       <div className="packet-fields">
         {entries.map(([fieldKey, field]) => (
-          <div className="packet-field-row" key={fieldKey}>
+          <div
+            className={[
+              'packet-field-row',
+              (field.confidence === 'low' || field.confidence === 'unknown')
+                ? 'packet-field-row--uncertain'
+                : '',
+            ].join(' ').trim()}
+            key={fieldKey}
+          >
             <div className="packet-field-meta">
               <label htmlFor={`${formKey}-${fieldKey}`}>{fieldKey}</label>
               <span>
