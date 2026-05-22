@@ -3,6 +3,7 @@ import type { TaxReturnExtraction } from '../../../shared/types'
 import { makeProcessHandler } from './processHandler'
 import { mergeParsedForms } from './taxPacketMergeService'
 import { clearProcessingProgress, getLatestProcessingProgress } from './processingProgressService'
+import { resetProcessingJobQueueForTest } from './processingJobQueue'
 
 const { parseTaxReturnPacket } = vi.hoisted(() => ({
   parseTaxReturnPacket: vi.fn(),
@@ -49,8 +50,10 @@ function packet(): TaxReturnExtraction {
 
 describe('makeProcessHandler packet parser wiring', () => {
   beforeEach(() => {
+    delete process.env.MAX_ACTIVE_PROCESSING_JOBS
     process.env.MASTER_ENCRYPTION_KEY = 'test-key'
     parseTaxReturnPacket.mockReset()
+    resetProcessingJobQueueForTest()
   })
 
   test('starts processing asynchronously for pending documents', async () => {
@@ -162,5 +165,74 @@ describe('makeProcessHandler packet parser wiring', () => {
     })
     expect(parseTaxReturnPacket).not.toHaveBeenCalled()
     expect(db.run).not.toHaveBeenCalled()
+  })
+
+  test('queues additional processing jobs when the active limit is reached', async () => {
+    clearProcessingProgress(1)
+    clearProcessingProgress(2)
+    let resolveFirstParser!: (value: TaxReturnExtraction) => void
+    let resolveSecondParser!: (value: TaxReturnExtraction) => void
+    parseTaxReturnPacket
+      .mockReturnValueOnce(new Promise(resolve => {
+        resolveFirstParser = resolve
+      }))
+      .mockReturnValueOnce(new Promise(resolve => {
+        resolveSecondParser = resolve
+      }))
+
+    const docs = new Map([
+      [1, { id: 1, stored_path: '/tmp/first.pdf', status: 'pending' }],
+      [2, { id: 2, stored_path: '/tmp/second.pdf', status: 'pending' }],
+    ])
+    const calls: Array<{ sql: string; params: unknown[] }> = []
+    const db = {
+      get: async (_sql: string, params: unknown[]) => {
+        const id = Number(params[0])
+        return docs.get(id)
+      },
+      run: async (sql: string, params: unknown[]) => {
+        calls.push({ sql, params })
+        const id = Number(params[1])
+        if (params[0] === 'processing') {
+          docs.set(id, { ...docs.get(id)!, status: 'processing' })
+        }
+        return { changes: 1 }
+      },
+    }
+    const firstRes = makeRes()
+    const secondRes = makeRes()
+
+    await makeProcessHandler(db as never)(makeReq('1') as never, firstRes as never)
+    await makeProcessHandler(db as never)(makeReq('2') as never, secondRes as never)
+
+    expect(firstRes.statusCode).toBe(202)
+    expect(secondRes.statusCode).toBe(202)
+    expect(firstRes.body).toEqual({ documentId: 1, status: 'processing' })
+    expect(secondRes.body).toEqual({ documentId: 2, status: 'processing' })
+    expect(parseTaxReturnPacket).toHaveBeenCalledTimes(1)
+    expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/first.pdf', expect.objectContaining({
+      onProgress: expect.any(Function),
+    }))
+
+    resolveFirstParser(packet())
+
+    await vi.waitFor(() => {
+      expect(parseTaxReturnPacket).toHaveBeenCalledTimes(2)
+    })
+    expect(parseTaxReturnPacket).toHaveBeenLastCalledWith('/tmp/second.pdf', expect.objectContaining({
+      onProgress: expect.any(Function),
+    }))
+
+    resolveSecondParser(packet())
+
+    await vi.waitFor(() => {
+      expect(getLatestProcessingProgress(2)).toMatchObject({
+        documentId: 2,
+        phase: 'completed',
+        percent: 100,
+      })
+    })
+    expect(calls.filter(call => call.params[0] === 'processing')).toHaveLength(2)
+    expect(calls.filter(call => call.params[1] === 'extracted')).toHaveLength(2)
   })
 })
