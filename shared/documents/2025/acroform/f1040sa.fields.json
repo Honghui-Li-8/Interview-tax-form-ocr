@@ -1,0 +1,652 @@
+{
+  "sourcePdf": "shared/documents/2025/acroform/f1040sa.acroform.pdf",
+  "pageCount": 1,
+  "hasAcroForm": true,
+  "hasXfa": false,
+  "xfaPackets": [],
+  "fieldCounts": {
+    "leaf": 35,
+    "byKind": {
+      "button": 3,
+      "text": 32
+    }
+  },
+  "fields": [
+    {
+      "fullName": "form1[0].Page1[0].f1_1[0]",
+      "partialName": "f1_1[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        36.0,
+        684.0,
+        474.45,
+        698.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].schedule_a_ssn_1[0]",
+      "partialName": "schedule_a_ssn_1[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        475.2,
+        684.0,
+        504.8,
+        698.001
+      ],
+      "flags": 25165824,
+      "maxLength": 3,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].schedule_a_ssn_2[0]",
+      "partialName": "schedule_a_ssn_2[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        510.8,
+        684.0,
+        530.533333,
+        698.001
+      ],
+      "flags": 25165824,
+      "maxLength": 2,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].schedule_a_ssn_3[0]",
+      "partialName": "schedule_a_ssn_3[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        536.533333,
+        684.0,
+        576.0,
+        698.001
+      ],
+      "flags": 25165824,
+      "maxLength": 4,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_3[0]",
+      "partialName": "f1_3[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        660.002,
+        481.65,
+        672.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].Line2_ReadOrder[0].f1_4[0]",
+      "partialName": "f1_4[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        316.8,
+        636.001,
+        388.05,
+        648.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_5[0]",
+      "partialName": "f1_5[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        624.002,
+        481.65,
+        636.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_6[0]",
+      "partialName": "f1_6[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        612.0,
+        576.0,
+        623.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].c1_1[0]",
+      "partialName": "c1_1[0]",
+      "fieldKind": "button",
+      "acroType": "/Btn",
+      "page": 1,
+      "rect": [
+        373.6,
+        560.0,
+        381.6,
+        568.0
+      ],
+      "flags": null,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": "/Off",
+      "buttonOnStates": [
+        "/1"
+      ]
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_7[0]",
+      "partialName": "f1_7[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        558.0,
+        481.65,
+        569.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_8[0]",
+      "partialName": "f1_8[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        546.001,
+        481.65,
+        558.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_9[0]",
+      "partialName": "f1_9[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        534.002,
+        481.65,
+        546.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_10[0]",
+      "partialName": "f1_10[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        522.0,
+        481.65,
+        533.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_11[0]",
+      "partialName": "f1_11[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        474.001,
+        481.65,
+        486.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_13[0]",
+      "partialName": "f1_13[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        438.001,
+        481.65,
+        450.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_12[0]",
+      "partialName": "f1_12[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        122.4,
+        437.998,
+        381.6,
+        461.999
+      ],
+      "flags": 8392704,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_14[0]",
+      "partialName": "f1_14[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        426.002,
+        576.0,
+        438.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].Line8_ReadOrder[0].c1_2[0]",
+      "partialName": "c1_2[0]",
+      "fieldKind": "button",
+      "acroType": "/Btn",
+      "page": 1,
+      "rect": [
+        373.6,
+        392.002,
+        381.6,
+        400.002
+      ],
+      "flags": null,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": "/Off",
+      "buttonOnStates": [
+        "/1"
+      ]
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_15[0]",
+      "partialName": "f1_15[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        366.001,
+        481.65,
+        378.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_17[0]",
+      "partialName": "f1_17[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        324.0,
+        481.65,
+        335.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].Line8b_ReadOrder[0].f1_16[0]",
+      "partialName": "f1_16[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        122.4,
+        299.999,
+        381.6,
+        324.0
+      ],
+      "flags": 8392704,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_18[0]",
+      "partialName": "f1_18[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        276.001,
+        481.65,
+        288.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_19[0]",
+      "partialName": "f1_19[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        264.002,
+        481.65,
+        276.001
+      ],
+      "flags": 8388609,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_20[0]",
+      "partialName": "f1_20[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        252.0,
+        481.65,
+        263.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_21[0]",
+      "partialName": "f1_21[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        240.001,
+        481.65,
+        252.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_22[0]",
+      "partialName": "f1_22[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        228.002,
+        576.0,
+        240.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_23[0]",
+      "partialName": "f1_23[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        204.001,
+        481.65,
+        216.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_24[0]",
+      "partialName": "f1_24[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        180.0,
+        481.65,
+        191.999
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_25[0]",
+      "partialName": "f1_25[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        410.4,
+        168.001,
+        481.65,
+        180.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_26[0]",
+      "partialName": "f1_26[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        156.002,
+        576.0,
+        168.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_27[0]",
+      "partialName": "f1_27[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        120.002,
+        576.0,
+        132.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_29[0]",
+      "partialName": "f1_29[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        84.002,
+        576.0,
+        96.001
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_28[0]",
+      "partialName": "f1_28[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        122.4,
+        83.999,
+        475.2,
+        108.0
+      ],
+      "flags": 8392704,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].f1_30[0]",
+      "partialName": "f1_30[0]",
+      "fieldKind": "text",
+      "acroType": "/Tx",
+      "page": 1,
+      "rect": [
+        504.0,
+        60.001,
+        576.0,
+        72.0
+      ],
+      "flags": 8388608,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": null,
+      "buttonOnStates": []
+    },
+    {
+      "fullName": "form1[0].Page1[0].Line18_ReadOrder[0].c1_3[0]",
+      "partialName": "c1_3[0]",
+      "fieldKind": "button",
+      "acroType": "/Btn",
+      "page": 1,
+      "rect": [
+        467.2,
+        38.25,
+        475.2,
+        46.25
+      ],
+      "flags": null,
+      "maxLength": null,
+      "defaultValue": null,
+      "currentValue": "/Off",
+      "buttonOnStates": [
+        "/1"
+      ]
+    }
+  ]
+}

@@ -10,6 +10,30 @@
       "normalizedPdf": "f1040.acroform.pdf",
       "fieldInventory": "f1040.fields.json",
       "valueTemplate": "f1040.values.template.json"
+    },
+    {
+      "formType": "Schedule A",
+      "source": "../official_doc/f1040sa.pdf",
+      "transformSpec": "f1040sa.transforms.json",
+      "normalizedPdf": "f1040sa.acroform.pdf",
+      "fieldInventory": "f1040sa.fields.json",
+      "valueTemplate": "f1040sa.values.template.json"
+    },
+    {
+      "formType": "Schedule B",
+      "source": "../official_doc/f1040sb.pdf",
+      "transformSpec": "f1040sb.transforms.json",
+      "normalizedPdf": "f1040sb.acroform.pdf",
+      "fieldInventory": "f1040sb.fields.json",
+      "valueTemplate": "f1040sb.values.template.json"
+    },
+    {
+      "formType": "Schedule C",
+      "source": "../official_doc/f1040sc.pdf",
+      "transformSpec": "f1040sc.transforms.json",
+      "normalizedPdf": "f1040sc.acroform.pdf",
+      "fieldInventory": "f1040sc.fields.json",
+      "valueTemplate": "f1040sc.values.template.json"
     }
   ]
 }
