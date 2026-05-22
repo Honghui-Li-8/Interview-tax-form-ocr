@@ -9,7 +9,8 @@
       "transformSpec": "f1040.transforms.json",
       "normalizedPdf": "f1040.acroform.pdf",
       "fieldInventory": "f1040.fields.json",
-      "valueTemplate": "f1040.values.template.json"
+      "valueTemplate": "f1040.values.template.json",
+      "examplePdf": "f1040-example-filled-1.pdf"
     },
     {
       "formType": "Schedule A",
@@ -17,7 +18,8 @@
       "transformSpec": "f1040sa.transforms.json",
       "normalizedPdf": "f1040sa.acroform.pdf",
       "fieldInventory": "f1040sa.fields.json",
-      "valueTemplate": "f1040sa.values.template.json"
+      "valueTemplate": "f1040sa.values.template.json",
+      "examplePdf": "f1040sa-example-filled-1.pdf"
     },
     {
       "formType": "Schedule B",
@@ -25,7 +27,8 @@
       "transformSpec": "f1040sb.transforms.json",
       "normalizedPdf": "f1040sb.acroform.pdf",
       "fieldInventory": "f1040sb.fields.json",
-      "valueTemplate": "f1040sb.values.template.json"
+      "valueTemplate": "f1040sb.values.template.json",
+      "examplePdf": "f1040sb-example-filled-1.pdf"
     },
     {
       "formType": "Schedule C",
@@ -33,7 +36,12 @@
       "transformSpec": "f1040sc.transforms.json",
       "normalizedPdf": "f1040sc.acroform.pdf",
       "fieldInventory": "f1040sc.fields.json",
-      "valueTemplate": "f1040sc.values.template.json"
+      "valueTemplate": "f1040sc.values.template.json",
+      "examplePdf": "f1040sc-example-filled-1.pdf"
     }
-  ]
+  ],
+  "combinedExample": {
+    "description": "All four forms merged into one PDF in filing order: 1040, Schedule A, Schedule B, Schedule C.",
+    "examplePdf": "f1040-combined-example-filled-1.pdf"
+  }
 }
