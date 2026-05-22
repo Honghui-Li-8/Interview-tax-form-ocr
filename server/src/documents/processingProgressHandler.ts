@@ -32,9 +32,11 @@ export function makeProcessingProgressHandler(db: Database) {
     res.setHeader('Content-Type', 'application/x-ndjson')
     res.setHeader('Cache-Control', 'no-cache')
     res.setHeader('Connection', 'keep-alive')
+    res.setHeader('X-Accel-Buffering', 'no')
     res.flushHeaders?.()
+    res.write('\n')
 
     const unsubscribe = subscribeProcessingProgress(id, event => writeProgressEvent(res, event))
-    req.on('close', unsubscribe)
+    res.on('close', unsubscribe)
   }
 }

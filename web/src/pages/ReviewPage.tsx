@@ -173,11 +173,10 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
     setProgressEvent(null)
     try {
       let doc = await getDocument(documentId)
-
-      if (doc.status === 'pending' && processStartedFor.current !== documentId) {
-        processStartedFor.current = documentId
-        const progressController = new AbortController()
-        const progressPromise = streamProcessingProgress(documentId, event => {
+      const shouldStreamProgress = doc.status === 'pending' || doc.status === 'processing'
+      const progressController = shouldStreamProgress ? new AbortController() : null
+      const progressPromise = progressController
+        ? streamProcessingProgress(documentId, event => {
           if (getCancelled()) return
           setProgressEvent(event)
           if (import.meta.env.DEV) {
@@ -204,23 +203,28 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
             console.debug('Processing progress stream unavailable', err)
           }
         })
+        : null
 
-        try {
-          await processDocument(documentId)
-        } catch (err) {
-          const message = err instanceof Error ? err.message : ''
-          if (!message.includes('Already processing') && !message.includes('Already processed')) {
-            throw err
+      try {
+        if (doc.status === 'pending' && processStartedFor.current !== documentId) {
+          processStartedFor.current = documentId
+          try {
+            await processDocument(documentId)
+          } catch (err) {
+            const message = err instanceof Error ? err.message : ''
+            if (!message.includes('Already processing') && !message.includes('Already processed')) {
+              throw err
+            }
           }
-        } finally {
-          progressController.abort()
-          await progressPromise
+          doc = await getDocument(documentId)
         }
-        doc = await getDocument(documentId)
-      }
 
-      if (doc.status === 'pending' || doc.status === 'processing') {
-        doc = await waitForProcessing(getCancelled)
+        if (doc.status === 'pending' || doc.status === 'processing') {
+          doc = await waitForProcessing(getCancelled)
+        }
+      } finally {
+        progressController?.abort()
+        await progressPromise
       }
 
       if (getCancelled()) return

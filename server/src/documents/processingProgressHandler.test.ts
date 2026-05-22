@@ -8,10 +8,19 @@ type DbCall = {
 }
 
 function makeReq(id = '1', username = 'alice') {
-  const listeners: Record<string, Array<() => void>> = {}
   return {
     params: { id },
     user: { username },
+  }
+}
+
+function makeRes() {
+  const listeners: Record<string, Array<() => void>> = {}
+  return {
+    statusCode: 200,
+    body: undefined as unknown,
+    headers: {} as Record<string, string>,
+    chunks: [] as string[],
     on(event: string, listener: () => void) {
       listeners[event] = [...(listeners[event] ?? []), listener]
       return this
@@ -19,15 +28,6 @@ function makeReq(id = '1', username = 'alice') {
     emitClose() {
       for (const listener of listeners.close ?? []) listener()
     },
-  }
-}
-
-function makeRes() {
-  return {
-    statusCode: 200,
-    body: undefined as unknown,
-    headers: {} as Record<string, string>,
-    chunks: [] as string[],
     status(code: number) {
       this.statusCode = code
       return this
@@ -77,9 +77,10 @@ describe('processing progress handler', () => {
 
     await makeProcessingProgressHandler(db as never)(req as never, res as never)
     const next = emitProcessingProgress(8, { phase: 'completed', message: 'Completed' })
-    req.emitClose()
+    res.emitClose()
 
     expect(res.headers['Content-Type']).toBe('application/x-ndjson')
-    expect(res.chunks.map(chunk => JSON.parse(chunk))).toEqual([latest, next])
+    expect(res.headers['X-Accel-Buffering']).toBe('no')
+    expect(res.chunks.filter(chunk => chunk.trim()).map(chunk => JSON.parse(chunk))).toEqual([latest, next])
   })
 })
