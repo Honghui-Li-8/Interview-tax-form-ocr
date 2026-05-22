@@ -140,7 +140,7 @@ export type ExtractedFields = {
 export type ProcessResponse = {
   documentId: number
   status: DocumentStatus
-  extraction: TaxReturnExtraction
+  extraction?: TaxReturnExtraction
   fields?: ExtractedFields
 }
 

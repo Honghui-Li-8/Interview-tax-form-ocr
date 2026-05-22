@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import type { TaxReturnExtraction } from '../../../shared/types'
 import { makeProcessHandler } from './processHandler'
 import { mergeParsedForms } from './taxPacketMergeService'
@@ -48,9 +48,17 @@ function packet(): TaxReturnExtraction {
 }
 
 describe('makeProcessHandler packet parser wiring', () => {
-  test('persists packet-shaped encrypted extraction on parser success', async () => {
+  beforeEach(() => {
+    process.env.MASTER_ENCRYPTION_KEY = 'test-key'
+    parseTaxReturnPacket.mockReset()
+  })
+
+  test('starts processing asynchronously for pending documents', async () => {
     clearProcessingProgress(1)
-    parseTaxReturnPacket.mockResolvedValueOnce(packet())
+    let resolveParser!: (value: TaxReturnExtraction) => void
+    parseTaxReturnPacket.mockReturnValueOnce(new Promise(resolve => {
+      resolveParser = resolve
+    }))
     const calls: Array<{ sql: string; params: unknown[] }> = []
     const db = {
       get: async () => ({ id: 1, stored_path: '/tmp/return.pdf', status: 'pending' }),
@@ -63,23 +71,25 @@ describe('makeProcessHandler packet parser wiring', () => {
 
     await makeProcessHandler(db as never)(makeReq() as never, res as never)
 
+    expect(res.statusCode).toBe(202)
+    expect(res.body).toEqual({
+      documentId: 1,
+      status: 'processing',
+    })
+    expect(calls).toHaveLength(1)
+    expect(calls[0].params[0]).toBe('processing')
     expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/return.pdf', expect.objectContaining({
       onProgress: expect.any(Function),
     }))
+    expect(calls).toHaveLength(1)
+
+    resolveParser(packet())
+
+    await vi.waitFor(() => {
+      expect(calls).toHaveLength(2)
+    })
     expect(calls[1].params[1]).toBe('extracted')
     expect(String(calls[1].params[0])).toContain('__encryptedJson')
-    expect(res.body).toMatchObject({
-      documentId: 1,
-      status: 'extracted',
-      fields: {
-        taxpayerName: 'Ada Lovelace',
-        filingStatus: 'Single',
-        totalWages: '1234',
-        totalTax: '120',
-        refundOrOwed: '20',
-      },
-    })
-    expect((res.body as { extraction: TaxReturnExtraction }).extraction.schemaVersion).toBe(1)
     expect(getLatestProcessingProgress(1)).toMatchObject({
       documentId: 1,
       phase: 'completed',
@@ -87,7 +97,7 @@ describe('makeProcessHandler packet parser wiring', () => {
     })
   })
 
-  test('sets failed status and returns packet-shaped extraction on parser failure', async () => {
+  test('sets failed status when background parser fails', async () => {
     clearProcessingProgress(1)
     parseTaxReturnPacket.mockRejectedValueOnce(new Error('missing api key'))
     const calls: Array<{ sql: string; params: unknown[] }> = []
@@ -102,15 +112,55 @@ describe('makeProcessHandler packet parser wiring', () => {
 
     await makeProcessHandler(db as never)(makeReq() as never, res as never)
 
-    expect(calls[1].params[1]).toBe('failed')
-    expect((res.body as { extraction: TaxReturnExtraction }).extraction.warnings)
-      .toEqual(expect.arrayContaining([
-        expect.objectContaining({ code: 'PARSER_FAILED', severity: 'error' }),
-      ]))
-    expect(getLatestProcessingProgress(1)).toMatchObject({
+    expect(res.statusCode).toBe(202)
+    expect(res.body).toEqual({
       documentId: 1,
-      phase: 'failed',
-      warningCodes: expect.arrayContaining(['PARSER_FAILED']),
+      status: 'processing',
     })
+
+    await vi.waitFor(() => {
+      expect(calls[1].params[1]).toBe('failed')
+      expect(getLatestProcessingProgress(1)).toMatchObject({
+        documentId: 1,
+        phase: 'failed',
+        warningCodes: expect.arrayContaining(['PARSER_FAILED']),
+      })
+    })
+  })
+
+  test('returns processing for processing document without starting another job', async () => {
+    const db = {
+      get: async () => ({ id: 1, stored_path: '/tmp/return.pdf', status: 'processing' }),
+      run: vi.fn(),
+    }
+    const res = makeRes()
+
+    await makeProcessHandler(db as never)(makeReq() as never, res as never)
+
+    expect(res.statusCode).toBe(202)
+    expect(res.body).toEqual({
+      documentId: 1,
+      status: 'processing',
+    })
+    expect(parseTaxReturnPacket).not.toHaveBeenCalled()
+    expect(db.run).not.toHaveBeenCalled()
+  })
+
+  test('returns terminal status without restarting processing', async () => {
+    const db = {
+      get: async () => ({ id: 1, stored_path: '/tmp/return.pdf', status: 'extracted' }),
+      run: vi.fn(),
+    }
+    const res = makeRes()
+
+    await makeProcessHandler(db as never)(makeReq() as never, res as never)
+
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toEqual({
+      documentId: 1,
+      status: 'extracted',
+    })
+    expect(parseTaxReturnPacket).not.toHaveBeenCalled()
+    expect(db.run).not.toHaveBeenCalled()
   })
 })
