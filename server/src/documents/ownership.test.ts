@@ -102,7 +102,7 @@ describe('document ownership guards', () => {
     await listAcceptedDocuments(makeReq('1', 'carol') as never, res as never)
 
     expect(res.statusCode).toBe(200)
-    expect(res.body).toEqual({ records: [] })
+    expect(res.body).toEqual({ records: [], warnings: [] })
     expect(calls[0].sql).toContain('owner_username = ?')
     expect(calls[0].sql).toContain("status = 'accepted'")
     expect(calls[0].params).toEqual(['carol'])
