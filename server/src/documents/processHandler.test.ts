@@ -3,7 +3,7 @@ import type { TaxReturnExtraction } from '../../../shared/types'
 import { makeProcessHandler } from './processHandler'
 import { mergeParsedForms } from './taxPacketMergeService'
 import { clearProcessingProgress, getLatestProcessingProgress } from './processingProgressService'
-import { resetProcessingJobQueueForTest } from './processingJobQueue'
+import { resetProcessingJobSlotsForTest } from './processingJobSlots'
 
 const { parseTaxReturnPacket } = vi.hoisted(() => ({
   parseTaxReturnPacket: vi.fn(),
@@ -53,7 +53,7 @@ describe('makeProcessHandler packet parser wiring', () => {
     delete process.env.MAX_ACTIVE_PROCESSING_JOBS
     process.env.MASTER_ENCRYPTION_KEY = 'test-key'
     parseTaxReturnPacket.mockReset()
-    resetProcessingJobQueueForTest()
+    resetProcessingJobSlotsForTest()
   })
 
   test('starts processing asynchronously for pending documents', async () => {
@@ -167,18 +167,15 @@ describe('makeProcessHandler packet parser wiring', () => {
     expect(db.run).not.toHaveBeenCalled()
   })
 
-  test('queues additional processing jobs when the active limit is reached', async () => {
+  test('rejects additional pending documents when the active limit is reached', async () => {
     clearProcessingProgress(1)
     clearProcessingProgress(2)
     let resolveFirstParser!: (value: TaxReturnExtraction) => void
-    let resolveSecondParser!: (value: TaxReturnExtraction) => void
     parseTaxReturnPacket
       .mockReturnValueOnce(new Promise(resolve => {
         resolveFirstParser = resolve
       }))
-      .mockReturnValueOnce(new Promise(resolve => {
-        resolveSecondParser = resolve
-      }))
+      .mockResolvedValueOnce(packet())
 
     const docs = new Map([
       [1, { id: 1, stored_path: '/tmp/first.pdf', status: 'pending' }],
@@ -206,9 +203,11 @@ describe('makeProcessHandler packet parser wiring', () => {
     await makeProcessHandler(db as never)(makeReq('2') as never, secondRes as never)
 
     expect(firstRes.statusCode).toBe(202)
-    expect(secondRes.statusCode).toBe(202)
+    expect(secondRes.statusCode).toBe(429)
     expect(firstRes.body).toEqual({ documentId: 1, status: 'processing' })
-    expect(secondRes.body).toEqual({ documentId: 2, status: 'processing' })
+    expect(secondRes.body).toEqual({
+      error: 'Another document is already processing. Try again after it finishes.',
+    })
     expect(parseTaxReturnPacket).toHaveBeenCalledTimes(1)
     expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/first.pdf', expect.objectContaining({
       onProgress: expect.any(Function),
@@ -217,22 +216,20 @@ describe('makeProcessHandler packet parser wiring', () => {
     resolveFirstParser(packet())
 
     await vi.waitFor(() => {
-      expect(parseTaxReturnPacket).toHaveBeenCalledTimes(2)
-    })
-    expect(parseTaxReturnPacket).toHaveBeenLastCalledWith('/tmp/second.pdf', expect.objectContaining({
-      onProgress: expect.any(Function),
-    }))
-
-    resolveSecondParser(packet())
-
-    await vi.waitFor(() => {
-      expect(getLatestProcessingProgress(2)).toMatchObject({
-        documentId: 2,
+      expect(getLatestProcessingProgress(1)).toMatchObject({
+        documentId: 1,
         phase: 'completed',
         percent: 100,
       })
     })
+
+    await makeProcessHandler(db as never)(makeReq('2') as never, secondRes as never)
+
+    await vi.waitFor(() => {
+      expect(parseTaxReturnPacket).toHaveBeenCalledTimes(2)
+    })
+    expect(secondRes.statusCode).toBe(202)
+    expect(secondRes.body).toEqual({ documentId: 2, status: 'processing' })
     expect(calls.filter(call => call.params[0] === 'processing')).toHaveLength(2)
-    expect(calls.filter(call => call.params[1] === 'extracted')).toHaveLength(2)
   })
 })

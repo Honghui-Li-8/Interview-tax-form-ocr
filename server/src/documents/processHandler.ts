@@ -6,7 +6,7 @@ import { parseTaxReturnPacket } from './claudeTaxParserService'
 import { mergeParsedForms } from './taxPacketMergeService'
 import type { ExtractedFields, DocumentStatus, TaxReturnExtraction } from '../../../shared/types'
 import { emitProcessingProgress } from './processingProgressService'
-import { enqueueProcessingJob } from './processingJobQueue'
+import { startReservedProcessingJob, tryReserveProcessingSlot } from './processingJobSlots'
 
 type TaxDocument = { id: number; stored_path: string; status: DocumentStatus }
 type ProcessJobResult = {
@@ -174,16 +174,30 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
+    const releaseProcessingSlot = tryReserveProcessingSlot()
+    if (!releaseProcessingSlot) {
+      res.status(429).json({
+        error: 'Another document is already processing. Try again after it finishes.',
+      })
+      return
+    }
+
     emitProcessingProgress(id, {
       phase: 'claiming',
       message: 'Claiming document for processing',
       percent: 5,
     })
 
-    const claim = await db.run(
-      'UPDATE tax_documents SET status = ? WHERE id = ? AND owner_username = ? AND status = ?',
-      ['processing', id, username, 'pending']
-    )
+    let claim: { changes?: number }
+    try {
+      claim = await db.run(
+        'UPDATE tax_documents SET status = ? WHERE id = ? AND owner_username = ? AND status = ?',
+        ['processing', id, username, 'pending']
+      )
+    } catch (err) {
+      releaseProcessingSlot()
+      throw err
+    }
 
     if (claim.changes !== 1) {
       const latestDoc = await db.get<TaxDocument>(
@@ -192,10 +206,11 @@ export function makeProcessHandler(db: Database) {
       )
       const status = latestDoc?.status ?? 'processing'
       res.status(status === 'processing' ? 202 : 200).json({ documentId: id, status })
+      releaseProcessingSlot()
       return
     }
 
-    enqueueProcessingJob(async () => {
+    startReservedProcessingJob(releaseProcessingSlot, async () => {
       try {
         await runDocumentProcessingJob(db, id, username, doc.stored_path)
       } catch {

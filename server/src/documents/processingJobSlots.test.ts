@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
-import { enqueueProcessingJob, resetProcessingJobQueueForTest } from './processingJobQueue'
+import { resetProcessingJobSlotsForTest, tryStartProcessingJob } from './processingJobSlots'
 
 function deferredJob() {
   let resolve!: () => void
@@ -13,29 +13,23 @@ function deferredJob() {
   }
 }
 
-describe('processingJobQueue', () => {
+describe('processingJobSlots', () => {
   beforeEach(() => {
     delete process.env.MAX_ACTIVE_PROCESSING_JOBS
-    resetProcessingJobQueueForTest()
+    resetProcessingJobSlotsForTest()
   })
 
-  test('runs one active job by default and drains queued jobs', async () => {
+  test('runs one active job by default and rejects extra jobs', () => {
     const first = deferredJob()
     const second = deferredJob()
 
-    enqueueProcessingJob(first.job)
-    enqueueProcessingJob(second.job)
+    expect(tryStartProcessingJob(first.job)).toBe(true)
+    expect(tryStartProcessingJob(second.job)).toBe(false)
 
     expect(first.job).toHaveBeenCalledTimes(1)
     expect(second.job).not.toHaveBeenCalled()
 
     first.resolve()
-
-    await vi.waitFor(() => {
-      expect(second.job).toHaveBeenCalledTimes(1)
-    })
-
-    second.resolve()
   })
 
   test('allows configured concurrent jobs', () => {
@@ -44,9 +38,9 @@ describe('processingJobQueue', () => {
     const second = deferredJob()
     const third = deferredJob()
 
-    enqueueProcessingJob(first.job)
-    enqueueProcessingJob(second.job)
-    enqueueProcessingJob(third.job)
+    expect(tryStartProcessingJob(first.job)).toBe(true)
+    expect(tryStartProcessingJob(second.job)).toBe(true)
+    expect(tryStartProcessingJob(third.job)).toBe(false)
 
     expect(first.job).toHaveBeenCalledTimes(1)
     expect(second.job).toHaveBeenCalledTimes(1)
@@ -61,12 +55,29 @@ describe('processingJobQueue', () => {
     const first = deferredJob()
     const second = deferredJob()
 
-    enqueueProcessingJob(first.job)
-    enqueueProcessingJob(second.job)
+    expect(tryStartProcessingJob(first.job)).toBe(true)
+    expect(tryStartProcessingJob(second.job)).toBe(false)
 
     expect(first.job).toHaveBeenCalledTimes(1)
     expect(second.job).not.toHaveBeenCalled()
 
     first.resolve()
+  })
+
+  test('allows a new job after the active job finishes', async () => {
+    const first = deferredJob()
+    const second = deferredJob()
+
+    expect(tryStartProcessingJob(first.job)).toBe(true)
+    expect(tryStartProcessingJob(second.job)).toBe(false)
+
+    first.resolve()
+
+    await vi.waitFor(() => {
+      expect(tryStartProcessingJob(second.job)).toBe(true)
+    })
+    expect(second.job).toHaveBeenCalledTimes(1)
+
+    second.resolve()
   })
 })
