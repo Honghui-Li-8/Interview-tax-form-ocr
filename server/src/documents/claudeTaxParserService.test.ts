@@ -85,8 +85,15 @@ describe('claudeTaxParserService', () => {
     const form = emptyForm('Schedule A')
     form.fields.line17.value = '$10,000'
     client.messages.create.mockResolvedValueOnce(claudeText(form))
+    const progress: unknown[] = []
 
-    const parsed = await parseFormGroup('Schedule A', pages, getDefaultSchema('Schedule A'), { config, client })
+    const parsed = await parseFormGroup('Schedule A', pages, getDefaultSchema('Schedule A'), {
+      config,
+      client,
+      formIndex: 1,
+      formCount: 1,
+      onProgress: event => progress.push(event),
+    })
     const createInput = client.messages.create.mock.calls[0][0] as {
       messages: Array<{ content: Array<{ type: string; text?: string }> }>
     }
@@ -96,6 +103,23 @@ describe('claudeTaxParserService', () => {
     expect(prompt).toContain('Schedule A')
     expect(prompt).toContain('"line17"')
     expect(prompt).not.toContain('"line1InterestPayers"')
+    expect(progress).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        phase: 'extracting_form_group',
+        formType: 'Schedule A',
+        pageNumbers: [1],
+        formIndex: 1,
+        formCount: 1,
+      }),
+      expect.objectContaining({
+        phase: 'validating_form_group',
+        formType: 'Schedule A',
+      }),
+      expect.objectContaining({
+        phase: 'normalizing_form_group',
+        formType: 'Schedule A',
+      }),
+    ]))
   })
 
   it('batches oversized form groups deterministically', async () => {
@@ -119,5 +143,19 @@ describe('claudeTaxParserService', () => {
 
     expect(client.messages.create).toHaveBeenCalledTimes(2)
     expect(parsed.sourcePages).toEqual([1, 2, 3])
+  })
+
+  it('keeps parsing when the progress callback throws', async () => {
+    client.messages.create.mockResolvedValueOnce(claudeText([
+      { pageNumber: 1, formType: '1040', taxYear: '2025', pageRole: 'page 1', confidence: 'high' },
+    ]))
+
+    const classifications = await classifyTaxPages(pages, {
+      config,
+      client,
+      onProgress: () => { throw new Error('progress failed') },
+    })
+
+    expect(classifications[0].formType).toBe('1040')
   })
 })

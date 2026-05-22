@@ -2,6 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import type { TaxReturnExtraction } from '../../../shared/types'
 import { makeProcessHandler } from './processHandler'
 import { mergeParsedForms } from './taxPacketMergeService'
+import { clearProcessingProgress, getLatestProcessingProgress } from './processingProgressService'
 
 const { parseTaxReturnPacket } = vi.hoisted(() => ({
   parseTaxReturnPacket: vi.fn(),
@@ -48,6 +49,7 @@ function packet(): TaxReturnExtraction {
 
 describe('makeProcessHandler packet parser wiring', () => {
   test('persists packet-shaped encrypted extraction on parser success', async () => {
+    clearProcessingProgress(1)
     parseTaxReturnPacket.mockResolvedValueOnce(packet())
     const calls: Array<{ sql: string; params: unknown[] }> = []
     const db = {
@@ -61,7 +63,9 @@ describe('makeProcessHandler packet parser wiring', () => {
 
     await makeProcessHandler(db as never)(makeReq() as never, res as never)
 
-    expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/return.pdf')
+    expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/return.pdf', expect.objectContaining({
+      onProgress: expect.any(Function),
+    }))
     expect(calls[1].params[1]).toBe('extracted')
     expect(String(calls[1].params[0])).toContain('__encryptedJson')
     expect(res.body).toMatchObject({
@@ -76,9 +80,15 @@ describe('makeProcessHandler packet parser wiring', () => {
       },
     })
     expect((res.body as { extraction: TaxReturnExtraction }).extraction.schemaVersion).toBe(1)
+    expect(getLatestProcessingProgress(1)).toMatchObject({
+      documentId: 1,
+      phase: 'completed',
+      percent: 100,
+    })
   })
 
   test('sets failed status and returns packet-shaped extraction on parser failure', async () => {
+    clearProcessingProgress(1)
     parseTaxReturnPacket.mockRejectedValueOnce(new Error('missing api key'))
     const calls: Array<{ sql: string; params: unknown[] }> = []
     const db = {
@@ -97,5 +107,10 @@ describe('makeProcessHandler packet parser wiring', () => {
       .toEqual(expect.arrayContaining([
         expect.objectContaining({ code: 'PARSER_FAILED', severity: 'error' }),
       ]))
+    expect(getLatestProcessingProgress(1)).toMatchObject({
+      documentId: 1,
+      phase: 'failed',
+      warningCodes: expect.arrayContaining(['PARSER_FAILED']),
+    })
   })
 })

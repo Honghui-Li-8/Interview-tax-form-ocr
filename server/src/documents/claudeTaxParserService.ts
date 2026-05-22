@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import type {
   PageClassification,
   ParsedTaxForm,
+  ProcessingProgressPhase,
   SupportedTaxFormType,
   TaxReturnExtraction,
 } from '../../../shared/types'
@@ -28,6 +29,30 @@ type ClaudeClient = {
 type ParserOptions = {
   config?: ParserConfig
   client?: ClaudeClient
+  onProgress?: ParserProgressCallback
+  formIndex?: number
+  formCount?: number
+}
+
+export type ParserProgressCallback = (event: {
+  phase: ProcessingProgressPhase
+  message: string
+  percent?: number | null
+  pageCount?: number
+  currentPage?: number
+  pageNumbers?: number[]
+  formType?: SupportedTaxFormType
+  formIndex?: number
+  formCount?: number
+  warningCodes?: string[]
+}) => void
+
+function emitParserProgress(options: ParserOptions, event: Parameters<ParserProgressCallback>[0]): void {
+  try {
+    options.onProgress?.(event)
+  } catch {
+    // Progress is best-effort observability and must not fail document parsing.
+  }
 }
 
 function ensureClaudeClient(options: ParserOptions = {}): { config: ParserConfig; client: ClaudeClient } {
@@ -130,11 +155,26 @@ export async function classifyTaxPages(
   }
 
   const { config, client } = ensureClaudeClient(options)
+  emitParserProgress(options, {
+    phase: 'classifying_pages',
+    message: 'Classifying rendered pages',
+    percent: 25,
+    pageCount: pages.length,
+    pageNumbers: pages.map(page => page.pageNumber),
+  })
   const json = await createClaudeJson(client, config, [
     textContent(classificationPrompt()),
     ...pages.map(imageContent),
   ])
-  return validatePageClassifications(json, pages)
+  const classifications = validatePageClassifications(json, pages)
+  emitParserProgress(options, {
+    phase: 'classified_pages',
+    message: 'Classified rendered pages',
+    percent: 35,
+    pageCount: pages.length,
+    pageNumbers: pages.map(page => page.pageNumber),
+  })
+  return classifications
 }
 
 function chunkPages(pages: RenderedPage[], maxPages: number): RenderedPage[][] {
@@ -179,11 +219,40 @@ export async function parseFormGroup(
 
   const parsedChunks: ParsedTaxForm[] = []
   for (const chunk of chunks) {
+    const pageNumbers = chunk.map(page => page.pageNumber)
+    emitParserProgress(options, {
+      phase: 'extracting_form_group',
+      message: `Extracting ${formType}`,
+      percent: null,
+      pageCount: pages.length,
+      pageNumbers,
+      formType,
+      formIndex: options.formIndex,
+      formCount: options.formCount,
+    })
     const json = await createClaudeJson(client, config, [
-      textContent(extractionPrompt(formType, schema, chunk.map(page => page.pageNumber))),
+      textContent(extractionPrompt(formType, schema, pageNumbers)),
       ...chunk.map(imageContent),
     ])
-    const validated = validateParsedForm(formType, json, schema, chunk.map(page => page.pageNumber))
+    emitParserProgress(options, {
+      phase: 'validating_form_group',
+      message: `Validating ${formType}`,
+      percent: null,
+      pageNumbers,
+      formType,
+      formIndex: options.formIndex,
+      formCount: options.formCount,
+    })
+    const validated = validateParsedForm(formType, json, schema, pageNumbers)
+    emitParserProgress(options, {
+      phase: 'normalizing_form_group',
+      message: `Normalizing ${formType}`,
+      percent: null,
+      pageNumbers,
+      formType,
+      formIndex: options.formIndex,
+      formCount: options.formCount,
+    })
     parsedChunks.push(normalizeParsedForm(validated, schema))
   }
 
@@ -196,17 +265,39 @@ export async function parseTaxReturnPacket(
 ): Promise<TaxReturnExtraction> {
   ensureClaudeClient(options)
 
+  emitParserProgress(options, {
+    phase: 'rendering_pages',
+    message: 'Rendering PDF pages',
+    percent: 10,
+  })
   return withRenderedPdfPages(filePath, async pages => {
+    emitParserProgress(options, {
+      phase: 'rendered_pages',
+      message: 'Rendered PDF pages',
+      percent: 20,
+      pageCount: pages.length,
+      pageNumbers: pages.map(page => page.pageNumber),
+    })
     const classifications = await classifyTaxPages(pages, options)
     const groupedPages = groupPagesByForm(classifications, pages)
     const parsedForms: Partial<Record<SupportedTaxFormType, ParsedTaxForm>> = {}
+    const formGroups = SUPPORTED_FORM_TYPES
+      .map(formType => ({ formType, pages: groupedPages.get(formType) ?? [] }))
+      .filter(group => group.pages.length > 0)
 
-    for (const formType of SUPPORTED_FORM_TYPES) {
-      const formPages = groupedPages.get(formType)
-      if (!formPages || formPages.length === 0) continue
-      parsedForms[formType] = await parseFormGroup(formType, formPages, getDefaultSchema(formType), options)
+    for (const [index, group] of formGroups.entries()) {
+      parsedForms[group.formType] = await parseFormGroup(group.formType, group.pages, getDefaultSchema(group.formType), {
+        ...options,
+        formIndex: index + 1,
+        formCount: formGroups.length,
+      })
     }
 
+    emitParserProgress(options, {
+      phase: 'reconciling',
+      message: 'Reconciling extracted forms',
+      percent: 85,
+    })
     return reconcileTaxReturnExtraction(mergeParsedForms(classifications, parsedForms))
   })
 }

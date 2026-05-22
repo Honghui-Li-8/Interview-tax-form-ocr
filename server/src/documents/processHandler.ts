@@ -5,6 +5,7 @@ import { decryptJsonPayload, encryptJsonPayload } from './encryptionService'
 import { parseTaxReturnPacket } from './claudeTaxParserService'
 import { mergeParsedForms } from './taxPacketMergeService'
 import type { ExtractedFields, DocumentStatus, TaxReturnExtraction } from '../../../shared/types'
+import { emitProcessingProgress } from './processingProgressService'
 
 type TaxDocument = { id: number; stored_path: string; status: string }
 
@@ -79,6 +80,12 @@ export function makeProcessHandler(db: Database) {
       return
     }
 
+    emitProcessingProgress(id, {
+      phase: 'claiming',
+      message: 'Claiming document for processing',
+      percent: 5,
+    })
+
     const claim = await db.run(
       'UPDATE tax_documents SET status = ? WHERE id = ? AND owner_username = ? AND status = ?',
       ['processing', id, username, 'pending']
@@ -96,12 +103,21 @@ export function makeProcessHandler(db: Database) {
       extraction = demoExtraction()
     } else {
       try {
-        extraction = await parseTaxReturnPacket(doc.stored_path)
+        extraction = await parseTaxReturnPacket(doc.stored_path, {
+          onProgress: event => emitProcessingProgress(id, event),
+        })
       } catch {
         extraction = failedExtraction('Document parsing failed. Review the uploaded PDF and parser configuration.')
         status = 'failed'
       }
     }
+
+    emitProcessingProgress(id, {
+      phase: 'encrypting_and_persisting',
+      message: 'Saving extraction',
+      percent: status === 'extracted' ? 95 : null,
+      warningCodes: extraction.warnings.map(warning => warning.code),
+    })
 
     const encrypted = encryptJsonPayload(extraction, username)
 
@@ -109,6 +125,22 @@ export function makeProcessHandler(db: Database) {
       'UPDATE tax_documents SET extracted_fields = ?, status = ?, processed_at = ? WHERE id = ? AND owner_username = ?',
       [JSON.stringify(encrypted), status, new Date().toISOString(), id, username]
     )
+
+    if (status === 'extracted') {
+      emitProcessingProgress(id, {
+        phase: 'completed',
+        message: 'Document processing completed',
+        percent: 100,
+        warningCodes: extraction.warnings.map(warning => warning.code),
+      })
+    } else {
+      emitProcessingProgress(id, {
+        phase: 'failed',
+        message: 'Document parsing failed',
+        percent: null,
+        warningCodes: extraction.warnings.map(warning => warning.code),
+      })
+    }
 
     const decryptedExtraction = decryptJsonPayload<TaxReturnExtraction>(encrypted, username)
     res.json({
