@@ -748,6 +748,47 @@
   margin: 10px 0;
 }
 
+.processing-progress-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.processing-progress-detail {
+  margin: 0;
+  color: #344256;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.processing-progress-track {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.processing-progress-bar {
+  min-width: 8px;
+  height: 100%;
+  border-radius: inherit;
+  background: #1d4ed8;
+  transition: width 180ms ease;
+}
+
+.processing-progress-meta,
+.processing-progress-note {
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+.processing-progress-meta {
+  color: #526173;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
 .status-icon {
   display: grid;
   width: 48px;

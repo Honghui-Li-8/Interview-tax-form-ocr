@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { getDocument, processDocument, acceptDocument, getDocumentFile } from '../api/documents'
+import { getDocument, processDocument, acceptDocument, getDocumentFile, streamProcessingProgress } from '../api/documents'
 import { isUnauthorizedError } from '../api/auth'
 import type {
   DocumentDetail,
@@ -7,6 +7,7 @@ import type {
   ExtractedFieldValue,
   ExtractedFields,
   ParsedTaxForm,
+  ProcessingProgressEvent,
   TaxReturnExtraction,
 } from '../../../shared/types'
 import PdfViewer from '../components/PdfViewer'
@@ -103,6 +104,29 @@ function visibleExtractionNotices(extraction: TaxReturnExtraction | null): Extra
   )
 }
 
+function formatProgressDetail(event: ProcessingProgressEvent | null): string | null {
+  if (!event) return null
+  if (event.formType && event.formIndex && event.formCount) {
+    const pages = event.pageNumbers?.length ? ` from page ${event.pageNumbers.join(', ')}` : ''
+    return `Form ${event.formIndex} of ${event.formCount}: ${event.formType}${pages}`
+  }
+  if (event.currentPage && event.pageCount) {
+    return `Page ${event.currentPage} of ${event.pageCount}`
+  }
+  if (event.pageNumbers?.length && event.pageCount) {
+    return `Pages ${event.pageNumbers.join(', ')} of ${event.pageCount}`
+  }
+  if (event.pageCount) {
+    return `${event.pageCount} page${event.pageCount === 1 ? '' : 's'}`
+  }
+  return null
+}
+
+function progressPercent(event: ProcessingProgressEvent | null): number {
+  if (!event || event.percent === null) return 0
+  return Math.max(0, Math.min(100, event.percent))
+}
+
 export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props) {
   const [state, setState] = useState<ReviewState>('loading')
   const [fields, setFields] = useState<FormFields>(EMPTY_FIELDS)
@@ -113,6 +137,8 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
   const [validationError, setValidationError] = useState<string | null>(null)
   const [acceptedAt, setAcceptedAt] = useState<string | null>(null)
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
+  const [progressEvent, setProgressEvent] = useState<ProcessingProgressEvent | null>(null)
+  const [progressFallback, setProgressFallback] = useState(false)
   const processStartedFor = useRef<number | null>(null)
 
   const waitForProcessing = useCallback(async (getCancelled: () => boolean): Promise<DocumentDetail> => {
@@ -143,11 +169,42 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
   const load = useCallback(async (getCancelled: () => boolean = () => false) => {
     setState('loading')
     setLoadError(null)
+    setProgressFallback(false)
+    setProgressEvent(null)
     try {
       let doc = await getDocument(documentId)
 
       if (doc.status === 'pending' && processStartedFor.current !== documentId) {
         processStartedFor.current = documentId
+        const progressController = new AbortController()
+        const progressPromise = streamProcessingProgress(documentId, event => {
+          if (getCancelled()) return
+          setProgressEvent(event)
+          if (import.meta.env.DEV) {
+            console.debug('Processing progress', {
+              documentId: event.documentId,
+              phase: event.phase,
+              percent: event.percent,
+              pageCount: event.pageCount,
+              currentPage: event.currentPage,
+              pageNumbers: event.pageNumbers,
+              formType: event.formType,
+              formIndex: event.formIndex,
+              formCount: event.formCount,
+            })
+          }
+        }, progressController.signal).catch(err => {
+          if (progressController.signal.aborted || getCancelled()) return
+          if (isUnauthorizedError(err)) {
+            onUnauthorized()
+            return
+          }
+          setProgressFallback(true)
+          if (import.meta.env.DEV) {
+            console.debug('Processing progress stream unavailable', err)
+          }
+        })
+
         try {
           await processDocument(documentId)
         } catch (err) {
@@ -155,6 +212,9 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
           if (!message.includes('Already processing') && !message.includes('Already processed')) {
             throw err
           }
+        } finally {
+          progressController.abort()
+          await progressPromise
         }
         doc = await getDocument(documentId)
       }
@@ -339,11 +399,28 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
   }
 
   if (state === 'loading') {
+    const detail = formatProgressDetail(progressEvent)
+    const percent = progressPercent(progressEvent)
     return (
-      <section className="panel state-panel">
+      <section className="panel state-panel processing-progress-panel">
         <div className="spinner" />
         <h1>Processing document</h1>
-        <p className="muted">Classifying pages and extracting supported tax forms from document #{documentId}.</p>
+        <p className="muted">
+          {progressEvent?.message ?? `Preparing document #${documentId} for extraction.`}
+        </p>
+        {detail && <p className="processing-progress-detail">{detail}</p>}
+        <div className="processing-progress-track" aria-label="Processing progress">
+          <div className="processing-progress-bar" style={{ width: `${percent}%` }} />
+        </div>
+        <p className="processing-progress-meta">
+          {progressEvent ? progressEvent.phase.split('_').join(' ') : 'waiting for backend status'}
+          {progressEvent?.timestamp ? ` · ${new Date(progressEvent.timestamp).toLocaleTimeString()}` : ''}
+        </p>
+        {progressFallback && (
+          <p className="muted processing-progress-note">
+            Live status is unavailable. The page is still checking the document status.
+          </p>
+        )}
       </section>
     )
   }

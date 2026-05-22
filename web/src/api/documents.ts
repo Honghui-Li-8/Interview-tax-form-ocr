@@ -6,6 +6,7 @@ import type {
   ExtractedFields,
   AcceptedDocumentRecord,
   TaxReturnExtraction,
+  ProcessingProgressEvent,
 } from '../../../shared/types'
 import { getToken, UnauthorizedError } from './auth'
 
@@ -80,4 +81,58 @@ export async function acceptDocument(
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(body),
   }))
+}
+
+export function parseProcessingProgressLines(
+  chunk: string,
+  carry: string,
+  onEvent: (event: ProcessingProgressEvent) => void
+): string {
+  const lines = `${carry}${chunk}`.split('\n')
+  const nextCarry = lines.pop() ?? ''
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (!trimmed) continue
+    try {
+      onEvent(JSON.parse(trimmed) as ProcessingProgressEvent)
+    } catch (err) {
+      if (import.meta.env.DEV) {
+        console.debug('Ignoring malformed processing progress event', err)
+      }
+    }
+  }
+
+  return nextCarry
+}
+
+export async function streamProcessingProgress(
+  documentId: number,
+  onEvent: (event: ProcessingProgressEvent) => void,
+  signal?: AbortSignal
+): Promise<void> {
+  const res = await fetch(`${SERVER_URL}/api/documents/${documentId}/process/progress`, {
+    headers: authHeaders(),
+    signal,
+  })
+
+  if (res.status === 401) throw new UnauthorizedError()
+  if (!res.ok) throw new Error(await res.text())
+  if (!res.body) throw new Error('Progress stream is not available')
+
+  const reader = res.body.getReader()
+  const decoder = new TextDecoder()
+  let carry = ''
+
+  while (true) {
+    const { value, done } = await reader.read()
+    if (done) break
+    carry = parseProcessingProgressLines(decoder.decode(value, { stream: true }), carry, onEvent)
+  }
+
+  const finalChunk = decoder.decode()
+  carry = parseProcessingProgressLines(finalChunk, carry, onEvent)
+  if (carry.trim() && import.meta.env.DEV) {
+    console.debug('Ignoring incomplete processing progress line')
+  }
 }
