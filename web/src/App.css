@@ -169,6 +169,14 @@
   color: #1d4ed8;
 }
 
+.packet-tab.disabled,
+.packet-tab:disabled {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
 .packet-form-section {
   display: flex;
   min-height: 0;
@@ -185,7 +193,8 @@
 }
 
 .packet-form-heading h2,
-.packet-warnings h2 {
+.packet-side-notices h2,
+.packet-empty-selection h2 {
   margin: 0;
   color: #111827;
   font-size: 1rem;
@@ -260,14 +269,27 @@
   overflow-wrap: anywhere;
 }
 
-.packet-warnings {
+.packet-side-notices {
   display: flex;
-  max-height: 180px;
   flex-direction: column;
   gap: 8px;
-  overflow-y: auto;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 14px;
+  margin-top: 18px;
+}
+
+.packet-side-notices h2 {
+  margin-bottom: 2px;
+}
+
+.packet-empty-selection {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 22px;
+  background: #f8fafc;
 }
 
 .field label {

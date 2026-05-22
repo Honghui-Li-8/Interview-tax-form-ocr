@@ -14,6 +14,7 @@ import PdfViewer from '../components/PdfViewer'
 type ReviewState = 'loading' | 'review' | 'submitting' | 'accepted' | 'error'
 type PacketFormKey = keyof TaxReturnExtraction['forms']
 type FormFields = Record<keyof ExtractedFields, string>
+type ExtractionNotice = TaxReturnExtraction['warnings'][number]
 
 const FORM_LABELS: Array<{ key: PacketFormKey; label: string }> = [
   { key: 'form1040', label: '1040' },
@@ -89,11 +90,24 @@ function fieldsFromDetail(doc: DocumentDetail): FormFields {
   }
 }
 
+function firstPresentFormKey(extraction: TaxReturnExtraction | null): PacketFormKey | null {
+  if (!extraction) return null
+  return FORM_LABELS.find(({ key }) => extraction.forms[key].present)?.key ?? null
+}
+
+function visibleExtractionNotices(extraction: TaxReturnExtraction | null): ExtractionNotice[] {
+  if (!extraction) return []
+  return extraction.warnings.filter(warning =>
+    warning.severity === 'error'
+    || (warning.code === 'MISSING_SUPPORTED_FORM' && warning.message.includes('1040'))
+  )
+}
+
 export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props) {
   const [state, setState] = useState<ReviewState>('loading')
   const [fields, setFields] = useState<FormFields>(EMPTY_FIELDS)
   const [extraction, setExtraction] = useState<TaxReturnExtraction | null>(null)
-  const [selectedForm, setSelectedForm] = useState<PacketFormKey>('form1040')
+  const [selectedForm, setSelectedForm] = useState<PacketFormKey | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [acceptError, setAcceptError] = useState<string | null>(null)
   const [validationError, setValidationError] = useState<string | null>(null)
@@ -154,7 +168,7 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
       setFields(fieldsFromDetail(doc))
       setExtraction(doc.extraction ?? null)
       setAcceptedAt(doc.accepted_at)
-      setSelectedForm(doc.extraction?.forms.form1040 ? 'form1040' : 'form1040')
+      setSelectedForm(firstPresentFormKey(doc.extraction ?? null))
       setState(doc.status === 'accepted' ? 'accepted' : 'review')
     } catch (err) {
       if (getCancelled()) return
@@ -204,8 +218,10 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
     try {
       await acceptDocument(documentId, extraction ?? fields as unknown as ExtractedFields)
       const savedDocument = await getDocument(documentId)
+      const savedExtraction = savedDocument.extraction ?? extraction
       setFields(fieldsFromDetail(savedDocument))
-      setExtraction(savedDocument.extraction ?? extraction)
+      setExtraction(savedExtraction)
+      setSelectedForm(firstPresentFormKey(savedExtraction))
       setAcceptedAt(savedDocument.accepted_at)
       setState('accepted')
     } catch (err) {
@@ -346,7 +362,8 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
 
   const isSubmitting = state === 'submitting'
   const isReadOnly = state === 'accepted'
-  const selected = extraction?.forms[selectedForm]
+  const selected = selectedForm && extraction ? extraction.forms[selectedForm] : null
+  const visibleNotices = visibleExtractionNotices(extraction)
 
   return (
     <section className="page-grid packet-review-grid">
@@ -355,12 +372,22 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
         <h1>{isReadOnly ? 'Document Accepted' : 'Review extracted data'}</h1>
         <p className="page-subtitle">
           {extraction
-            ? `${extraction.sourceInventory.taxYear} packet extraction with ${extraction.warnings.length} warning(s).`
+            ? `${extraction.sourceInventory.taxYear} packet extraction with ${visibleNotices.length} notice(s).`
             : 'Confirm each field before accepting the extracted result.'}
           {acceptedAt && ` Accepted at: ${new Date(acceptedAt).toLocaleString()}.`}
         </p>
         {pdfUrl && (
           <PdfViewer url={pdfUrl} onOpenInTab={() => { const tab = window.open('', '_blank'); tab?.location.replace(pdfUrl) }} />
+        )}
+        {visibleNotices.length > 0 && (
+          <section className="packet-side-notices">
+            <h2>Warnings</h2>
+            {visibleNotices.map((warning, index) => (
+              <p className={`alert ${warning.severity === 'error' ? 'alert-error' : 'alert-warning'}`} key={`${warning.code}-${index}`}>
+                <strong>{warning.code}</strong>: {warning.message}
+              </p>
+            ))}
+          </section>
         )}
       </div>
 
@@ -368,19 +395,27 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
         {extraction ? (
           <>
             <div className="packet-tabs" role="tablist" aria-label="Tax forms">
-              {FORM_LABELS.map(({ key, label }) => (
-                <button
-                  key={key}
-                  type="button"
-                  className={key === selectedForm ? 'packet-tab active' : 'packet-tab'}
-                  onClick={() => setSelectedForm(key)}
-                >
-                  {label}
-                </button>
-              ))}
+              {FORM_LABELS.map(({ key, label }) => {
+                const isPresent = extraction.forms[key].present
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    className={[
+                      'packet-tab',
+                      key === selectedForm ? 'active' : '',
+                      !isPresent ? 'disabled' : '',
+                    ].filter(Boolean).join(' ')}
+                    disabled={!isPresent}
+                    onClick={() => setSelectedForm(key)}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
             </div>
 
-            {selected && (
+            {selected && selectedForm ? (
               <section className="packet-form-section">
                 <div className="packet-form-heading">
                   <div>
@@ -391,16 +426,10 @@ export default function ReviewPage({ documentId, onBack, onUnauthorized }: Props
                 </div>
                 {renderPacketFields(selectedForm, selected, isReadOnly || isSubmitting)}
               </section>
-            )}
-
-            {extraction.warnings.length > 0 && (
-              <section className="packet-warnings">
-                <h2>Warnings</h2>
-                {extraction.warnings.map((warning, index) => (
-                  <p className={`alert ${warning.severity === 'error' ? 'alert-error' : 'alert-warning'}`} key={`${warning.code}-${index}`}>
-                    <strong>{warning.code}</strong>: {warning.message}
-                  </p>
-                ))}
+            ) : (
+              <section className="packet-empty-selection">
+                <h2>No supported forms detected</h2>
+                <p className="muted">The parser did not identify a selectable supported form in this PDF.</p>
               </section>
             )}
           </>
