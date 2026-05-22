@@ -208,6 +208,8 @@ describe('makeProcessHandler packet parser wiring', () => {
     expect(secondRes.body).toEqual({
       error: 'Another document is already processing. Try again after it finishes.',
     })
+    expect(docs.get(2)?.status).toBe('pending')
+    expect(calls.filter(call => call.params[0] === 'processing')).toHaveLength(1)
     expect(parseTaxReturnPacket).toHaveBeenCalledTimes(1)
     expect(parseTaxReturnPacket).toHaveBeenCalledWith('/tmp/first.pdf', expect.objectContaining({
       onProgress: expect.any(Function),
